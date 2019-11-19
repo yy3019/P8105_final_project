@@ -1,4 +1,4 @@
-# P8105_final_project
+# P8105 Final Project
 P8105 Data Science Final Project 
 # Tentative Title
 Our tentative title is: Exploring The Use of Fragility Index outside of Oncology Drug Development
