@@ -11,9 +11,9 @@ navbar:
       href: members.html
   - text: "Obtaining Data"
     menu:
-    - text: "Scraping Attempts"
+    - text: "Scraping Failures"
       href: plotstuff.html
-    - text: "What we will do"
+    - text: "Working Scrapes"
       href: dashboard-hw.html
   - text: "FI calculator"
     icon: fa-calculator fa-lg
@@ -25,8 +25,8 @@ navbar:
       href: plotstuff.html
     - text: "Flexdashboards"
       href: dashboard-hw.html
-  - text: "Report"
-    href: plotstuff.html
+  - text: "Project Report"
+    href: report.html
   - icon: fa-envelope fa-lg
     href: mailto:<yy3019@cumc.columbia.edu> 
   - icon: fa-github-square fa-lg

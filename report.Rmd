@@ -1,0 +1,40 @@
+---
+output: html_document
+---
+
+# Motivation
+
+Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go [here](proj_background.html) to learn more about our motivation. 
+
+# Related work
+
+insert prior research?
+
+# Initial Questions
+
+Initial questions: What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?
+
+# Data
+
+### Obtaining Data
+
+After various trial and error ("link"), we've decided to use API from clinicaltrials.gov as a starting point. 
+
+We then employed a combination of API search to obtain specific trial ID and use those to then scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link"
+
+### Cleaning Data
+
+Cleaning the data surprisingly wasn't as bad as we thought. However, we do have to....
+
+Our process is explained in detail "link"
+
+### Exploratory Analysis
+Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
+
+### Other Analysis
+
+Additional analysis: If you undertake formal statistical analyses, describe these in detail
+
+# Discussion
+
+Discussion: What were your findings? Are they what you expect? What insights into the data can you make?
