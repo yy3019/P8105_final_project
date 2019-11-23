@@ -1,16 +1,28 @@
-name: "Yay internet!"
+name: "Global Settings"
 output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "Data"
-      href: Data.html
-    - text: "Analysis"
-      href: Analysis.html
-    - icon: fa-envelope fa-lg
-      href: mailto:<yy3019@cumc.columbia.edu>
-    - icon: fa-github fa-lg
-      href: https://github.com/yy3019/P8105_final_project.github.io
+  - text: "Data"
+    menu:
+    - text: "What we tried"
+      href: plotstuff.html
+    - text: "What we will do"
+      href: dashboard-hw.html
+  - text: "FI calculator"
+    href: plotstuff.html
+  - text: "visualization"  
+    menu:
+    - text: "Plotly"
+      href: plotstuff.html
+    - text: "Flexdashboards"
+      href: dashboard-hw.html
+  - text: "Report"
+    href: plotstuff.html
+  - icon: fa-envelope fa-lg
+    href: mailto:<yy3019@cumc.columbia.edu> 
+  - icon: fa-github-square fa-lg
+    href: https://github.com/yy3019/P8105_final_project.github.io 
 output:
   html_document:
-    theme: flatly
+    css: simplex2.min.css
