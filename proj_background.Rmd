@@ -1,0 +1,64 @@
+---
+title: "About Me..."
+output: html_document
+---
+
+<br></br>
+
+<center><a href=""><img src=https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif></a></center>
+
+# Background{.tabset .tabset-fade}
+
+My name is Kevin S.W. and I'm from Indonesia. My dream is to eventually be a physician and for that goal, I studied biochemistry as an undergraduate in University of Washington. I then worked a bit in clinics to expose myself to healthcare and during that time, I met a mentor who taught me things about data, which led me to pursuing biostatistics in Columbia University. I believe that learning about data, wrangling, and analysis will significantly help my future decision-making as a physician. If not, it is still a super cool skill to have! Below you will find a brief summary of my "achievements" up until this point. You can check my [LinkedIn](https://www.linkedin.com/in/kwongso/) to see more details.
+<br></br>
+
+## Academics 
+
+Graduate: MS in Biostatistics - Columbia University, New York NY  (Graduating 2021)
+
+Undergraduate: BS in Biochemistry - University of Washington, Seattle WA  (Graduated 2014)
+
+Highschool: IB Program - Sekolah Pelita Harapan, Indonesia (Graduated 2009/2010)
+
+## Experiences
+
+#### Research												
+Research Intern (Walter Lab), Fred Hutchinson Cancer Research Center. June 2016 – Dec 2016
+
+Research Technician Volunteer (Dr. Christopher Kim), University of Washington Medical Center. Mar 2016 – Aug 2016
+<br></br>
+
+#### Work													
+Medical Scribe, ScribeAmerica – Overlake Medical Center. May 2017 – Mar 2019
+
+Front Desk Receptionist, Immediate Clinic – Capitol Hill. Feb 2017 – Nov 2017
+
+Administrator Coordinator – Leave of Absence (Volunteer), COPE Health Solutions. Feb 2016 – Mar 2017
+
+Health Scholar, COPE Health Solutions & Swedish Medical Center. May 2015 – Mar 2017
+
+Data Entry Technician, Bloodworks Northwest. Nov 2015 – May 2016
+
+Blood Processing Technician, Bloodworks Northwest. Oct 2015 – Dec 2015
+
+Customer Service & Inventory Manager (Seasonal), Filter LLC. & DOTA International. Jul 2015
+<br></br>
+
+#### Volunteering												
+Sound Engineer Volunteer, IFGF Seattle. Feb 2016 – Jun 2019
+
+Per Diem Adult Tutor, Vision House. Jan 2018 – Jun 2019
+
+Disaster Relief Volunteer – Medical Brigade at Escuintla, Guatemala. Hope Worldwide. Aug 2018
+
+Child Life & Office Volunteer, Seattle Children’s Hospital. Aug 2014 – Mar 2017  
+
+Disaster Relief Volunteer at Manta & Chamanga, World Harvest & Iglesia Fuente de Salvacion. May 2016  
+
+Seasonal Career & Internship Fair Volunteer, UW Mary Gates Career Center. Jan 2014 – Oct 2015  
+
+Blood Donor Monitor, Bloodworks Northwest. Feb 2015 – Aug 2015  
+
+Math & English Tutor (Seasonal), Olympic View Elementary. Jul 2011 – Aug 2011  
+
+#

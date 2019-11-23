@@ -1,8 +1,10 @@
 name: "Global Settings"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "Fragility Index Project"
   right:
+  - text: "About"
+    href: about.html
   - text: "Data"
     menu:
     - text: "What we tried"
