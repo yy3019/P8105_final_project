@@ -1,0 +1,27 @@
+---
+title: "The members"
+output: html_document
+---
+
+<br></br>
+
+# <a href=""><img src=https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif></a> Bryan Bunning
+
+Content
+
+# <a href=""><img src=https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif></a> Yuanzhi (Fisher) Yu
+
+Content
+
+# <a href=""><img src=https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif></a> Zongchao Liu
+
+Content
+
+# <a href=""><img src=https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif></a> Gavin (Wang...) Ko
+
+Content
+
+# <a href=""><img src=https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif></a> Kevin S.W. 
+
+My name is Kevin S.W. and I'm from Indonesia. My dream is to eventually be a physician and for that goal, I studied biochemistry as an undergraduate in University of Washington. I then worked a bit in clinics to expose myself to healthcare and during that time, I met a mentor who taught me things about data, which led me to pursuing biostatistics in Columbia University. I believe that learning about data, wrangling, and analysis will significantly help my future decision-making as a physician. If not, it is still a super cool skill to have! Below you will find a brief summary of my "achievements" up until this point. You can check my [LinkedIn](https://www.linkedin.com/in/kwongso/) to see more details.
+<br></br>

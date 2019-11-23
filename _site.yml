@@ -4,16 +4,22 @@ navbar:
   title: "Fragility Index Project"
   right:
   - text: "About"
-    href: about.html
-  - text: "Data"
     menu:
-    - text: "What we tried"
+    - text: "The Project"
+      href: proj_background.html
+    - text: "Members"
+      href: members.html
+  - text: "Obtaining Data"
+    menu:
+    - text: "Scraping Attempts"
       href: plotstuff.html
     - text: "What we will do"
       href: dashboard-hw.html
   - text: "FI calculator"
+    icon: fa-calculator fa-lg
     href: plotstuff.html
-  - text: "visualization"  
+  - text: "Graphs"  
+    icon: fa-bar-chart fa-lg
     menu:
     - text: "Plotly"
       href: plotstuff.html
@@ -28,3 +34,5 @@ navbar:
 output:
   html_document:
     css: simplex2.min.css
+    includes:
+      after_body: _suffix.html
