@@ -8235,3 +8235,20 @@ label {
 .pager .disabled>a {
 	border-color: #dddddd
 }
+
+/* custom class for circle profile pics */
+/* courtesy of https://stackoverflow.com/questions/46615680/png-icon-with-circle-border-css */
+
+.cat_circle {
+  display: inline-block;
+  border: 3px solid #7E9CC2;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+}
+.cat_circle img {
+  top: 50%; left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
