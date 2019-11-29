@@ -6,25 +6,143 @@ output:
     toc_float: true
 ---
 
+```{r setup, include = FALSE, message = FALSE, warning = FALSE}
+
+# global default settings for chunks
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.width = 10, 
+                      fig.align = "center"
+                      )
+
+# loaded packages; placed here to be able to load global settings
+Packages <- c("tidyverse", "dplyr", "rvest", "httr")
+invisible(lapply(Packages, library, character.only = TRUE))
+
+
+
+# global settings for color palettes
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+
+# theme global setting for ggplot
+theme_set(theme_minimal() + 
+            theme(legend.position = "bottom") +
+            theme(plot.title = element_text(hjust = 0.5, size = 12),
+                  plot.subtitle = element_text(hjust = 0.5, size = 8))
+          )
+
+```
+
 # Motivation
 
 Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go [here](proj_background.html) to learn more about our motivation. 
+<br></br>
+
+### Some facts
+<br></br>
+
+### Primary Goals
+<br></br>
 
 # Related work
 
 insert prior research?
+<br></br>
 
 # Initial Questions
 
 Initial questions: What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?
+<br></br>
 
-# Data
+# Obtaining Data
 
-### Obtaining Data
+### Attempt to Scrape from Google Scholar
 
-After various trial and error ("link"), we've decided to use API from clinicaltrials.gov as a starting point. 
+```{r google_schol_scrape}
 
-We then employed a combination of API search to obtain specific trial ID and use those to then scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link"
+# have to split link into 2 parts...
+gs_url_base1 <- "https://scholar.google.com/scholar?start="
+gs_url_base2 <- "&q=monoclonal+antibody+phase+3&hl=en&as_sdt=0,33&as_ylo=2007&as_yhi=2017&lookup=0"
+
+# adds the search term by 10s (obtained by evaluating scholar's http address)
+gs_vec_url <- str_c(gs_url_base1, seq(0, 100, 10), gs_url_base2)
+
+```
+
+Given the ease of access to Google Scholar (GS), we first attempted to scrape our sources from the site. We initially did this manually by searching some random entry in order to see a pattern where we can insert our "page number". We found that we need to split Google's search address into two partitions so that we can insert the search numbers. 
+
+Once we figured out the web address components, we attempted to incorporate this into our scraping function by using `purrr::map` function and search for the term "monoclonal antibody phase 3". Utilizing ["SelectorGadget"](https://selectorgadget.com/), we were able to obtain the css tag for the title, `.gs_rt a` and used this to scrape our articles/journals. 
+
+```{r scraping_fn}
+
+# scraper fn
+read_page <- function(url) {
+  
+  h = read_html(url)               # reads url input
+  
+  title = h %>%
+    html_nodes(".gs_rt a") %>%     # pulls the specific html tag (for titles)
+    html_text()
+  
+  data_frame(title)                # turns scraped data into a dataframe
+}
+
+# map read test
+gs_test <- map(gs_vec_url, read_page)
+
+# unnested df test (success)
+unnested_gs <- gs_test %>% 
+  tibble::enframe(name = NULL) %>% 
+  unnest()
+
+# peek into the first 3 results
+head(unnested_gs, n = 3L)
+
+```
+
+As seen above, the code was successful in scraping the titles from GS. However, an apparent issue with this is that we're unable to get the links to the actual paper. Furthermore, the various sources of the article will be highly varied when accessing these articles, which complicates the generalizability of our functions. Additionally, we're unable to exclusively scrape the year of publication, which further worsens this method. 
+
+Given the apparent high ceiling to scrape via GS, we decided to stop using GS and tried PubMed scraping.
+
+# Scraping from PubMed
+Attempting to scrape PubMed results for our relevant issues quickly comes to a halt because we noticed that as we try to search results, their html address does **NOT** change or provide a page number. We quickly scraped this from our viable methods to obtain our data. 
+
+# Scraping from clinicaltrials.gov
+
+Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to then scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link"
+
+We first obtained (downloaded) a `.csv` file from clinicaltrials.gov that contained our advanced search options:
+
+* options...
+
+After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we're only interested in the trial ID. We further filter the trials to those that has a "Placebo" arm. 
+
+```{r ctgov_data_read}
+
+ctgov_scrape_test <- read_csv("./data/SearchResults(1).csv") %>%      # read csv
+  janitor::clean_names() %>% 
+  mutate(
+    url = str_replace(url, "https://ClinicalTrials.gov/show/", "")    # keep trial ID only
+  ) %>% 
+  rename("nct_id" = url) %>% 
+  select(rank, nct_id, title, conditions, interventions) %>%          # remove location; irrelevant
+  filter(str_detect(interventions, "Placebo"))
+
+ctgov_scrape_test %>% 
+  distinct(conditions) %>% 
+  view()
+
+```
+
+Now our "database" that contains relevant clinical trials are ready. Before we continue, we need to obtain the html tags from clinicaltrials.gov which contains our variables of interest. With the help of SelectorGadget, we managed to isolate the tags to contain:
+
+* `#EXPAND-outcome-data-1 .labelSubtle` : label within the table this is the thing that needs to have participants or "Unit of Measure: Participants"
+* `#EXPAND-outcome-data-1 td.de-outcomeLabelCell` : this is arm description for primary outcome
+* `#EXPAND-outcome-data-1 tbody:nth-child(2) th` : this is description of table
 
 ### Cleaning Data
 

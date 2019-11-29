@@ -423,6 +423,12 @@ div.tocify {
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
 <p>Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go <a href="proj_background.html">here</a> to learn more about our motivation.</p>
+<div id="some-facts" class="section level3">
+<h3>Some facts</h3>
+</div>
+<div id="primary-goals" class="section level3">
+<h3>Primary Goals</h3>
+</div>
 </div>
 <div id="related-work" class="section level1">
 <h1>Related work</h1>
@@ -432,13 +438,79 @@ div.tocify {
 <h1>Initial Questions</h1>
 <p>Initial questions: What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?</p>
 </div>
-<div id="data" class="section level1">
-<h1>Data</h1>
-<div id="obtaining-data" class="section level3">
-<h3>Obtaining Data</h3>
-<p>After various trial and error (“link”), we’ve decided to use API from clinicaltrials.gov as a starting point.</p>
+<div id="obtaining-data" class="section level1">
+<h1>Obtaining Data</h1>
+<div id="attempt-to-scrape-from-google-scholar" class="section level3">
+<h3>Attempt to Scrape from Google Scholar</h3>
+<p>Given the ease of access to Google Scholar (GS), we first attempted to scrape our sources from the site.</p>
+<pre class="r"><code># have to split link into 2 parts...
+gs_url_base1 &lt;- &quot;https://scholar.google.com/scholar?start=&quot;
+gs_url_base2 &lt;- &quot;&amp;q=monoclonal+antibody+phase+3&amp;hl=en&amp;as_sdt=0,33&amp;as_ylo=2007&amp;as_yhi=2017&amp;lookup=0&quot;
+
+# adds the search term by 10s (obtained by evaluating scholar&#39;s http address)
+gs_vec_url &lt;- str_c(gs_url_base1, seq(0, 100, 10), gs_url_base2)</code></pre>
+<p>We initially did this manually by searching some random entry in order to see a pattern where we can insert our “page number”. We found that we need to split Google’s search address into two partitions so that we can insert the search numbers.</p>
+<p>Once we figured out the web address components, we attempted to incorporate this into our scraping function by using <code>purrr::map</code> function and search for the term “monoclonal antibody phase 3”. Utilizing <a href="https://selectorgadget.com/">“SelectorGadget”</a>, we were able to obtain the css tag for the title, <code>.gs_rt a</code> and used this to scrape our articles/journals.</p>
+<pre class="r"><code># scraper fn
+read_page &lt;- function(url) {
+  
+  h = read_html(url)               # reads url input
+  
+  title = h %&gt;%
+    html_nodes(&quot;.gs_rt a&quot;) %&gt;%     # pulls the specific html tag (for titles)
+    html_text()
+  
+  data_frame(title)                # turns scraped data into a dataframe
+}
+
+# map read test
+gs_test &lt;- map(gs_vec_url, read_page)
+
+# unnested df test (success)
+unnested_gs &lt;- gs_test %&gt;% 
+  tibble::enframe(name = NULL) %&gt;% 
+  unnest()
+
+head(unnested_gs, n = 3L)</code></pre>
+<pre><code>## # A tibble: 3 x 1
+##   title                                                                    
+##   &lt;chr&gt;                                                                    
+## 1 … , a human anti-interleukin-17A monoclonal antibody, in patients with p…
+## 2 Benralizumab, an anti-interleukin-5 receptor α monoclonal antibody, as a…
+## 3 Efficacy and safety of the anti-IL-12/23 p40 monoclonal antibody, usteki…</code></pre>
+<p>As seen above, the code was successful in scraping the titles from GS. However, an apparent issue with this is that we’re unable to get the links to the actual paper. Furthermore, the various sources of the article will be highly varied when accessing these articles. Additionally, we’re unable to exclusively scrape the year of publication, which further worsens the result.</p>
+<p>Given the apparent high ceiling to scrape via GS, we decided to stop using GS and tried PubMed scraping.</p>
+</div>
+</div>
+<div id="scraper-test-pubmed" class="section level1">
+<h1>Scraper test PubMed</h1>
+<p>Attempting to scrape PubMed results for our relevant issues quickly comes to a halt because we noticed that as we try to search results, their html does <strong>NOT</strong> change or provide a page number. We quickly scraped this from our viable methods to obtain our data.</p>
 <p>We then employed a combination of API search to obtain specific trial ID and use those to then scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail “link”</p>
 </div>
+<div id="scraping-from-clinicaltrials.gov" class="section level1">
+<h1>Scraping from clinicaltrials.gov</h1>
+<p>We first obtained (downloaded) a <code>.csv</code> file from clinicaltrials.gov that contained our advanced search options:</p>
+<ul>
+<li>options…</li>
+</ul>
+<p>After obtaining this, we then read this into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we’re only interested in the trial ID. We further filter the trials to those that has a “Placebo” arm.</p>
+<pre class="r"><code>ctgov_scrape_test &lt;- read_csv(&quot;./data/SearchResults(1).csv&quot;) %&gt;%             # read csv
+  janitor::clean_names() %&gt;% 
+  mutate(
+    url = str_replace(url, &quot;https://ClinicalTrials.gov/show/&quot;, &quot;&quot;)    # keep trial ID only
+  ) %&gt;% 
+  select(-locations) %&gt;%                                              # remove location; irrelevant
+  filter(str_detect(interventions, &quot;Placebo&quot;))
+
+ctgov_scrape_test %&gt;% 
+  distinct(conditions) %&gt;% 
+  view()</code></pre>
+<p>Now our “database” that contains relevant clinical trials are ready. Before we continue, we need to obtain the html tags from clinicaltrials.gov which contains our variables of interest. With the help of SelectorGadget, we managed to isolate the tags to contain:</p>
+<ul>
+<li><code>#EXPAND-outcome-data-1 .labelSubtle</code> : label within the table this is the thing that needs to have participants or “Unit of Measure: Participants”</li>
+<li><code>#EXPAND-outcome-data-1 td.de-outcomeLabelCell</code> : this is arm description for primary outcome</li>
+<li><code>#EXPAND-outcome-data-1 tbody:nth-child(2) th</code> : this is description of table</li>
+</ul>
 <div id="cleaning-data" class="section level3">
 <h3>Cleaning Data</h3>
 <p>Cleaning the data surprisingly wasn’t as bad as we thought. However, we do have to….</p>
