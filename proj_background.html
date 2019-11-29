@@ -71,7 +71,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="simplex2.min.css" type="text/css" />
+<link rel="stylesheet" href="simplex2-modded.min.css" type="text/css" />
 
 
 
@@ -270,7 +270,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Fragility Index Project</a>
+      <a class="navbar-brand" href="index.html"><div><img src="image/title-icon.png" height="22px"><span style="padding-left:10px">Fragility Index Project</div></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -292,20 +292,12 @@ $(document).ready(function () {
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Obtaining Data
+<li>
+  <a href="report.html">
+    <span class="fa fa-file-text-o fa-lg"></span>
      
-    <span class="caret"></span>
+    Project Report
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="plotstuff.html">Scraping Failures</a>
-    </li>
-    <li>
-      <a href="dashboard-hw.html">Working Scrapes</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="plotstuff.html">
@@ -314,25 +306,12 @@ $(document).ready(function () {
     FI calculator
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+<li>
+  <a href="plotstuff.html">
     <span class="fa fa-bar-chart fa-lg"></span>
      
     Graphs
-     
-    <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="plotstuff.html">Plotly</a>
-    </li>
-    <li>
-      <a href="dashboard-hw.html">Flexdashboards</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="report.html">Project Report</a>
 </li>
 <li>
   <a href="mailto:&lt;yy3019@cumc.columbia.edu&gt;">
@@ -362,22 +341,35 @@ $(document).ready(function () {
 </div>
 
 
-<div id="section" class="section level1 tabset tabset-fade">
-<h1></h1>
-<div id="what-is-it" class="section level2">
-<h2>What is it?</h2>
+<!-- # {.tabset .tabset-fade} -->
+<p><br></br></p>
+<div id="what-is-it" class="section level1">
+<h1>What is it?</h1>
 <p>The fragility index is a measure of the “fragility” of a clinical trial. It is the equivalent of the required number of people who, if we switch their outcome, would convert the primary endpoint of a significant trial into a non-significant trial. <br></br></p>
 </div>
-<div id="projects-motivation" class="section level2">
-<h2>Project’s Motivation</h2>
-<p>The Fragility Index has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values. We are interested how the fragility index may differ based on different clinical trial characteristics. Multiple papers have shown that it requires just a few patients to alter outcomes of many large phase III trials. It is of concern to us that these studies require billions of dollars sunk but outcomes can be “easily” rendered obsolete based on so few participant outcomes.</p>
-<p>Our main question of interest is whether fragility index is associated with a disease type. Specifically, we want to test the difference in fragility index for cancer related therapies to non-oncology immunologic monoclonal antibodies such as allergy, diabetes, and asthma. As a prior belief, we hypothesize that the median fragility Index of trials targeting cancers will be less than trials targeting auto-immune chronic diseases. <br></br></p>
+<div id="projects-motivation" class="section level1">
+<h1>Project’s Motivation</h1>
+<p>The Fragility Index has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values. We are interested how the fragility index may differ based on different clinical trial characteristics. Multiple papers have shown that it requires just a few patients to alter outcomes of many large phase III trials. It is of concern to us that these studies require billions of dollars sunk but outcomes can be “easily” rendered obsolete based on so few participant outcomes. <br></br></p>
 </div>
-<div id="other-stuff" class="section level2">
-<h2>Other stuff</h2>
+<div id="hypotheses" class="section level1">
+<h1>Hypotheses</h1>
+<p>Our main question of interest is whether fragility index is associated with a disease type. Specifically, we want to test the difference in fragility index for cancer related therapies to non-oncology immunologic monoclonal antibodies such as allergy, diabetes, and asthma. As a prior belief, we hypothesize that the median fragility Index of trials targeting cancers will be less than trials targeting auto-immune chronic diseases.</p>
+<p>We hypothesize that there will be a difference between the median fragility index of trials targeting cancers and trials targeting auto-immune chronic diseases. We believe the fragility index of non-oncology trials will be much higher. We believe this to be true for two main reasons:</p>
+<ul>
+<li>There is more at risk in treating cancer than most autoimmune disease cases. The outcome in cancer is death while autoimmune diseases tend to cause chronic illnesses and/or decreased quality of life. We believe that this change in outcome will be seen in riskier trials existing in cancer compared to autoimmune diseases.</li>
+<li>Cancer is thought anecdotally to be ‘ahead of the field’ in its research/treatments and has the luxury of additional funding. We believe being further on the cutting edge will result in more fragile trials.</li>
+</ul>
+<p>We have a few secondary questions of interest if time allows:</p>
+<ul>
+<li>If a drug is already approved for one indication, we hypothesize that the fragility index of the next trial will be much higher. We believe this for two reasons:
+<ul>
+<li>A drug company would not make the 2nd trial in an already existing drug if they did not have full confidence it would work.</li>
+<li>In between a drug being approved for one indication and the next, doctors who are affiliated with research may prescribe therapies off label. There may be a host of evidence in the field from doctors using the drug off label, which gives data to suggest the drug may work in a different indication before it is approved.</li>
+</ul></li>
+<li>Is a drug intended to treat children less fragile than other drugs?</li>
+</ul>
 </div>
-</div>
-<div id="section-1" class="section level1">
+<div id="section" class="section level1">
 <h1></h1>
 </div>
 

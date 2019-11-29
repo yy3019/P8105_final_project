@@ -12,7 +12,7 @@
 
 
 
-<title>P8105 Data Science Final Project</title>
+<title>index.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,9 +20,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -74,7 +71,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="simplex2.min.css" type="text/css" />
+<link rel="stylesheet" href="simplex2-modded.min.css" type="text/css" />
 
 
 
@@ -254,63 +251,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -318,16 +258,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -340,7 +270,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Fragility Index Project</a>
+      <a class="navbar-brand" href="index.html"><div><img src="image/title-icon.png" height="22px"><span style="padding-left:10px">Fragility Index Project</div></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -362,20 +292,12 @@ div.tocify {
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Obtaining Data
+<li>
+  <a href="report.html">
+    <span class="fa fa-file-text-o fa-lg"></span>
      
-    <span class="caret"></span>
+    Project Report
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="plotstuff.html">Scraping Failures</a>
-    </li>
-    <li>
-      <a href="dashboard-hw.html">Working Scrapes</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="plotstuff.html">
@@ -384,25 +306,12 @@ div.tocify {
     FI calculator
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+<li>
+  <a href="plotstuff.html">
     <span class="fa fa-bar-chart fa-lg"></span>
      
     Graphs
-     
-    <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="plotstuff.html">Plotly</a>
-    </li>
-    <li>
-      <a href="dashboard-hw.html">Flexdashboards</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="report.html">Project Report</a>
 </li>
 <li>
   <a href="mailto:&lt;yy3019@cumc.columbia.edu&gt;">
@@ -425,30 +334,30 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">P8105 Data Science Final Project</h1>
+<h1 class="title toc-ignore"><center>
+Fragility Index - P8105 Data Science I Project</h1>
 
 </div>
 
 
-<p><img src="image/pikachu.gif" style="width:80%"></p>
-<div id="tentative-title" class="section level1">
-<h1>Tentative Title</h1>
-<p>Our tentative title is: Exploring The Use of Fragility Index outside of Oncology Drug Development</p>
+<h3 style="text-align: center;">
+Exploring The Use of Fragility Index outside of Oncology Drug Development
+</h3>
+<center>
+<a href=""><img src="image/title-image.webp"></a>
+</center>
+<h6 style="text-align: center;">
+By: Bryan Bunning (bjb2178) | Yuanzhi (Fisher) Yu (yy3019) | Zongchao Liu (zl2860) | Gavin Ko (wk2343) | Kevin S.W. (ksw2137)
+</h6>
+<p><br></br></p>
+<p>Fragility index (FI) measures the “fragility” of a clinical trial by iteratively switching the outcomes of patients from the experimental arm to a control and evaluating whether or not the trial becomes non-signifcant. It therefore measures the number of people for this to be true. FI has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values and we are interested in how FI may differ based on different clinical trial characteristics. More details regarding our motivation can be found <a href="proj_background.html">here</a></p>
+<div id="dataset" class="section level1">
+<h1>Dataset</h1>
+<p>Obtaining our dataset is the hardest portion of this project. After various trial and error, we decided to use <a href="https://clinicaltrials.gov">clinicaltrials.gov</a> as our data source. This is a website provided by U.S. National Library of Medicine that stores information on studies being conducted around the world. Our study is particularly focused on phase III clinical trials that are within the scope of autoimmune disorders. It ***more stuff here</p>
 </div>
-<div id="team-members" class="section level1">
-<h1>Team Members</h1>
-<ul>
-<li>“Bryan Bunning - UNI: bjb2178”</li>
-<li>“Yuanzhi (Fisher) Yu - UNI: yy3019”</li>
-<li>“Zongchao Liu - UNI: zl2860”</li>
-<li>“Gavin Ko - UNI: wk2343”</li>
-<li>“Kevin S.W. - UNI: ksw2137”</li>
-</ul>
-</div>
-<div id="motivation" class="section level1">
-<h1>Motivation</h1>
-<p>The Fragility Index has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values. We are interested how the fragility index may differ based on different clinical trial characteristics. Multiple papers have shown that it requires just a few patients to alter outcomes of many large phase III trials. It is of concern to us that these studies require billions of dollars sunk but outcomes can be “easily” rendered obsolete based on so few participant outcomes.</p>
-<p>Our main question of interest is whether fragility index is associated with a disease type. Specifically, we want to test the difference in fragility index for cancer related therapies to non-oncology immunologic monoclonal antibodies such as allergy, diabetes, and asthma. As a prior belief, we hypothesize that the median fragility Index of trials targeting cancers will be less than trials targeting auto-immune chronic diseases.</p>
+<div id="findings" class="section level1">
+<h1>Findings</h1>
+<p>A quick summary of our findings include ***.</p>
 </div>
 
 <!DOCTYPE html>
@@ -473,8 +382,6 @@ A work by <a href="https://github.com/Mediculus/">Bryan Bunning</a>, <a href="ht
 </div>
 
 
-</div>
-</div>
 
 </div>
 
@@ -507,32 +414,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

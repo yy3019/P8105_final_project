@@ -1,7 +1,7 @@
 name: "Global Settings"
 output_dir: "."
 navbar:
-  title: "Fragility Index Project"
+  title: "<div><img src=\"image/title-icon.png\" height=\"22px\"><span style=\"padding-left:10px\">Fragility Index Project</div>"
   right:
   - text: "About"
     menu:
@@ -9,30 +9,21 @@ navbar:
       href: proj_background.html
     - text: "Members"
       href: members.html
-  - text: "Obtaining Data"
-    menu:
-    - text: "Scraping Failures"
-      href: plotstuff.html
-    - text: "Working Scrapes"
-      href: dashboard-hw.html
+  - text: "Project Report"
+    icon: fa-file-text-o fa-lg
+    href: report.html
   - text: "FI calculator"
     icon: fa-calculator fa-lg
     href: plotstuff.html
   - text: "Graphs"  
     icon: fa-bar-chart fa-lg
-    menu:
-    - text: "Plotly"
-      href: plotstuff.html
-    - text: "Flexdashboards"
-      href: dashboard-hw.html
-  - text: "Project Report"
-    href: report.html
+    href: plotstuff.html
   - icon: fa-telegram fa-lg
     href: mailto:<yy3019@cumc.columbia.edu> 
   - icon: fa-github fa-lg
     href: https://github.com/yy3019/P8105_final_project.github.io 
 output:
   html_document:
-    css: simplex2.min.css
+    css: simplex2-modded.min.css
     includes:
       after_body: _suffix.html
