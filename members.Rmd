@@ -27,7 +27,7 @@ Content
 
 <br></br>
 
-# <a href=""><img src=https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif></a> Gavin (Wang...) Ko
+# <a href=""><img class="cat_circle" src="image/gavin.jpg"></a><span style="padding-left:25px">Gavin (Wang..) Ko
 
 Content
 
