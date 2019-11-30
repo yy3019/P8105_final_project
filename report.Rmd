@@ -108,10 +108,12 @@ As seen above, the code was successful in scraping the titles from GS. However, 
 
 Given the apparent high ceiling to scrape via GS, we decided to stop using GS and tried PubMed scraping.
 
-# Scraping from PubMed
+### Scraping from PubMed
 Attempting to scrape PubMed results for our relevant issues quickly comes to a halt because we noticed that as we try to search results, their html address does **NOT** change or provide a page number. We quickly scraped this from our viable methods to obtain our data. 
 
-# Scraping from clinicaltrials.gov
+### Scraping from clinicaltrials.gov
+
+##### Scraping Clinical Trial ID
 
 Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to then scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link"
 
@@ -144,16 +146,66 @@ Now our "database" that contains relevant clinical trials are ready. Before we c
 * `#EXPAND-outcome-data-1 td.de-outcomeLabelCell` : this is arm description for primary outcome
 * `#EXPAND-outcome-data-1 tbody:nth-child(2) th` : this is description of table
 
+These tags will be used to identify certain cells in the messy table within clinicaltrials.gov. 
+
+##### Testing Data Scraping and Transformation to Dataframe
+
+First, we 
+```{r ctgov_test1}
+
+# test to obtain the particular unit of measure; "participants"
+test_url_1 <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>%
+  html_nodes("#EXPAND-outcome-data-1 .labelSubtle") %>% 
+  html_text() %>% 
+  str_replace("Unit of Measure: ", "")
+
+# pulling the relevant column names that corresponds to the eventual numbers we pulled.
+# this always has the first term be "\n    Arm/Group Title \n  ", which we will ignore
+col_names <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
+  html_nodes("#EXPAND-outcome-data-1 tbody:nth-child(2) tr:nth-child(1) .de-outcomeLabelCell") %>%
+  html_text()
+
+col_names
+
+#important for rownames #ideally this should be participants and unit of measure
+row_names <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
+  html_nodes("#EXPAND-outcome-data-1 .labelSubtle , #EXPAND-outcome-data-1 tbody:nth-child(2) tr:nth-child(4) .de-outcomeLabelCell") %>%
+  html_text()
+
+row_names
+
+#scrape the actual data, with variable table length
+test123 <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
+  html_nodes("#EXPAND-outcome-data-1 .de-numValue_outcomeDataCell") %>%
+  html_text()
+
+#get rid of dumb characters
+test123 <- test123 %>% as.numeric()
+
+#make into a matrix of correct size 
+
+my_matrix<- matrix(test123, ncol=length(col_names[-1]), nrow=length(row_names), byrow=TRUE)
+my_matrix
+
+my_df<- as.tibble(my_matrix)
+names(my_df) <- col_names[-1]
+#a tibble doesnt show rownames when you call it but it is saved into R
+rownames(my_df) <- row_names
+
+
+#what we should do next is store this into a listcol, and then iterate to the next website!
+```
+
 ### Cleaning Data
 
 Cleaning the data surprisingly wasn't as bad as we thought. However, we do have to....
 
 Our process is explained in detail "link"
 
-### Exploratory Analysis
+# Exploratory Analysis
 Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
 
-### Other Analysis
+# Other Analysis
 
 Additional analysis: If you undertake formal statistical analyses, describe these in detail
 
