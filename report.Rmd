@@ -40,6 +40,8 @@ theme_set(theme_minimal() +
 # Motivation
 
 Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go [here](proj_background.html) to learn more about our motivation. 
+
+**Note:** You can expand our code chunks by clicking on `code` on the right pill-button.
 <br></br>
 
 ### Some facts
@@ -62,7 +64,9 @@ Initial questions: What questions are you trying to answer? How did these questi
 
 ### Attempt to Scrape from Google Scholar
 
-```{r google_schol_scrape}
+Given the ease of access to Google Scholar (GS), we first attempted to scrape our sources from the site. We initially did this manually by searching some random entry in order to see a pattern where we can insert our "page number". We found that we need to split Google's search address into two partitions so that we can insert the search numbers. 
+
+```{r gs_scrape}
 
 # have to split link into 2 parts...
 gs_url_base1 <- "https://scholar.google.com/scholar?start="
@@ -73,13 +77,11 @@ gs_vec_url <- str_c(gs_url_base1, seq(0, 100, 10), gs_url_base2)
 
 ```
 
-Given the ease of access to Google Scholar (GS), we first attempted to scrape our sources from the site. We initially did this manually by searching some random entry in order to see a pattern where we can insert our "page number". We found that we need to split Google's search address into two partitions so that we can insert the search numbers. 
-
 Once we figured out the web address components, we attempted to incorporate this into our scraping function by using `purrr::map` function and search for the term "monoclonal antibody phase 3". Utilizing ["SelectorGadget"](https://selectorgadget.com/), we were able to obtain the css tag for the title, `.gs_rt a` and used this to scrape our articles/journals. 
 
-```{r scraping_fn}
+```{r gs_scraping_fn, eval = FALSE}
 
-# scraper fn
+# GS scraper fn
 read_page <- function(url) {
   
   h = read_html(url)               # reads url input
@@ -104,7 +106,7 @@ head(unnested_gs, n = 3L)
 
 ```
 
-As seen above, the code was successful in scraping the titles from GS. However, an apparent issue with this is that we're unable to get the links to the actual paper. Furthermore, the various sources of the article will be highly varied when accessing these articles, which complicates the generalizability of our functions. Additionally, we're unable to exclusively scrape the year of publication, which further worsens this method. 
+The code we made was successful in scraping the titles from GS. However, an apparent issue with this is that we're unable to get the links to the actual paper. Furthermore, the various sources of the article will be highly varied when accessing these articles, which complicates the generalizability of our functions. Additionally, we're unable to exclusively scrape the year of publication, which further worsens this method. 
 
 Given the apparent high ceiling to scrape via GS, we decided to stop using GS and tried PubMed scraping.
 
@@ -125,7 +127,7 @@ After obtaining this file, we read it into R and clean-up the relevant part of t
 
 ```{r ctgov_data_read}
 
-ctgov_scrape_test <- read_csv("./data/SearchResults(1).csv") %>%      # read csv
+ctgov_scrape_test <- read_csv("./data/ctgov_test_API.csv") %>%      # read csv
   janitor::clean_names() %>% 
   mutate(
     url = str_replace(url, "https://ClinicalTrials.gov/show/", "")    # keep trial ID only
@@ -134,66 +136,190 @@ ctgov_scrape_test <- read_csv("./data/SearchResults(1).csv") %>%      # read csv
   select(rank, nct_id, title, conditions, interventions) %>%          # remove location; irrelevant
   filter(str_detect(interventions, "Placebo"))
 
-ctgov_scrape_test %>% 
-  distinct(conditions) %>% 
-  view()
+
+## disabled code to check distinct categories of potential interest
+#ctgov_scrape_test %>% 
+#  distinct(conditions) %>% 
+#  view()
 
 ```
 
-Now our "database" that contains relevant clinical trials are ready. Before we continue, we need to obtain the html tags from clinicaltrials.gov which contains our variables of interest. With the help of SelectorGadget, we managed to isolate the tags to contain:
+Now our "database" containing relevant clinical trials are ready. Before we continue, we need to obtain the html tags from clinicaltrials.gov which contains our variables of interest. With the help of SelectorGadget, we managed to isolate the tags to contain:
 
 * `#EXPAND-outcome-data-1 .labelSubtle` : label within the table this is the thing that needs to have participants or "Unit of Measure: Participants"
 * `#EXPAND-outcome-data-1 td.de-outcomeLabelCell` : this is arm description for primary outcome
 * `#EXPAND-outcome-data-1 tbody:nth-child(2) th` : this is description of table
 
 These tags will be used to identify certain cells in the messy table within clinicaltrials.gov. 
+<br></br>
 
 ##### Testing Data Scraping and Transformation to Dataframe
 
-First, we 
-```{r ctgov_test1}
+We then test our code to be able to run and create a dataframe from a single source. It took quite a few trial and errors to be able to obtain the right form. 
+
+Firstly, we attempt to find an identifier relevant to our project that may help us automate the determination of which trial will be included. 
+
+```{r ctgov_test_id, eval = FALSE}
 
 # test to obtain the particular unit of measure; "participants"
-test_url_1 <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>%
+test_url_ctgov <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>%
   html_nodes("#EXPAND-outcome-data-1 .labelSubtle") %>% 
   html_text() %>% 
   str_replace("Unit of Measure: ", "")
 
+```
+
+This returns our important "unit of measure". We are particularly looking for variables that contain "participants". Having found a way to detect this, we continued to build our function under the assumption that we have "participants" as our unit of measure. 
+
+We obtained the relevant column names:
+
+```{r col_names_pull}
+
 # pulling the relevant column names that corresponds to the eventual numbers we pulled.
 # this always has the first term be "\n    Arm/Group Title \n  ", which we will ignore
-col_names <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
+col_names_test <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
   html_nodes("#EXPAND-outcome-data-1 tbody:nth-child(2) tr:nth-child(1) .de-outcomeLabelCell") %>%
   html_text()
 
-col_names
+col_names_test
 
-#important for rownames #ideally this should be participants and unit of measure
-row_names <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
+```
+
+The row names, in case we need it as well:
+
+```{r row_names_pull}
+
+# obtains relevant row names
+# ideally this will be participants and the specified units of measure
+row_names_test <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
   html_nodes("#EXPAND-outcome-data-1 .labelSubtle , #EXPAND-outcome-data-1 tbody:nth-child(2) tr:nth-child(4) .de-outcomeLabelCell") %>%
   html_text()
 
-row_names
+row_names_test
 
-#scrape the actual data, with variable table length
-test123 <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
+```
+
+And finally, our most important component, which is the number of participants in each group. 
+
+```{r content_pull}
+
+# scrape the actual data, with variable table length
+content_test <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702") %>% 
   html_nodes("#EXPAND-outcome-data-1 .de-numValue_outcomeDataCell") %>%
-  html_text()
+  html_text() %>% 
+  as.numeric() %>%                           # cleans our data to contain just the numbers
+  matrix(ncol = length(col_names_test[-1]),  # make into a matrix of correct size 
+         nrow = length(row_names_test), 
+         byrow = TRUE) %>% 
+  as_tibble()                                # convert the matrix into a tibble
 
-#get rid of dumb characters
-test123 <- test123 %>% as.numeric()
+# add column names to our df
+names(content_test) <- col_names_test[-1]
 
-#make into a matrix of correct size 
+# adds rownames to our tibbles
+# a tibble doesnt show rownames when you call it but it is saved into R
+rownames(content_test) <- row_names_test
 
-my_matrix<- matrix(test123, ncol=length(col_names[-1]), nrow=length(row_names), byrow=TRUE)
-my_matrix
+content_test
 
-my_df<- as.tibble(my_matrix)
-names(my_df) <- col_names[-1]
-#a tibble doesnt show rownames when you call it but it is saved into R
-rownames(my_df) <- row_names
+```
 
+Though it took a while, our code managed to pull the relevant info that we need to manipulate in order to evaluate our fragility indexes. Our next step then, is to be able to `map` this and make a listcol within our original dataframe. 
 
-#what we should do next is store this into a listcol, and then iterate to the next website!
+##### Building the function with the proper conditions and mapping. 
+
+Similar to how we approach making the single-url code, we had various trial and error to come up with the function. We start with a simple form of object that stores our url. We extract the "unit of measure" and evaluate whether or not it contains "participants" or "patients"; scrape if `TRUE`, return `NA` if `FALSE`. 
+
+A slightly different step was to split the content-scraping and data-frame transformation into two separate steps in order to clarify the segmentation. 
+
+```{r function_build_working}
+
+# function to scrape from url
+outcome_extractor <- function(data) {
+  
+  # stores our list of urls
+  site = read_html(str_c("https://ClinicalTrials.gov/show/results/", data))
+  
+  # pulls our "measure" detector
+  measure = site %>%
+    html_nodes("#EXPAND-outcome-data-1 .labelSubtle") %>% 
+    html_text() %>% 
+    str_replace("Unit of Measure: ", "")
+  
+  # if/else function that skips to the next url if our measure does not contain "participants" or "patients"
+  if (!str_detect(measure, "[pP]articipants|[pP]atients")) {
+    NA            # returns NA if it doesn't exist
+  } else {
+    
+    # pulls relevant column names
+    col_names = site %>%
+      html_nodes("#EXPAND-outcome-data-1 tbody:nth-child(2) tr:nth-child(1) .de-outcomeLabelCell") %>%
+      html_text()
+    
+    # pulls row names (might be unnecessary)
+    row_names = site %>% 
+      html_nodes("#EXPAND-outcome-data-1 .labelSubtle , #EXPAND-outcome-data-1 tbody:nth-child(2) tr:nth-child(4) .de-outcomeLabelCell") %>% 
+      html_text()
+    
+    # pulls the actual numbers (content)
+    content = site %>% 
+      html_nodes("#EXPAND-outcome-data-1 .de-numValue_outcomeDataCell") %>% 
+      html_text() %>% 
+      as.numeric()
+    
+    # makes a dataframe using matrix
+    df = matrix(content, 
+                ncol = length(col_names[-1]), 
+                nrow = length(row_names), 
+                byrow = TRUE) %>% 
+      as_tibble() 
+    
+    # adds column names
+    names(df) <- col_names[-1]
+    #rownames(df) <- row_names
+    
+    # returns the df output
+    df
+  }
+}
+
+```
+
+We then test this by scraping our .csv file, `ctgov_test_API.csv` located inside our `data` folder (loaded earlier) and map our newly-made function. A critical step after we tested this was that we need to filter our `NA` for our listcol to appear proper. 
+
+```{r map_fn_test}
+
+# testing our function using purrr::map function.
+mapped_ctgov_scrape_test <- ctgov_scrape_test %>% 
+  mutate(
+    scrape_data = map(url, outcome_extractor)
+  ) %>% 
+  filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.
+
+```
+
+##### Mapping our real dataset
+
+Now that we have a working function that produces our expected extraction, we can use our real data source, `ctgov_10k_API`. This time, we just apply our previous functions and wait for *** to "compile". 
+
+```{r ctgov_real_scrape}
+
+ctgov_10k_df <- read_csv("./data/ctgov_10k_API.csv") %>%      # read csv
+  janitor::clean_names() %>% 
+  mutate(
+    url = str_replace(url, "https://ClinicalTrials.gov/show/", "")    # keep trial ID only
+  ) %>% 
+  rename("nct_id" = url) %>% 
+  select(rank, nct_id, title, conditions, interventions) %>%          # remove location; irrelevant
+  filter(str_detect(interventions, "Placebo"))
+
+# testing our function using purrr::map function.
+ctgov_10k_scraped <- ctgov_10k_df %>% 
+  mutate(
+    scrape_data = map(url, outcome_extractor)
+  ) %>% 
+  filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.
+
 ```
 
 ### Cleaning Data

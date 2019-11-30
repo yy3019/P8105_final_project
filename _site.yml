@@ -18,8 +18,19 @@ navbar:
   - text: "Graphs"  
     icon: fa-bar-chart fa-lg
     href: plotstuff.html
-  - icon: fa-telegram fa-lg
-    href: mailto:<yy3019@cumc.columbia.edu> 
+  - text: "Contact Us"
+    icon: fa-telegram fa-lg
+    menu:
+    - text: "Bryan Bunning"
+      href: mailto:<bjb2178@cumc.columbia.edu>
+    - text: "Yuanzhi Yu"
+      href: mailto:<yy3019@cumc.columbia.edu> 
+    - text: "Zongchao Liu"
+      href: mailto:<zl2860@cumc.columbia.edu>
+    - text: "Gavin Ko"
+      href: mailto:<wk2343@cumc.columbia.edu>
+    - text: "Kevin S. Wongsodirdjo"
+      href: mailto:<ksw2137@cumc.columbia.edu>
   - icon: fa-github fa-lg
     href: https://github.com/yy3019/P8105_final_project.github.io 
 output:

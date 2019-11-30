@@ -5,6 +5,10 @@ output: html_document
 
 <br></br>
 
+We are a rag-tag bunch that was formed during the hellish classes in the first semester of our lives as candidates of MS Biostatistics at Columbia University. What started out as friendly competition in P8105 class under Professor Jeff Goldsmith's tutelage. 
+
+<br></br>
+
 # <a href=""><img class="cat_circle" src="image/bbunning.jpg"></a><span style="padding-left:25px">Bryan Bunning
 
 Content
@@ -29,9 +33,9 @@ Content
 
 <br></br>
 
-# <a href=""><img class="cat_circle" src="image/ksw.jpg"></a><span style="padding-left:25px">Kevin S.W. 
+# <a href=""><img class="cat_circle" src="image/ksw.jpg"></a><span style="padding-left:25px">Kevin S. Wongsodirdjo
 
-My name is Kevin S.W. and I'm from Indonesia. My dream is to eventually be a physician and for that goal, I studied biochemistry as an undergraduate in University of Washington. I got into Columbia's Biostatistics program after a mentor taught me the things you can do with data. I believe that learning about data, wrangling, and analysis will significantly help my future decision-making as a physician. I joined this project after Bryan explained the significance of FI. I decided to join the group out of pure interest in the hopes that we could find something useful for the scientific community. 
+My name is Kevin and I'm from Indonesia! My dream is to eventually be a physician and for that goal, I studied biochemistry as an undergraduate in University of Washington. I got into Columbia's Biostatistics program after a mentor taught me the things you can do with data. I believe that learning about data, wrangling, and analysis will significantly help my future decision-making as a physician. I decided to join this project after Bryan explained the significance of FI. Though it's not the perfect tool to assess the validity of statistical tests, FI bridges the gap of what truly matters to physicians and statisticians. We hope that this project may find something useful for the scientific community. 
 <br></br>
 
 # <a href=""><img class="cat_circle" src="image/pika_det.jpg"></a><span style="padding-left:25px">Pikachu
