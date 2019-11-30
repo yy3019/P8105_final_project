@@ -329,6 +329,8 @@ ctgov_10k_scraped <- ctgov_10k_df %>%
 
 ```
 
+After all this, our resulting viable dataset is `r nrow(ctgov_10k_scraped)` datasets that each contains the primary outcomes of interest. There are `r nrow(ctgov_10k_scraped %>% distinct(conditions))` unique conditions found using `distinct()` function. 
+
 ### Cleaning Data
 
 Cleaning the data surprisingly wasn't as bad as we thought. However, we do have to....
@@ -337,6 +339,16 @@ Our process is explained in detail "link"
 
 # Exploratory Analysis
 Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
+
+### Preliminary exploration from our scraped dataset
+
+```{r count_of_unique}
+
+cond_count <- ctgov_10k_scraped %>% 
+  count(conditions)
+
+```
+
 
 # Other Analysis
 
