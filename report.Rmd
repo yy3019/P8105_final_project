@@ -247,7 +247,9 @@ outcome_extractor <- function(data) {
     str_replace("Unit of Measure: ", "")
   
   # if/else function that skips to the next url if our measure does not contain "participants" or "patients"
-  if (!str_detect(measure, "[pP]articipants|[pP]atients")) {
+  if (length(measure) == 0) {      # added after bug found; accounts for length = 0
+    NA
+  } else if (!str_detect(measure, "[pP]articipants|[pP]atients")) {
     NA            # returns NA if it doesn't exist
   } else {
     
@@ -292,7 +294,7 @@ We then test this by scraping our .csv file, `ctgov_test_API.csv` located inside
 # testing our function using purrr::map function.
 mapped_ctgov_scrape_test <- ctgov_scrape_test %>% 
   mutate(
-    scrape_data = map(url, outcome_extractor)
+    scrape_data = map(nct_id, outcome_extractor)
   ) %>% 
   filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.
 
@@ -300,12 +302,16 @@ mapped_ctgov_scrape_test <- ctgov_scrape_test %>%
 
 ##### Mapping our real dataset
 
-Now that we have a working function that produces our expected extraction, we can use our real data source, `ctgov_10k_API`. This time, we just apply our previous functions and wait for *** to "compile". 
+Now that we have a working function that produces our expected extraction, we can use our real data source, `ctgov_10k_API`. This time, we just apply our previous functions and wait for about 30-40 minutes to "compile". 
+
+**Note:** During one of our tries, we realize that there's an extra element in the "outcome measures" that we failed to take into account; `character(0)`. We had to debug this for a while to make our function work by adding another condition: `if(length(input) == 0)`, which returns `NA` if `TRUE`.
+
+**TURN THE CODE OFF UNLESS READY TO BUILD WITH SIGNIFICANT UPDATES**
 
 ```{r ctgov_real_scrape}
 
-ctgov_10k_df <- read_csv("./data/ctgov_10k_API.csv") %>%      # read csv
-  janitor::clean_names() %>% 
+ctgov_10k_df <- read_csv("./data/ctgov_10k_API.csv") %>%              # read csv
+  janitor::clean_names() %>%
   mutate(
     url = str_replace(url, "https://ClinicalTrials.gov/show/", "")    # keep trial ID only
   ) %>% 
@@ -313,10 +319,11 @@ ctgov_10k_df <- read_csv("./data/ctgov_10k_API.csv") %>%      # read csv
   select(rank, nct_id, title, conditions, interventions) %>%          # remove location; irrelevant
   filter(str_detect(interventions, "Placebo"))
 
+
 # testing our function using purrr::map function.
 ctgov_10k_scraped <- ctgov_10k_df %>% 
   mutate(
-    scrape_data = map(url, outcome_extractor)
+    scrape_data = map(nct_id, outcome_extractor)
   ) %>% 
   filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.
 

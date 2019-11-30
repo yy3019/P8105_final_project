@@ -442,7 +442,8 @@ div.tocify {
 
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go <a href="proj_background.html">here</a> to learn more about our motivation. <br></br></p>
+<p>Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go <a href="proj_background.html">here</a> to learn more about our motivation.</p>
+<p><strong>Note:</strong> You can expand our code chunks by clicking on <code>code</code> on the right pill-button. <br></br></p>
 <div id="some-facts" class="section level3">
 <h3>Some facts</h3>
 <p><br></br></p>
@@ -511,7 +512,7 @@ head(unnested_gs, n = 3L)</code></pre>
 <li>options…</li>
 </ul>
 <p>After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we’re only interested in the trial ID. We further filter the trials to those that has a “Placebo” arm.</p>
-<pre class="r"><code>ctgov_scrape_test &lt;- read_csv(&quot;./data/SearchResults(1).csv&quot;) %&gt;%      # read csv
+<pre class="r"><code>ctgov_scrape_test &lt;- read_csv(&quot;./data/ctgov_test_API.csv&quot;) %&gt;%      # read csv
   janitor::clean_names() %&gt;% 
   mutate(
     url = str_replace(url, &quot;https://ClinicalTrials.gov/show/&quot;, &quot;&quot;)    # keep trial ID only
@@ -589,6 +590,91 @@ content_test</code></pre>
 ## *                     &lt;dbl&gt;                      &lt;dbl&gt;                &lt;dbl&gt;
 ## 1                       212                        207                  200
 ## 2                       129                        131                   59</code></pre>
+<p>Though it took a while, our code managed to pull the relevant info that we need to manipulate in order to evaluate our fragility indexes. Our next step then, is to be able to <code>map</code> this and make a listcol within our original dataframe.</p>
+</div>
+<div id="building-the-function-with-the-proper-conditions-and-mapping." class="section level5">
+<h5>Building the function with the proper conditions and mapping.</h5>
+<p>Similar to how we approach making the single-url code, we had various trial and error to come up with the function. We start with a simple form of object that stores our url. We extract the “unit of measure” and evaluate whether or not it contains “participants” or “patients”; scrape if <code>TRUE</code>, return <code>NA</code> if <code>FALSE</code>.</p>
+<p>A slightly different step was to split the content-scraping and data-frame transformation into two separate steps in order to clarify the segmentation.</p>
+<pre class="r"><code># function to scrape from url
+outcome_extractor &lt;- function(data) {
+  
+  # stores our list of urls
+  site = read_html(str_c(&quot;https://ClinicalTrials.gov/show/results/&quot;, data))
+  
+  # pulls our &quot;measure&quot; detector
+  measure = site %&gt;%
+    html_nodes(&quot;#EXPAND-outcome-data-1 .labelSubtle&quot;) %&gt;% 
+    html_text() %&gt;% 
+    str_replace(&quot;Unit of Measure: &quot;, &quot;&quot;)
+  
+  # if/else function that skips to the next url if our measure does not contain &quot;participants&quot; or &quot;patients&quot;
+  if (length(measure) == 0) {      # added after bug found; accounts for length = 0
+    NA
+  } else if (!str_detect(measure, &quot;[pP]articipants|[pP]atients&quot;)) {
+    NA            # returns NA if it doesn&#39;t exist
+  } else {
+    
+    # pulls relevant column names
+    col_names = site %&gt;%
+      html_nodes(&quot;#EXPAND-outcome-data-1 tbody:nth-child(2) tr:nth-child(1) .de-outcomeLabelCell&quot;) %&gt;%
+      html_text()
+    
+    # pulls row names (might be unnecessary)
+    row_names = site %&gt;% 
+      html_nodes(&quot;#EXPAND-outcome-data-1 .labelSubtle , #EXPAND-outcome-data-1 tbody:nth-child(2) tr:nth-child(4) .de-outcomeLabelCell&quot;) %&gt;% 
+      html_text()
+    
+    # pulls the actual numbers (content)
+    content = site %&gt;% 
+      html_nodes(&quot;#EXPAND-outcome-data-1 .de-numValue_outcomeDataCell&quot;) %&gt;% 
+      html_text() %&gt;% 
+      as.numeric()
+    
+    # makes a dataframe using matrix
+    df = matrix(content, 
+                ncol = length(col_names[-1]), 
+                nrow = length(row_names), 
+                byrow = TRUE) %&gt;% 
+      as_tibble() 
+    
+    # adds column names
+    names(df) &lt;- col_names[-1]
+    #rownames(df) &lt;- row_names
+    
+    # returns the df output
+    df
+  }
+}</code></pre>
+<p>We then test this by scraping our .csv file, <code>ctgov_test_API.csv</code> located inside our <code>data</code> folder (loaded earlier) and map our newly-made function. A critical step after we tested this was that we need to filter our <code>NA</code> for our listcol to appear proper.</p>
+<pre class="r"><code># testing our function using purrr::map function.
+mapped_ctgov_scrape_test &lt;- ctgov_scrape_test %&gt;% 
+  mutate(
+    scrape_data = map(nct_id, outcome_extractor)
+  ) %&gt;% 
+  filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.</code></pre>
+</div>
+<div id="mapping-our-real-dataset" class="section level5">
+<h5>Mapping our real dataset</h5>
+<p>Now that we have a working function that produces our expected extraction, we can use our real data source, <code>ctgov_10k_API</code>. This time, we just apply our previous functions and wait for about 30-40 minutes to “compile”.</p>
+<p><strong>Note:</strong> During one of our tries, we realize that there’s an extra element in the “outcome measures” that we failed to take into account; <code>character(0)</code>. We had to debug this for a while to make our function work by adding another condition: <code>if(length(input) == 0)</code>, which returns <code>NA</code> if <code>TRUE</code>.</p>
+<p><strong>TURN THE CODE OFF UNLESS READY TO BUILD WITH SIGNIFICANT UPDATES</strong></p>
+<pre class="r"><code>ctgov_10k_df &lt;- read_csv(&quot;./data/ctgov_10k_API.csv&quot;) %&gt;%              # read csv
+  janitor::clean_names() %&gt;%
+  mutate(
+    url = str_replace(url, &quot;https://ClinicalTrials.gov/show/&quot;, &quot;&quot;)    # keep trial ID only
+  ) %&gt;% 
+  rename(&quot;nct_id&quot; = url) %&gt;% 
+  select(rank, nct_id, title, conditions, interventions) %&gt;%          # remove location; irrelevant
+  filter(str_detect(interventions, &quot;Placebo&quot;))
+
+
+# testing our function using purrr::map function.
+ctgov_10k_scraped &lt;- ctgov_10k_df %&gt;% 
+  mutate(
+    scrape_data = map(nct_id, outcome_extractor)
+  ) %&gt;% 
+  filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.</code></pre>
 </div>
 </div>
 <div id="cleaning-data" class="section level3">
