@@ -7,16 +7,27 @@ output: html_document
 
 <center><a href=""><img src="image/title-image.webp"></a></center>
 
-<h6 style="text-align: center;" markdown="1">By: Bryan Bunning (bjb2178)  |  Yuanzhi (Fisher) Yu (yy3019)  |  Zongchao Liu (zl2860)  |  Gavin Ko (wk2343)  |  Kevin S.W. (ksw2137)</h6>
+<h6 style="text-align: center;" markdown="1">By: Bryan Bunning (bjb2178)  |  Yuanzhi Yu (yy3019)  |  Zongchao Liu (zl2860)  |  Gavin Ko (wk2343)  |  Kevin S.W. (ksw2137)</h6>
 
 <br></br>
 
-Fragility index (FI) measures the "fragility" of a clinical trial by iteratively switching the outcomes of patients from the experimental arm to a control and evaluating whether or not the trial becomes non-signifcant. It therefore measures the number of people for this to be true. FI has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values and we are interested in how FI may differ based on different clinical trial characteristics. More details regarding our motivation can be found [here](proj_background.html)
+# Introduction
+
+Fragility index (FI) measures the "fragility" of a clinical trial by iteratively switching the outcomes of patients from the experimental arm to a control and evaluating whether or not the trial becomes non-signifcant. It therefore measures the number of people for this to be true. FI has been suggested to be an easy-to-understand metric of a clinical trial’s robustness, which may pair well with other frequently discussed metrics like p-values and we are interested in how FI may differ based on different clinical trial characteristics. More details regarding our motivation can be found [here](proj_background.html).
 
 # Dataset
 
-Obtaining our dataset is the hardest portion of this project. After various trial and error, we decided to use [clinicaltrials.gov](https://clinicaltrials.gov) as our data source. This is a website provided by U.S. National Library of Medicine that stores information on studies being conducted around the world. Our study is particularly focused on phase III clinical trials that are within the scope of autoimmune disorders. It ***more stuff here
+Obtaining our dataset is the hardest portion of this project. After various trial and error, we decided to use [clinicaltrials.gov](https://clinicaltrials.gov) as our data source. This is a website provided by U.S. National Library of Medicine that stores information on studies being conducted around the world. 
+
+At first, we set the main target to autoimmune disorder related clinical trials; however, the resulting dataset wasn't big enough for us to conduct further analysis. Therefore, we enlarged the criteria to US based phase III clinical trials. 
+
+The resulting dataset includes 
 
 # Findings
 
-A quick summary of our findings include ***. 
+A quick summary of our findings include:     
+1.     
+2.     
+3.          
+
+For detailed results, analysis and outout, please refer to [report](report.html).
