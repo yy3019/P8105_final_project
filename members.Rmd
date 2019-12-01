@@ -27,7 +27,7 @@ Content
 
 <br></br>
 
-# <a href=""><img class="cat_circle" src="image/gavin.jpg"></a><span style="padding-left:25px">Gavin (Wang..) Ko
+# <a href=""><img class="cat_circle" src="image/gavin.jpg"></a><span style="padding-left:25px">Wangchia (Gavin) Ko
 
 Content
 
