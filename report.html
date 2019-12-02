@@ -374,7 +374,7 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="plotstuff.html">
+  <a href="https://yy3019.shinyapps.io/FI_calculator/">
     <span class="fa fa-calculator fa-lg"></span>
      
     FI calculator
@@ -455,7 +455,7 @@ div.tocify {
 </li>
 <li>Construct a web-based FI calculator which allows user to input their own dataset<br />
 </li>
-<li>Discover potential impact factors on FI. e.g. disease type, treatment type, published journal</li>
+<li>Discover potential impact factors on FI. e.g. disease type, treatment type, conducted location</li>
 </ul>
 <p><br></br></p>
 </div>
@@ -469,7 +469,9 @@ Lastly, the <a href="https://www.thelancet.com/journals/lanonc/article/PIIS1470-
 </div>
 <div id="initial-questions" class="section level1">
 <h1>Initial Questions</h1>
-<p>Initial questions: What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis? <br></br></p>
+<p>As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there’s significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we find out that all the criterias we’ve applied would result in insufficient sample size to conduct further analysis. Accordingly, we’ve enlarged our filtering criteria to US based phase III clinical trials.<br />
+On the other hand, given the dataset we scraped, we’re allowed to perform exploratory data analysis on the study sites, published journal and their respective FI.</p>
+<p><br></br></p>
 </div>
 <div id="obtaining-data" class="section level1">
 <h1>Obtaining Data</h1>
@@ -514,12 +516,13 @@ head(unnested_gs, n = 3L)</code></pre>
 </div>
 <div id="scraping-from-clinicaltrials.gov" class="section level3">
 <h3>Scraping from clinicaltrials.gov</h3>
-<div id="scraping-clinical-trial-id" class="section level5">
-<h5>Scraping Clinical Trial ID</h5>
-<p>Our last bastion, <a href="https://clinicaltrials.gov">clinicaltrials.gov</a>, were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to then scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail “link”</p>
+<div id="scraping-clinical-trial-id" class="section level4">
+<h4>Scraping Clinical Trial ID</h4>
+<p>Our last bastion, <a href="https://clinicaltrials.gov">clinicaltrials.gov</a>, were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail “link”</p>
 <p>We first obtained (downloaded) a <code>.csv</code> file from clinicaltrials.gov that contained our advanced search options:</p>
 <ul>
-<li>options…</li>
+<li>phase III trials</li>
+<li>completed</li>
 </ul>
 <p>After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we’re only interested in the trial ID. We further filter the trials to those that has a “Placebo” arm.</p>
 <pre class="r"><code>ctgov_scrape_test &lt;- read_csv(&quot;./data/ctgov_test_API.csv&quot;) %&gt;%      # read csv
@@ -532,8 +535,8 @@ head(unnested_gs, n = 3L)</code></pre>
   filter(str_detect(interventions, &quot;Placebo&quot;))
 
 
-## disabled code to check distinct categories of potential interest
-#ctgov_scrape_test %&gt;% 
+## disabled code to check distinct categories of potential interest:
+#  ctgov_scrape_test %&gt;% 
 #  distinct(conditions) %&gt;% 
 #  view()</code></pre>
 <p>Now our “database” containing relevant clinical trials are ready. Before we continue, we need to obtain the html tags from clinicaltrials.gov which contains our variables of interest. With the help of SelectorGadget, we managed to isolate the tags to contain:</p>
@@ -544,8 +547,8 @@ head(unnested_gs, n = 3L)</code></pre>
 </ul>
 <p>These tags will be used to identify certain cells in the messy table within clinicaltrials.gov. <br></br></p>
 </div>
-<div id="testing-data-scraping-and-transformation-to-dataframe" class="section level5">
-<h5>Testing Data Scraping and Transformation to Dataframe</h5>
+<div id="testing-data-scraping-and-transformation-to-dataframe" class="section level4">
+<h4>Testing Data Scraping and Transformation to Dataframe</h4>
 <p>We then test our code to be able to run and create a dataframe from a single source. It took quite a few trial and errors to be able to obtain the right form.</p>
 <p>Firstly, we attempt to find an identifier relevant to our project that may help us automate the determination of which trial will be included.</p>
 <pre class="r"><code># test to obtain the particular unit of measure; &quot;participants&quot;
@@ -602,8 +605,8 @@ content_test</code></pre>
 ## 2                       129                        131                   59</code></pre>
 <p>Though it took a while, our code managed to pull the relevant info that we need to manipulate in order to evaluate our fragility indexes. Our next step then, is to be able to <code>map</code> this and make a listcol within our original dataframe.</p>
 </div>
-<div id="building-the-function-with-the-proper-conditions-and-mapping." class="section level5">
-<h5>Building the function with the proper conditions and mapping.</h5>
+<div id="building-the-function-with-the-proper-conditions-and-mapping" class="section level4">
+<h4>Building the function with the proper conditions and mapping</h4>
 <p>Similar to how we approach making the single-url code, we had various trial and error to come up with the function. We start with a simple form of object that stores our url. We extract the “unit of measure” and evaluate whether or not it contains “participants” or “patients”; scrape if <code>TRUE</code>, return <code>NA</code> if <code>FALSE</code>.</p>
 <p>A slightly different step was to split the content-scraping and data-frame transformation into two separate steps in order to clarify the segmentation.</p>
 <pre class="r"><code># function to scrape from url
@@ -664,8 +667,8 @@ mapped_ctgov_scrape_test &lt;- ctgov_scrape_test %&gt;%
   ) %&gt;% 
   filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.</code></pre>
 </div>
-<div id="mapping-our-real-dataset" class="section level5">
-<h5>Mapping our real dataset</h5>
+<div id="mapping-our-real-dataset" class="section level4">
+<h4>Mapping our real dataset</h4>
 <p>Now that we have a working function that produces our expected extraction, we can use our real data source, <code>ctgov_10k_API</code>. This time, we just apply our previous functions and wait for about 30-40 minutes to “compile”.</p>
 <p><strong>Note:</strong> During one of our tries, we realize that there’s an extra element in the “outcome measures” that we failed to take into account; <code>character(0)</code>. We had to debug this for a while to make our function work by adding another condition: <code>if(length(input) == 0)</code>, which returns <code>NA</code> if <code>TRUE</code>.</p>
 <p><strong>TURN THE CODE OFF UNLESS READY TO BUILD WITH SIGNIFICANT UPDATES</strong></p>
@@ -675,7 +678,7 @@ mapped_ctgov_scrape_test &lt;- ctgov_scrape_test %&gt;%
     url = str_replace(url, &quot;https://ClinicalTrials.gov/show/&quot;, &quot;&quot;)    # keep trial ID only
   ) %&gt;% 
   rename(&quot;nct_id&quot; = url) %&gt;% 
-  select(rank, nct_id, title, conditions, interventions) %&gt;%          # remove location; irrelevant
+  select(rank, nct_id, title, conditions, interventions) %&gt;%     
   filter(str_detect(interventions, &quot;Placebo&quot;))
 
 
