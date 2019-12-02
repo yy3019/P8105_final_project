@@ -17,7 +17,9 @@ Content
 
 # <a href=""><img class="cat_circle" src="image/fisher.jpg"></a><span style="padding-left:25px">Yuanzhi (Fisher) Yu
 
-Content
+My name is Yuanzhi Yu (Fisher) and I'm from from China! 
+
+You can learn more about me here [Fisher](https://yy3019.github.io/Resume.html)
 
 <br></br>
 
@@ -27,7 +29,7 @@ Content
 
 <br></br>
 
-# <a href=""><img class="cat_circle" src="image/gavin.jpg"></a><span style="padding-left:25px">Gavin (Wang..) Ko
+# <a href=""><img class="cat_circle" src="image/gavin.jpg"></a><span style="padding-left:25px">Wangchia (Gavin) Ko
 
 Content
 
