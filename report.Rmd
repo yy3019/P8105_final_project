@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
                       )
 
 # loaded packages; placed here to be able to load global settings
-Packages <- c("tidyverse", "dplyr", "rvest", "httr")
+Packages <- c("tidyverse", "dplyr", "rvest", "httr", "XML", "readxl")
 invisible(lapply(Packages, library, character.only = TRUE))
 
 
@@ -42,10 +42,6 @@ theme_set(theme_minimal() +
 Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go [here](proj_background.html) to learn more about our motivation. 
 
 **Note:** You can expand our code chunks by clicking on `code` on the right pill-button.
-<br></br>
-
-### Some facts
-
 
 <br></br>
 
@@ -53,6 +49,10 @@ Our motivation behind this project is to explore the fragility index (FI) beyond
 * Explore general trend of FI in recent phase III clinical trials   
 * Construct a web-based FI calculator which allows user to input their own dataset       
 * Discover potential impact factors on FI. e.g. disease type, treatment type, conducted location
+
+### Secondary Goals
+
+* Explore other variables 
 
 <br></br>
 
@@ -66,8 +66,36 @@ Lastly, the [Del Paggio study](https://www.thelancet.com/journals/lanonc/article
 
 # Initial Questions
 
-As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there's significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we find out that all the criterias we've applied would result in insufficient sample size to conduct further analysis. Accordingly, we've enlarged our filtering criteria to US based phase III clinical trials.     
-On the other hand, given the dataset we scraped, we're allowed to perform exploratory data analysis on the study sites, published journal and their respective FI. 
+As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there's significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we found out that all the criterias we'd applied would result in insufficient sample size to conduct further analysis. Accordingly, we've enlarged our filtering criteria to US based phase III clinical trials.
+
+## What actually happened
+
+### The reality of our fragility index data
+
+What we ended up actually doing differed from our initial hypothesis described in the above paragraph. After looking at the data we were able to gather, the questions we initially posed were not answerable. While we were able to scrape clinical trial information usable to calculate the fragility index, we did not have enough trials to make visualizations or really anything in our initial query which was filtered by drug type and disease type. 
+
+So we pivoted and instead **scraped data from 10,000 completed phase 3 clinical trials prior to 2017**. This took a lot of trial and error, and the various methods we attempted can be found in the *obtaining data* section. We ended up scrapping **620???** trials that matched out criteria.
+
+Questions we could answer from this dataset include:
+
+1) What is the median fragility index of our data using our MacGyvered scraping method?
+2) What sort of trends, if any, do we see from basic information describing the trials?
+
+### Quest for ~~more~~ all data
+
+The dataset we collected above was light in the sense that our scraping method did not gather other descriptive information. We needed more data to allow us to graph information required for this project. Here, we pivoted, again, to look at phase III clinical trials more generally. Our group members are interested in clincial trials, which despite their importance to US healthcare seem very shrouded in mystery. The fragility index was a very pointed question in this area of our healthcare system we do not know much about. There is a lot of general information about trials unknown to our group which might be interesting to look at.
+
+So, to supplement our data scraping of clinical trial data, we decided instead to download **every clinical trial from clinicaltrials.gov**. This included a 800mb csv including descriptive information about each trial. This dataset was quite large, and crashed multiple members computers multiple times.
+
+There were many questions which we could answer with this data, although it is not about the fragility index at all, and instead gave us a glimpse about what was generally going on in the field. We performed exploratory data analysis to look at what sort of questions we could answer including:
+
+Some questions we could answer include
+
+1) Where are clinical trials being done in the United States?
+2) How many trials are done per year? Has it changed much year to year?
+3) Who sponsors clinical trials?
+4) Other interesting tidbits
+
 
 <br></br>
 
@@ -122,17 +150,52 @@ The code we made was successful in scraping the titles from GS. However, an appa
 Given the apparent high ceiling to scrape via GS, we decided to stop using GS and tried PubMed scraping.
 
 ### Scraping from PubMed
+
 Attempting to scrape PubMed results for our relevant issues quickly comes to a halt because we noticed that as we try to search results, their html address does **NOT** change or provide a page number. We quickly scraped this from our viable methods to obtain our data. 
 
 ### Scraping from clinicaltrials.gov
 
-##### Scraping Clinical Trial ID
+#### rclinicaltrials library
 
-Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to then scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link"
+[rclinicaltrials](https://github.com/sachsmc/rclinicaltrials) is a library meant to serve as an R interface to clinicaltrials.gov! It allows you to perform basic and advanced searches, query the database, and then download study information in a "useful" format. The author even included a useful vignette which served as a useful example during initial testing.
+
+Unforuntately, it ended up not being useful for our purposes. This R package's last commit was in early 2017, and it looks like it is no longer being supported fully. However, there are still uses for this package as it can quickly grab information from clinicaltrials.gov and put it into an R object. It was not quickly apparant how it could be used in our situation.
+
+The data from the `clinicaltrials_download` function was in a listcol with plenty of descriptive information. Unfortunately, the outcomes section did not include the actual n included in each participant arm, and the structure of the data was inconsistent between trials. It ended up being more of a hassle to try to use this package than other methods learned in class. 
+
+clinicaltrials.gov trial and error example code:
+```{r test_rclinicaltrials, eval=FALSE}
+#install_github("sachsmc/rclinicaltrials")
+library(devtools)
+library(rclinicaltrials)
+
+test <- clinicaltrials_download(query = 'asthma', count = 10, include_results = TRUE)
+test$study_information$outcomes
+myoutcomes<- test$study_information$outcomes
+head(myoutcomes)
+#test$study_information
+#Doing a query of multiple clinical trials results in a listcol
+
+test2<- clinicaltrials_download(query = 'NCT01123083', count = 1, include_results = TRUE)
+test2$study_results$outcome_data$measure
+outcomes2<- test2$study_results$outcome_data
+head(outcomes2)
+#information is not exactly in a great format
+
+test3 <- clinicaltrials_download(query = 'NCT00195702', count = 1, include_results = TRUE)
+outcomes3 <- test3$study_results$outcome_data
+baseline3 <- test3$study_results$baseline_data
+#information is inconsistent between trials
+```
+
+#### Scraping Clinical Trial ID
+
+Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link"
 
 We first obtained (downloaded) a `.csv` file from clinicaltrials.gov that contained our advanced search options:
 
-* options...
+* phase III trials 
+* completed
 
 After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we're only interested in the trial ID. We further filter the trials to those that has a "Placebo" arm. 
 
@@ -148,8 +211,8 @@ ctgov_scrape_test <- read_csv("./data/ctgov_test_API.csv") %>%      # read csv
   filter(str_detect(interventions, "Placebo"))
 
 
-## disabled code to check distinct categories of potential interest
-#ctgov_scrape_test %>% 
+## disabled code to check distinct categories of potential interest:
+#  ctgov_scrape_test %>% 
 #  distinct(conditions) %>% 
 #  view()
 
@@ -164,7 +227,7 @@ Now our "database" containing relevant clinical trials are ready. Before we cont
 These tags will be used to identify certain cells in the messy table within clinicaltrials.gov. 
 <br></br>
 
-##### Testing Data Scraping and Transformation to Dataframe
+#### Testing Data Scraping and Transformation to Dataframe
 
 We then test our code to be able to run and create a dataframe from a single source. It took quite a few trial and errors to be able to obtain the right form. 
 
@@ -237,7 +300,7 @@ content_test
 
 Though it took a while, our code managed to pull the relevant info that we need to manipulate in order to evaluate our fragility indexes. Our next step then, is to be able to `map` this and make a listcol within our original dataframe. 
 
-##### Building the function with the proper conditions and mapping. 
+#### Building the function with the proper conditions and mapping 
 
 Similar to how we approach making the single-url code, we had various trial and error to come up with the function. We start with a simple form of object that stores our url. We extract the "unit of measure" and evaluate whether or not it contains "participants" or "patients"; scrape if `TRUE`, return `NA` if `FALSE`. 
 
@@ -276,7 +339,7 @@ outcome_extractor <- function(data) {
     
     # pulls the actual numbers (content)
     content = site %>% 
-      html_nodes("#EXPAND-outcome-data-1 .de-numValue_outcomeDataCell") %>% 
+      html_nodes(".de-numValue_outcomeDataCell") %>% 
       html_text() %>% 
       as.numeric()
     
@@ -289,7 +352,7 @@ outcome_extractor <- function(data) {
     
     # adds column names
     names(df) <- col_names[-1]
-    #rownames(df) <- row_names
+    rownames(df) <- row_names
     
     # returns the df output
     df
@@ -311,7 +374,7 @@ mapped_ctgov_scrape_test <- ctgov_scrape_test %>%
 
 ```
 
-##### Mapping our real dataset
+#### Mapping our real dataset
 
 Now that we have a working function that produces our expected extraction, we can use our real data source, `ctgov_10k_API`. This time, we just apply our previous functions and wait for about 30-40 minutes to "compile". 
 
@@ -327,7 +390,7 @@ ctgov_10k_df <- read_csv("./data/ctgov_10k_API.csv") %>%              # read csv
     url = str_replace(url, "https://ClinicalTrials.gov/show/", "")    # keep trial ID only
   ) %>% 
   rename("nct_id" = url) %>% 
-  select(rank, nct_id, title, conditions, interventions) %>%          # remove location; irrelevant
+  select(rank, nct_id, title, conditions, interventions) %>%     
   filter(str_detect(interventions, "Placebo"))
 
 
@@ -342,13 +405,125 @@ ctgov_10k_scraped <- ctgov_10k_df %>%
 
 After all this, our resulting viable dataset is `r nrow(ctgov_10k_scraped)` datasets that each contains the primary outcomes of interest. There are `r nrow(ctgov_10k_scraped %>% distinct(conditions))` unique conditions found using `distinct()` function. 
 
+### Gathering other interested information by XML
+
+As time went by, our interest expanded to explore the general trend and other variables related to clinical trials. Therefore, we first downloaded the XML information for **ALL** clinical trials listed in clinical.gov, then gather specific information for phase III, US based studies. The data extracting and processing code are shown below.
+
+```{r scraping from XML, eval = F}
+
+### step 1
+### get all names of the downloaded xml files
+
+get_file_names = function(){
+  file_list = tibble(
+    file_name = list.files("/Users/adobel/Desktop/Columbia/data\ science/homework/rclinicaltrials/AllPublicXML", recursive = T)
+  ) 
+} 
+# the xml files are too large to be submitted to github, so we kept the directory local
+
+### step 2
+### build a dataframe for future mapping
+
+all_files = get_file_names() %>%
+  separate(file_name,c("1","file_name")) %>%
+  select('file_name') %>%
+  .[-1,]
+
+### step 3
+### build a function that automatically reads and parses each xml file, and organizes the information into a dataframe
+
+xml_reader = function(file_name){
+  file = xmlParse(str_c("/Users/adobel/Desktop/Columbia/data\ science/homework/rclinicaltrials/AllPublicXML/",
+                        str_sub(file_name,start = 1, end = 7), "xxxx/",
+                        file_name,".xml"))  #directory of each file
+#########
+  xmltop = xmlRoot(file) # get nodes
+######### get interested variables
+  
+  new_tbl = tibble(
+    overall_status = xmlValue(xmltop[['overall_status']]),
+    phase = xmlValue(xmltop[['phase']]),
+    study_type = xmlValue(xmltop[['study_type']]),
+    masking = xmlValue(xmltop[['study_design_info']][['masking']]),
+    primary_outcome = xmlValue(xmltop[['primary_outcome']]),
+    sponsors =  xmlValue(xmltop[['sponsors']]),
+    start_date = xmlValue(xmltop[['start_date']]),
+    completion_date = xmlValue(xmltop[['completion_date']]),
+    primary_completion_date = xmlValue(xmltop[['primary_completion_date']]),
+    observational_model = xmlValue(xmltop[['study_design_info']][['observational_model']]),
+    time_perspective = xmlValue(xmltop[['study_design_info']][['time_perspective']]),
+    measure = xmlValue(xmltop[['primary_outcome']][['measure']]),
+    time_frame = xmlValue(xmltop[['primary_outcome']][['time_frame']]),
+    enrollment = xmlValue(xmltop[['enrollment']]),
+    study_pop = xmlValue(xmltop[['eligibility']][['study_pop']]),
+    sampling_method = xmlValue(xmltop[['eligibility']][['sampling_method']]),
+    criteria = xmlValue(xmltop[['eligibility']][['criteria']]),
+    gender = xmlValue(xmltop[['eligibility']][['gender']]),
+    minimum_age = xmlValue(xmltop[['eligibility']][['minimum_age']]),
+    maximum_age = xmlValue(xmltop[['eligibility']][['maximum_age']]),
+    healthy_volunteers = xmlValue(xmltop[['eligibility']][['healthy_volunteers']]),
+    study_first_submitted = xmlValue(xmltop[['study_first_submitted']]),
+    study_first_posted = xmlValue(xmltop[['study_first_posted']]),
+    location_city = xmlValue(xmltop[['location']][['facility']][['address']][['city']]),
+    location_state = xmlValue(xmltop[['location']][['facility']][['address']][['state']]),
+    location_country = xmlValue(xmltop[['location']][['facility']][['address']][['country']]),
+    agency_class = xmlValue(xmltop[['sponsors']][['lead_sponsor']][['agency_class']])
+    )
+}
+
+# build dataset
+data_from_xml = map_df(all_files$file_name,xml_reader)
+data_from_xml = bind_cols(all_files,data_from_xml)
+data_from_xml_cleaned = data_from_xml %>% 
+  drop_na() %>%
+  mutate(file_group = str_c( str_sub(file_name,start = 1, end = 7), "xxxx"))
+
+# save files to local pathway
+write_csv(data_from_xml,"./data_from_xml.csv")
+write_csv(data_from_xml_cleaned ,"./data_from_xml_cleaned.csv")
+
+# get data only for US & Phase 3 studies
+us_only =
+  data_from_xml %>%
+  filter(location_country == "United States") %>%
+  mutate(location_state = recode(location_state,
+                                 "Missouri" = "Missouri State")) %>%
+  filter( phase == "Phase 3")
+
+```
+
+
+In the following, we're splitting the discussion into two parts:     
+* Main outcome: fragility index dataset 
+* Secondary outcome:  clinical trials dataset
+
 ### Cleaning Data
 
-Cleaning the data surprisingly wasn't as bad as we thought. However, we do have to....
+#### Fragility Index dataset
 
-Our process is explained in detail "link"
+After scraping the hard numbers in the `scrape_data` column, we found that according to clinicaltrials.gov output issue, the html node doesn't necessarily extract the information we want. Therefore, we have no choice but to filter out those contains NA values in the scraped table. 
+
+```{r removing those containg NAs}
+# left as _test for now, change it back to ctgov_10k_scraped later
+ctgov_test = 
+ctgov_10k_scraped %>% 
+mutate(
+  nainside = map_chr(scrape_data, anyNA)
+)
+
+ctgov_test %>% 
+  count(nainside)
+
+```
+
+As shown above, we have 274 intact datasets for further FI analysis.
+
+#### Clinical trials dataset
+
 
 # Exploratory Analysis
+
+
 Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
 
 ### Preliminary exploration from our scraped dataset
@@ -357,7 +532,7 @@ Exploratory analysis: Visualizations, summaries, and exploratory statistical ana
 
 cond_count <- ctgov_10k_scraped %>% 
   count(conditions)
-
+  
 ```
 
 
@@ -368,3 +543,8 @@ Additional analysis: If you undertake formal statistical analyses, describe thes
 # Discussion
 
 Discussion: What were your findings? Are they what you expect? What insights into the data can you make?
+
+Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions. However, we did learn a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov, likely due to the vast differences between trials making any general structure close to impossible.
+
+Thankfully, there are many insights we were able to gather from the data we were able to collect!
+
