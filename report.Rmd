@@ -52,7 +52,8 @@ Our motivation behind this project is to explore the fragility index (FI) beyond
 
 ### Secondary Goals
 
-* Explore other variables 
+* Explore other variables
+* Use available data the best we can to synthesize information about clinical trials
 
 <br></br>
 
@@ -88,8 +89,6 @@ The dataset we collected above was light in the sense that our scraping method d
 So, to supplement our data scraping of clinical trial data, we decided instead to download **every clinical trial from clinicaltrials.gov**. This included a 800mb csv including descriptive information about each trial. This dataset was quite large, and crashed multiple members computers multiple times.
 
 There were many questions which we could answer with this data, although it is not about the fragility index at all, and instead gave us a glimpse about what was generally going on in the field. We performed exploratory data analysis to look at what sort of questions we could answer including:
-
-Some questions we could answer include
 
 1) Where are clinical trials being done in the United States?
 2) How many trials are done per year? Has it changed much year to year?
@@ -519,6 +518,13 @@ ctgov_test %>%
 As shown above, we have 274 intact datasets for further FI analysis.
 
 #### Clinical trials dataset
+
+## Data Summary
+To summarize, we have 2 datasets that we used with data analysis
+
+1) A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial.
+
+2) A separate and distinct dataset created by selecting information by XML to explore trends in clinical trials.
 
 
 # Exploratory Analysis
