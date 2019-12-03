@@ -187,6 +187,9 @@ baseline3 <- test3$study_results$baseline_data
 #information is inconsistent between trials
 ```
 
+![](https://media.giphy.com/media/z9AUvhAEiXOqA/source.gif)
+
+
 #### Scraping Clinical Trial ID
 
 Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link"
@@ -520,7 +523,7 @@ As shown above, we have 274 intact datasets for further FI analysis.
 #### Clinical trials dataset
 
 ## Data Summary
-To summarize, we have 2 datasets that we used with data analysis
+To summarize, we have 2 datasets that we used for further analysis and exploration:
 
 1) A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial.
 
