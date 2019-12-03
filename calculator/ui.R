@@ -21,15 +21,19 @@ shinyUI(
                                            tags$li(tags$b("EVENTS_1: "),"the number of events in Arm 1"),
                                            tags$li(tags$b("TOTAL_1: "),"the total number of patients included in Arm 1"),
                                            tags$li(tags$b("EVENTS_2: "),"the number of events in Arm 2"),
-                                           tags$li(tags$b("TOTAL_2: "),"the total number of patients included in Arm 2"))))),
+                                           tags$li(tags$b("TOTAL_2: "),"the total number of patients included in Arm 2")))),
+                        # WHERE FOOTER GOES
+                        hr(),
+                        print("© Copyright 2019 The Fragility Index Project Team, All Rights Reserved | Calculator credits to author for `fragility_sign_ma.R` and `fragility_non_sign_ma.R`")),
                
                
         tabPanel("Evaluate the Fragility", value = "fragility",
                  h3("Evaluate the Fragility Index for your own meta-analysis"),
+                 
                             
                  sidebarPanel(
                      tags$p(tags$strong("1- Upload meta-analysis data as CSV File")),
-                     tags$em("(See ", actionLink('jumpToData', 'data requirements'), " for help)"),
+                     tags$em("(See About for help)"),
                      fileInput("file1", label = NULL,
                                accept = c("text/csv","text/comma-separated-values,text/plain",".csv")),
                      tags$p(tags$strong("2- Select the parameters of the meta-analysis")),
@@ -54,6 +58,7 @@ shinyUI(
                      actionButton("compute_fragility", "Evaluate the Fragility Index!"),
                      width = 3),
                  
+                 
                  mainPanel(
                      h4(textOutput("is_significant"),align="center"),
                      plotOutput("initPlot",width = "100%",height = "auto"),
@@ -64,11 +69,17 @@ shinyUI(
                                                h3(textOutput("fragility_index2"),align="center")),
                                       plotOutput('fragilePlot',width = "100%",height = "auto"),
                                       tags$hr(),
-                                      htmlOutput("modifications_text")),width = 9))
+                                      htmlOutput("modifications_text")),width = 9),
                  
-        
-        
-        
-)
+
+                 
+                 # WHERE FOOTER GOES
+                 hr(),
+                 print("© Copyright 2019 The Fragility Index Project Team, All Rights Reserved | Calculator credits to author for `fragility_sign_ma.R` and `fragility_non_sign_ma.R`"))
+
+        ,a( img(src='game.jpg', width='150px'),         href="https://yy3019.github.io/P8105_final_project.github.io/",target="_blank")
+        )
+    
+    
 
 )
