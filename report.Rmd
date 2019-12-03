@@ -543,3 +543,8 @@ Additional analysis: If you undertake formal statistical analyses, describe thes
 # Discussion
 
 Discussion: What were your findings? Are they what you expect? What insights into the data can you make?
+
+Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions. However, we did learn a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov, likely due to the vast differences between trials making any general structure close to impossible.
+
+Thankfully, there are many insights we were able to gather from the data we were able to collect!
+
