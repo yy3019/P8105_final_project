@@ -12,12 +12,16 @@ navbar:
   - text: "Project Report"
     icon: fa-file-text-o fa-lg
     href: report.html
-  - text: "FI calculator"
+  - text: "FI Calculator"
     icon: fa-calculator fa-lg
     href: https://yy3019.shinyapps.io/FI_calculator/
   - text: "Graphs"  
     icon: fa-bar-chart fa-lg
+    href: flexdashboard.html
+  - text: "Trials"
+    icon: fa-bar-chart fa-lg
     href: https://zongchaoliu.shinyapps.io/clinicaltrials_map/
+    
   - text: "Contact Us"
     icon: fa-telegram fa-lg
     menu:
