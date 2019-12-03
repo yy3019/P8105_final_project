@@ -377,14 +377,21 @@ div.tocify {
   <a href="https://yy3019.shinyapps.io/FI_calculator/">
     <span class="fa fa-calculator fa-lg"></span>
      
-    FI calculator
+    FI Calculator
+  </a>
+</li>
+<li>
+  <a href="flexdashboard.html">
+    <span class="fa fa-bar-chart fa-lg"></span>
+     
+    Graphs
   </a>
 </li>
 <li>
   <a href="https://zongchaoliu.shinyapps.io/clinicaltrials_map/">
     <span class="fa fa-bar-chart fa-lg"></span>
      
-    Graphs
+    Trials
   </a>
 </li>
 <li class="dropdown">
@@ -459,6 +466,7 @@ div.tocify {
 <h3>Secondary Goals</h3>
 <ul>
 <li>Explore other variables</li>
+<li>Use available data the best we can to synthesize information about clinical trials</li>
 </ul>
 <p><br></br></p>
 </div>
@@ -472,9 +480,33 @@ Lastly, the <a href="https://www.thelancet.com/journals/lanonc/article/PIIS1470-
 </div>
 <div id="initial-questions" class="section level1">
 <h1>Initial Questions</h1>
-<p>As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there’s significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we find out that all the criterias we’ve applied would result in insufficient sample size to conduct further analysis. Accordingly, we’ve enlarged our filtering criteria to US based phase III clinical trials.</p>
-<p>On the other hand, given the dataset we scraped, we’re allowed to perform exploratory data analysis on the study sites and their respective FI.</p>
+<p>As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there’s significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we found out that all the criterias we’d applied would result in insufficient sample size to conduct further analysis. Accordingly, we’ve enlarged our filtering criteria to US based phase III clinical trials.</p>
+<div id="what-actually-happened" class="section level2">
+<h2>What actually happened</h2>
+<div id="the-reality-of-our-fragility-index-data" class="section level3">
+<h3>The reality of our fragility index data</h3>
+<p>What we ended up actually doing differed from our initial hypothesis described in the above paragraph. After looking at the data we were able to gather, the questions we initially posed were not answerable. While we were able to scrape clinical trial information usable to calculate the fragility index, we did not have enough trials to make visualizations or really anything in our initial query which was filtered by drug type and disease type.</p>
+<p>So we pivoted and instead <strong>scraped data from 10,000 completed phase 3 clinical trials prior to 2017</strong>. This took a lot of trial and error, and the various methods we attempted can be found in the <em>obtaining data</em> section. We ended up scrapping <strong>620???</strong> trials that matched out criteria.</p>
+<p>Questions we could answer from this dataset include:</p>
+<ol style="list-style-type: decimal">
+<li>What is the median fragility index of our data using our MacGyvered scraping method?</li>
+<li>What sort of trends, if any, do we see from basic information describing the trials?</li>
+</ol>
+</div>
+<div id="quest-for-more-all-data" class="section level3">
+<h3>Quest for <del>more</del> all data</h3>
+<p>The dataset we collected above was light in the sense that our scraping method did not gather other descriptive information. We needed more data to allow us to graph information required for this project. Here, we pivoted, again, to look at phase III clinical trials more generally. Our group members are interested in clincial trials, which despite their importance to US healthcare seem very shrouded in mystery. The fragility index was a very pointed question in this area of our healthcare system we do not know much about. There is a lot of general information about trials unknown to our group which might be interesting to look at.</p>
+<p>So, to supplement our data scraping of clinical trial data, we decided instead to download <strong>every clinical trial from clinicaltrials.gov</strong>. This included a 800mb csv including descriptive information about each trial. This dataset was quite large, and crashed multiple members computers multiple times.</p>
+<p>There were many questions which we could answer with this data, although it is not about the fragility index at all, and instead gave us a glimpse about what was generally going on in the field. We performed exploratory data analysis to look at what sort of questions we could answer including:</p>
+<ol style="list-style-type: decimal">
+<li>Where are clinical trials being done in the United States?</li>
+<li>How many trials are done per year? Has it changed much year to year?</li>
+<li>Who sponsors clinical trials?</li>
+<li>Other interesting tidbits</li>
+</ol>
 <p><br></br></p>
+</div>
+</div>
 </div>
 <div id="obtaining-data" class="section level1">
 <h1>Obtaining Data</h1>
@@ -519,6 +551,35 @@ head(unnested_gs, n = 3L)</code></pre>
 </div>
 <div id="scraping-from-clinicaltrials.gov" class="section level3">
 <h3>Scraping from clinicaltrials.gov</h3>
+<div id="rclinicaltrials-library" class="section level4">
+<h4>rclinicaltrials library</h4>
+<p><a href="https://github.com/sachsmc/rclinicaltrials">rclinicaltrials</a> is a library meant to serve as an R interface to clinicaltrials.gov! It allows you to perform basic and advanced searches, query the database, and then download study information in a “useful” format. The author even included a useful vignette which served as a useful example during initial testing.</p>
+<p>Unforuntately, it ended up not being useful for our purposes. This R package’s last commit was in early 2017, and it looks like it is no longer being supported fully. However, there are still uses for this package as it can quickly grab information from clinicaltrials.gov and put it into an R object. It was not quickly apparant how it could be used in our situation.</p>
+<p>The data from the <code>clinicaltrials_download</code> function was in a listcol with plenty of descriptive information. Unfortunately, the outcomes section did not include the actual n included in each participant arm, and the structure of the data was inconsistent between trials. It ended up being more of a hassle to try to use this package than other methods learned in class.</p>
+<p>clinicaltrials.gov trial and error example code:</p>
+<pre class="r"><code>#install_github(&quot;sachsmc/rclinicaltrials&quot;)
+library(devtools)
+library(rclinicaltrials)
+
+test &lt;- clinicaltrials_download(query = &#39;asthma&#39;, count = 10, include_results = TRUE)
+test$study_information$outcomes
+myoutcomes&lt;- test$study_information$outcomes
+head(myoutcomes)
+#test$study_information
+#Doing a query of multiple clinical trials results in a listcol
+
+test2&lt;- clinicaltrials_download(query = &#39;NCT01123083&#39;, count = 1, include_results = TRUE)
+test2$study_results$outcome_data$measure
+outcomes2&lt;- test2$study_results$outcome_data
+head(outcomes2)
+#information is not exactly in a great format
+
+test3 &lt;- clinicaltrials_download(query = &#39;NCT00195702&#39;, count = 1, include_results = TRUE)
+outcomes3 &lt;- test3$study_results$outcome_data
+baseline3 &lt;- test3$study_results$baseline_data
+#information is inconsistent between trials</code></pre>
+<p><img src="https://media.giphy.com/media/z9AUvhAEiXOqA/source.gif" /></p>
+</div>
 <div id="scraping-clinical-trial-id" class="section level4">
 <h4>Scraping Clinical Trial ID</h4>
 <p>Our last bastion, <a href="https://clinicaltrials.gov">clinicaltrials.gov</a>, were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail “link”</p>
@@ -602,7 +663,7 @@ rownames(content_test) &lt;- row_names_test
 
 content_test</code></pre>
 <pre><code>## # A tibble: 2 x 3
-##   `\n      DB Adalimumab 2~ `\n      DB Adalimumab 40~ `\n      DB Placebo~
+##   `\n      DB Adalimumab 2… `\n      DB Adalimumab 40… `\n      DB Placebo…
 ## *                     &lt;dbl&gt;                      &lt;dbl&gt;                &lt;dbl&gt;
 ## 1                       212                        207                  200
 ## 2                       129                        131                   59</code></pre>
@@ -803,6 +864,14 @@ ctgov_test %&gt;%
 <h4>Clinical trials dataset</h4>
 </div>
 </div>
+<div id="data-summary" class="section level2">
+<h2>Data Summary</h2>
+<p>To summarize, we have 2 datasets that we used for further analysis and exploration:</p>
+<ol style="list-style-type: decimal">
+<li><p>A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial.</p></li>
+<li><p>A separate and distinct dataset created by selecting information by XML to explore trends in clinical trials.</p></li>
+</ol>
+</div>
 </div>
 <div id="exploratory-analysis" class="section level1">
 <h1>Exploratory Analysis</h1>
@@ -820,6 +889,8 @@ ctgov_test %&gt;%
 <div id="discussion" class="section level1">
 <h1>Discussion</h1>
 <p>Discussion: What were your findings? Are they what you expect? What insights into the data can you make?</p>
+<p>Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions. However, we did learn a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov, likely due to the vast differences between trials making any general structure close to impossible.</p>
+<p>Thankfully, there are many insights we were able to gather from the data we were able to collect!</p>
 </div>
 
 <!DOCTYPE html>

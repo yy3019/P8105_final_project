@@ -368,7 +368,7 @@ Fragility Index - P8105 Data Science I Project</h1>
 
 
 <h3 style="text-align: center;">
-Exploring The Use of Fragility Index outside of Oncology Drug Development
+Exploring the fragility index and learning about clinical trials
 </h3>
 <center>
 <a href=""><img src="image/title-image.webp"></a>
@@ -384,8 +384,12 @@ By: Bryan Bunning (bjb2178) | Yuanzhi Yu (yy3019) | Zongchao Liu (zl2860) | Gavi
 <div id="dataset" class="section level1">
 <h1>Dataset</h1>
 <p>Obtaining our dataset is the hardest portion of this project. After various trial and error, we decided to use <a href="https://clinicaltrials.gov">clinicaltrials.gov</a> as our data source. This is a website provided by U.S. National Library of Medicine that stores information on studies being conducted around the world.</p>
-<p>At first, we set the main target to autoimmune disorder related clinical trials; however, the resulting dataset wasn’t big enough for us to conduct further analysis. Therefore, we enlarged the criteria to US based phase III clinical trials.</p>
-<p>The resulting dataset includes</p>
+<p>At first, we set the main target to autoimmune disorder related clinical trials; however, the resulting dataset wasn’t big enough for us to conduct further analysis. Therefore, we broadened our criteria to US based phase III clinical trials.</p>
+<p>This project ended up utilizing two manually created datasets:</p>
+<ol style="list-style-type: decimal">
+<li><p>A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial</p></li>
+<li><p>A separate and distinct dataset created by selecting information by XML to explore trends in clinical trials from <strong>all available clinical trial data</strong></p></li>
+</ol>
 </div>
 <div id="findings" class="section level1">
 <h1>Findings</h1>
