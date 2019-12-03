@@ -66,9 +66,36 @@ Lastly, the [Del Paggio study](https://www.thelancet.com/journals/lanonc/article
 
 # Initial Questions
 
-As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there's significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we find out that all the criterias we've applied would result in insufficient sample size to conduct further analysis. Accordingly, we've enlarged our filtering criteria to US based phase III clinical trials.
+As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there's significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we found out that all the criterias we'd applied would result in insufficient sample size to conduct further analysis. Accordingly, we've enlarged our filtering criteria to US based phase III clinical trials.
 
-On the other hand, given the dataset we scraped, we're allowed to perform exploratory data analysis on the study sites and their respective FI.
+## What actually happened
+
+### The reality of our fragility index data
+
+What we ended up actually doing differed from our initial hypothesis described in the above paragraph. After looking at the data we were able to gather, the questions we initially posed were not answerable. While we were able to scrape clinical trial information usable to calculate the fragility index, we did not have enough trials to make visualizations or really anything in our initial query which was filtered by drug type and disease type. 
+
+So we pivoted and instead **scraped data from 10,000 completed phase 3 clinical trials prior to 2017**. This took a lot of trial and error, and the various methods we attempted can be found in the *obtaining data* section. We ended up scrapping **620???** trials that matched out criteria.
+
+Questions we could answer from this dataset include:
+
+1) What is the median fragility index of our data using our MacGyvered scraping method?
+2) What sort of trends, if any, do we see from basic information describing the trials?
+
+### Quest for ~~more~~ all data
+
+The dataset we collected above was light in the sense that our scraping method did not gather other descriptive information. We needed more data to allow us to graph information required for this project. Here, we pivoted, again, to look at phase III clinical trials more generally. Our group members are interested in clincial trials, which despite their importance to US healthcare seem very shrouded in mystery. The fragility index was a very pointed question in this area of our healthcare system we do not know much about. There is a lot of general information about trials unknown to our group which might be interesting to look at.
+
+So, to supplement our data scraping of clinical trial data, we decided instead to download **every clinical trial from clinicaltrials.gov**. This included a 800mb csv including descriptive information about each trial. This dataset was quite large, and crashed multiple members computers multiple times.
+
+There were many questions which we could answer with this data, although it is not about the fragility index at all, and instead gave us a glimpse about what was generally going on in the field. We performed exploratory data analysis to look at what sort of questions we could answer including:
+
+Some questions we could answer include
+
+1) Where are clinical trials being done in the United States?
+2) How many trials are done per year? Has it changed much year to year?
+3) Who sponsors clinical trials?
+4) Other interesting tidbits
+
 
 <br></br>
 
@@ -127,6 +154,39 @@ Given the apparent high ceiling to scrape via GS, we decided to stop using GS an
 Attempting to scrape PubMed results for our relevant issues quickly comes to a halt because we noticed that as we try to search results, their html address does **NOT** change or provide a page number. We quickly scraped this from our viable methods to obtain our data. 
 
 ### Scraping from clinicaltrials.gov
+
+#### rclinicaltrials library
+
+[rclinicaltrials](https://github.com/sachsmc/rclinicaltrials) is a library meant to serve as an R interface to clinicaltrials.gov! It allows you to perform basic and advanced searches, query the database, and then download study information in a "useful" format. The author even included a useful vignette which served as a useful example during initial testing.
+
+Unforuntately, it ended up not being useful for our purposes. This R package's last commit was in early 2017, and it looks like it is no longer being supported fully. However, there are still uses for this package as it can quickly grab information from clinicaltrials.gov and put it into an R object. It was not quickly apparant how it could be used in our situation.
+
+The data from the `clinicaltrials_download` function was in a listcol with plenty of descriptive information. Unfortunately, the outcomes section did not include the actual n included in each participant arm, and the structure of the data was inconsistent between trials. It ended up being more of a hassle to try to use this package than other methods learned in class. 
+
+clinicaltrials.gov trial and error example code:
+```{r test_rclinicaltrials, eval=FALSE}
+#install_github("sachsmc/rclinicaltrials")
+library(devtools)
+library(rclinicaltrials)
+
+test <- clinicaltrials_download(query = 'asthma', count = 10, include_results = TRUE)
+test$study_information$outcomes
+myoutcomes<- test$study_information$outcomes
+head(myoutcomes)
+#test$study_information
+#Doing a query of multiple clinical trials results in a listcol
+
+test2<- clinicaltrials_download(query = 'NCT01123083', count = 1, include_results = TRUE)
+test2$study_results$outcome_data$measure
+outcomes2<- test2$study_results$outcome_data
+head(outcomes2)
+#information is not exactly in a great format
+
+test3 <- clinicaltrials_download(query = 'NCT00195702', count = 1, include_results = TRUE)
+outcomes3 <- test3$study_results$outcome_data
+baseline3 <- test3$study_results$baseline_data
+#information is inconsistent between trials
+```
 
 #### Scraping Clinical Trial ID
 
