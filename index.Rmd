@@ -3,7 +3,7 @@ title: <center>Fragility Index - P8105 Data Science I Project
 output: html_document
 ---
 
-<h3 style="text-align: center;" markdown="1">Exploring The Use of Fragility Index outside of Oncology Drug Development</h3>
+<h3 style="text-align: center;" markdown="1">Exploring the fragility index and learning about clinical trials</h3>
 
 <center><a href=""><img src="image/title-image.webp"></a></center>
 
@@ -19,9 +19,13 @@ Fragility index (FI) measures the "fragility" of a clinical trial by iteratively
 
 Obtaining our dataset is the hardest portion of this project. After various trial and error, we decided to use [clinicaltrials.gov](https://clinicaltrials.gov) as our data source. This is a website provided by U.S. National Library of Medicine that stores information on studies being conducted around the world. 
 
-At first, we set the main target to autoimmune disorder related clinical trials; however, the resulting dataset wasn't big enough for us to conduct further analysis. Therefore, we enlarged the criteria to US based phase III clinical trials. 
+At first, we set the main target to autoimmune disorder related clinical trials; however, the resulting dataset wasn't big enough for us to conduct further analysis. Therefore, we broadened our criteria to US based phase III clinical trials. 
 
-The resulting dataset includes 
+This project ended up utilizing two manually created datasets:
+
+1. A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial
+
+2. A separate and distinct dataset created by selecting information by XML to explore trends in clinical trials from **all available clinical trial data**
 
 # Findings
 

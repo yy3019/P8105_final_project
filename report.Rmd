@@ -520,7 +520,7 @@ As shown above, we have 274 intact datasets for further FI analysis.
 #### Clinical trials dataset
 
 ## Data Summary
-To summarize, we have 2 datasets that we used with data analysis
+To summarize, we have 2 datasets that we used for further analysis and exploration:
 
 1) A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial.
 
