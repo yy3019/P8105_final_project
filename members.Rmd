@@ -11,7 +11,7 @@ We are a rag-tag bunch that was formed during the hellish classes in the first s
 
 # <a href=""><img class="cat_circle" src="image/bbunning.jpg"></a><span style="padding-left:25px">Bryan Bunning
 
-Content
+I'm Bryan and my professional interests include clinical trial methodology, patient centered outcomes, and data science. I spent the last few years working in an immunology lab focused on pediatric food allergy and asthma. I performed various immunophenotyping experiments for phase 1-3 clinical trials, which is where/how I found my passion for this area of research!
 
 <br></br>
 
