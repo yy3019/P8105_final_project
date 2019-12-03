@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
                       )
 
 # loaded packages; placed here to be able to load global settings
-Packages <- c("tidyverse", "dplyr", "rvest", "httr")
+Packages <- c("tidyverse", "dplyr", "rvest", "httr", "XML", "readxl")
 invisible(lapply(Packages, library, character.only = TRUE))
 
 
@@ -42,10 +42,6 @@ theme_set(theme_minimal() +
 Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go [here](proj_background.html) to learn more about our motivation. 
 
 **Note:** You can expand our code chunks by clicking on `code` on the right pill-button.
-<br></br>
-
-### Some facts
-
 
 <br></br>
 
@@ -53,6 +49,10 @@ Our motivation behind this project is to explore the fragility index (FI) beyond
 * Explore general trend of FI in recent phase III clinical trials   
 * Construct a web-based FI calculator which allows user to input their own dataset       
 * Discover potential impact factors on FI. e.g. disease type, treatment type, conducted location
+
+### Secondary Goals
+
+* Explore other variables 
 
 <br></br>
 
@@ -66,8 +66,9 @@ Lastly, the [Del Paggio study](https://www.thelancet.com/journals/lanonc/article
 
 # Initial Questions
 
-As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there's significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we find out that all the criterias we've applied would result in insufficient sample size to conduct further analysis. Accordingly, we've enlarged our filtering criteria to US based phase III clinical trials.     
-On the other hand, given the dataset we scraped, we're allowed to perform exploratory data analysis on the study sites, published journal and their respective FI.
+As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there's significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we find out that all the criterias we've applied would result in insufficient sample size to conduct further analysis. Accordingly, we've enlarged our filtering criteria to US based phase III clinical trials.
+
+On the other hand, given the dataset we scraped, we're allowed to perform exploratory data analysis on the study sites and their respective FI.
 
 <br></br>
 
@@ -278,7 +279,7 @@ outcome_extractor <- function(data) {
     
     # pulls the actual numbers (content)
     content = site %>% 
-      html_nodes("#EXPAND-outcome-data-1 .de-numValue_outcomeDataCell") %>% 
+      html_nodes(".de-numValue_outcomeDataCell") %>% 
       html_text() %>% 
       as.numeric()
     
@@ -291,7 +292,7 @@ outcome_extractor <- function(data) {
     
     # adds column names
     names(df) <- col_names[-1]
-    #rownames(df) <- row_names
+    rownames(df) <- row_names
     
     # returns the df output
     df
@@ -344,13 +345,125 @@ ctgov_10k_scraped <- ctgov_10k_df %>%
 
 After all this, our resulting viable dataset is `r nrow(ctgov_10k_scraped)` datasets that each contains the primary outcomes of interest. There are `r nrow(ctgov_10k_scraped %>% distinct(conditions))` unique conditions found using `distinct()` function. 
 
+### Gathering other interested information by XML
+
+As time went by, our interest expanded to explore the general trend and other variables related to clinical trials. Therefore, we first downloaded the XML information for **ALL** clinical trials listed in clinical.gov, then gather specific information for phase III, US based studies. The data extracting and processing code are shown below.
+
+```{r scraping from XML, eval = F}
+
+### step 1
+### get all names of the downloaded xml files
+
+get_file_names = function(){
+  file_list = tibble(
+    file_name = list.files("/Users/adobel/Desktop/Columbia/data\ science/homework/rclinicaltrials/AllPublicXML", recursive = T)
+  ) 
+} 
+# the xml files are too large to be submitted to github, so we kept the directory local
+
+### step 2
+### build a dataframe for future mapping
+
+all_files = get_file_names() %>%
+  separate(file_name,c("1","file_name")) %>%
+  select('file_name') %>%
+  .[-1,]
+
+### step 3
+### build a function that automatically reads and parses each xml file, and organizes the information into a dataframe
+
+xml_reader = function(file_name){
+  file = xmlParse(str_c("/Users/adobel/Desktop/Columbia/data\ science/homework/rclinicaltrials/AllPublicXML/",
+                        str_sub(file_name,start = 1, end = 7), "xxxx/",
+                        file_name,".xml"))  #directory of each file
+#########
+  xmltop = xmlRoot(file) # get nodes
+######### get interested variables
+  
+  new_tbl = tibble(
+    overall_status = xmlValue(xmltop[['overall_status']]),
+    phase = xmlValue(xmltop[['phase']]),
+    study_type = xmlValue(xmltop[['study_type']]),
+    masking = xmlValue(xmltop[['study_design_info']][['masking']]),
+    primary_outcome = xmlValue(xmltop[['primary_outcome']]),
+    sponsors =  xmlValue(xmltop[['sponsors']]),
+    start_date = xmlValue(xmltop[['start_date']]),
+    completion_date = xmlValue(xmltop[['completion_date']]),
+    primary_completion_date = xmlValue(xmltop[['primary_completion_date']]),
+    observational_model = xmlValue(xmltop[['study_design_info']][['observational_model']]),
+    time_perspective = xmlValue(xmltop[['study_design_info']][['time_perspective']]),
+    measure = xmlValue(xmltop[['primary_outcome']][['measure']]),
+    time_frame = xmlValue(xmltop[['primary_outcome']][['time_frame']]),
+    enrollment = xmlValue(xmltop[['enrollment']]),
+    study_pop = xmlValue(xmltop[['eligibility']][['study_pop']]),
+    sampling_method = xmlValue(xmltop[['eligibility']][['sampling_method']]),
+    criteria = xmlValue(xmltop[['eligibility']][['criteria']]),
+    gender = xmlValue(xmltop[['eligibility']][['gender']]),
+    minimum_age = xmlValue(xmltop[['eligibility']][['minimum_age']]),
+    maximum_age = xmlValue(xmltop[['eligibility']][['maximum_age']]),
+    healthy_volunteers = xmlValue(xmltop[['eligibility']][['healthy_volunteers']]),
+    study_first_submitted = xmlValue(xmltop[['study_first_submitted']]),
+    study_first_posted = xmlValue(xmltop[['study_first_posted']]),
+    location_city = xmlValue(xmltop[['location']][['facility']][['address']][['city']]),
+    location_state = xmlValue(xmltop[['location']][['facility']][['address']][['state']]),
+    location_country = xmlValue(xmltop[['location']][['facility']][['address']][['country']]),
+    agency_class = xmlValue(xmltop[['sponsors']][['lead_sponsor']][['agency_class']])
+    )
+}
+
+# build dataset
+data_from_xml = map_df(all_files$file_name,xml_reader)
+data_from_xml = bind_cols(all_files,data_from_xml)
+data_from_xml_cleaned = data_from_xml %>% 
+  drop_na() %>%
+  mutate(file_group = str_c( str_sub(file_name,start = 1, end = 7), "xxxx"))
+
+# save files to local pathway
+write_csv(data_from_xml,"./data_from_xml.csv")
+write_csv(data_from_xml_cleaned ,"./data_from_xml_cleaned.csv")
+
+# get data only for US & Phase 3 studies
+us_only =
+  data_from_xml %>%
+  filter(location_country == "United States") %>%
+  mutate(location_state = recode(location_state,
+                                 "Missouri" = "Missouri State")) %>%
+  filter( phase == "Phase 3")
+
+```
+
+
+In the following, we're splitting the discussion into two parts:     
+* Main outcome: fragility index dataset 
+* Secondary outcome:  clinical trials dataset
+
 ### Cleaning Data
 
-Cleaning the data surprisingly wasn't as bad as we thought. However, we do have to....
+#### Fragility Index dataset
 
-Our process is explained in detail "link"
+After scraping the hard numbers in the `scrape_data` column, we found that according to clinicaltrials.gov output issue, the html node doesn't necessarily extract the information we want. Therefore, we have no choice but to filter out those contains NA values in the scraped table. 
+
+```{r removing those containg NAs}
+# left as _test for now, change it back to ctgov_10k_scraped later
+ctgov_test = 
+ctgov_10k_scraped %>% 
+mutate(
+  nainside = map_chr(scrape_data, anyNA)
+)
+
+ctgov_test %>% 
+  count(nainside)
+
+```
+
+As shown above, we have 274 intact datasets for further FI analysis.
+
+#### Clinical trials dataset
+
 
 # Exploratory Analysis
+
+
 Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
 
 ### Preliminary exploration from our scraped dataset
@@ -359,7 +472,7 @@ Exploratory analysis: Visualizations, summaries, and exploratory statistical ana
 
 cond_count <- ctgov_10k_scraped %>% 
   count(conditions)
-
+  
 ```
 
 

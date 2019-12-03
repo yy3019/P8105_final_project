@@ -381,7 +381,7 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="plotstuff.html">
+  <a href="https://zongchaoliu.shinyapps.io/clinicaltrials_map/">
     <span class="fa fa-bar-chart fa-lg"></span>
      
     Graphs
@@ -443,11 +443,8 @@ div.tocify {
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
 <p>Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go <a href="proj_background.html">here</a> to learn more about our motivation.</p>
-<p><strong>Note:</strong> You can expand our code chunks by clicking on <code>code</code> on the right pill-button. <br></br></p>
-<div id="some-facts" class="section level3">
-<h3>Some facts</h3>
+<p><strong>Note:</strong> You can expand our code chunks by clicking on <code>code</code> on the right pill-button.</p>
 <p><br></br></p>
-</div>
 <div id="primary-goals" class="section level3">
 <h3>Primary Goals</h3>
 <ul>
@@ -456,6 +453,12 @@ div.tocify {
 <li>Construct a web-based FI calculator which allows user to input their own dataset<br />
 </li>
 <li>Discover potential impact factors on FI. e.g. disease type, treatment type, conducted location</li>
+</ul>
+</div>
+<div id="secondary-goals" class="section level3">
+<h3>Secondary Goals</h3>
+<ul>
+<li>Explore other variables</li>
 </ul>
 <p><br></br></p>
 </div>
@@ -469,8 +472,8 @@ Lastly, the <a href="https://www.thelancet.com/journals/lanonc/article/PIIS1470-
 </div>
 <div id="initial-questions" class="section level1">
 <h1>Initial Questions</h1>
-<p>As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there’s significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we find out that all the criterias we’ve applied would result in insufficient sample size to conduct further analysis. Accordingly, we’ve enlarged our filtering criteria to US based phase III clinical trials.<br />
-On the other hand, given the dataset we scraped, we’re allowed to perform exploratory data analysis on the study sites, published journal and their respective FI.</p>
+<p>As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there’s significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we find out that all the criterias we’ve applied would result in insufficient sample size to conduct further analysis. Accordingly, we’ve enlarged our filtering criteria to US based phase III clinical trials.</p>
+<p>On the other hand, given the dataset we scraped, we’re allowed to perform exploratory data analysis on the study sites and their respective FI.</p>
 <p><br></br></p>
 </div>
 <div id="obtaining-data" class="section level1">
@@ -640,7 +643,7 @@ outcome_extractor &lt;- function(data) {
     
     # pulls the actual numbers (content)
     content = site %&gt;% 
-      html_nodes(&quot;#EXPAND-outcome-data-1 .de-numValue_outcomeDataCell&quot;) %&gt;% 
+      html_nodes(&quot;.de-numValue_outcomeDataCell&quot;) %&gt;% 
       html_text() %&gt;% 
       as.numeric()
     
@@ -653,7 +656,7 @@ outcome_extractor &lt;- function(data) {
     
     # adds column names
     names(df) &lt;- col_names[-1]
-    #rownames(df) &lt;- row_names
+    rownames(df) &lt;- row_names
     
     # returns the df output
     df
@@ -691,10 +694,114 @@ ctgov_10k_scraped &lt;- ctgov_10k_df %&gt;%
 <p>After all this, our resulting viable dataset is 620 datasets that each contains the primary outcomes of interest. There are 394 unique conditions found using <code>distinct()</code> function.</p>
 </div>
 </div>
+<div id="gathering-other-interested-information-by-xml" class="section level3">
+<h3>Gathering other interested information by XML</h3>
+<p>As time went by, our interest expanded to explore the general trend and other variables related to clinical trials. Therefore, we first downloaded the XML information for <strong>ALL</strong> clinical trials listed in clinical.gov, then gather specific information for phase III, US based studies. The data extracting and processing code are shown below.</p>
+<pre class="r"><code>### step 1
+### get all names of the downloaded xml files
+
+get_file_names = function(){
+  file_list = tibble(
+    file_name = list.files(&quot;/Users/adobel/Desktop/Columbia/data\ science/homework/rclinicaltrials/AllPublicXML&quot;, recursive = T)
+  ) 
+} 
+# the xml files are too large to be submitted to github, so we kept the directory local
+
+### step 2
+### build a dataframe for future mapping
+
+all_files = get_file_names() %&gt;%
+  separate(file_name,c(&quot;1&quot;,&quot;file_name&quot;)) %&gt;%
+  select(&#39;file_name&#39;) %&gt;%
+  .[-1,]
+
+### step 3
+### build a function that automatically reads and parses each xml file, and organizes the information into a dataframe
+
+xml_reader = function(file_name){
+  file = xmlParse(str_c(&quot;/Users/adobel/Desktop/Columbia/data\ science/homework/rclinicaltrials/AllPublicXML/&quot;,
+                        str_sub(file_name,start = 1, end = 7), &quot;xxxx/&quot;,
+                        file_name,&quot;.xml&quot;))  #directory of each file
+#########
+  xmltop = xmlRoot(file) # get nodes
+######### get interested variables
+  
+  new_tbl = tibble(
+    overall_status = xmlValue(xmltop[[&#39;overall_status&#39;]]),
+    phase = xmlValue(xmltop[[&#39;phase&#39;]]),
+    study_type = xmlValue(xmltop[[&#39;study_type&#39;]]),
+    masking = xmlValue(xmltop[[&#39;study_design_info&#39;]][[&#39;masking&#39;]]),
+    primary_outcome = xmlValue(xmltop[[&#39;primary_outcome&#39;]]),
+    sponsors =  xmlValue(xmltop[[&#39;sponsors&#39;]]),
+    start_date = xmlValue(xmltop[[&#39;start_date&#39;]]),
+    completion_date = xmlValue(xmltop[[&#39;completion_date&#39;]]),
+    primary_completion_date = xmlValue(xmltop[[&#39;primary_completion_date&#39;]]),
+    observational_model = xmlValue(xmltop[[&#39;study_design_info&#39;]][[&#39;observational_model&#39;]]),
+    time_perspective = xmlValue(xmltop[[&#39;study_design_info&#39;]][[&#39;time_perspective&#39;]]),
+    measure = xmlValue(xmltop[[&#39;primary_outcome&#39;]][[&#39;measure&#39;]]),
+    time_frame = xmlValue(xmltop[[&#39;primary_outcome&#39;]][[&#39;time_frame&#39;]]),
+    enrollment = xmlValue(xmltop[[&#39;enrollment&#39;]]),
+    study_pop = xmlValue(xmltop[[&#39;eligibility&#39;]][[&#39;study_pop&#39;]]),
+    sampling_method = xmlValue(xmltop[[&#39;eligibility&#39;]][[&#39;sampling_method&#39;]]),
+    criteria = xmlValue(xmltop[[&#39;eligibility&#39;]][[&#39;criteria&#39;]]),
+    gender = xmlValue(xmltop[[&#39;eligibility&#39;]][[&#39;gender&#39;]]),
+    minimum_age = xmlValue(xmltop[[&#39;eligibility&#39;]][[&#39;minimum_age&#39;]]),
+    maximum_age = xmlValue(xmltop[[&#39;eligibility&#39;]][[&#39;maximum_age&#39;]]),
+    healthy_volunteers = xmlValue(xmltop[[&#39;eligibility&#39;]][[&#39;healthy_volunteers&#39;]]),
+    study_first_submitted = xmlValue(xmltop[[&#39;study_first_submitted&#39;]]),
+    study_first_posted = xmlValue(xmltop[[&#39;study_first_posted&#39;]]),
+    location_city = xmlValue(xmltop[[&#39;location&#39;]][[&#39;facility&#39;]][[&#39;address&#39;]][[&#39;city&#39;]]),
+    location_state = xmlValue(xmltop[[&#39;location&#39;]][[&#39;facility&#39;]][[&#39;address&#39;]][[&#39;state&#39;]]),
+    location_country = xmlValue(xmltop[[&#39;location&#39;]][[&#39;facility&#39;]][[&#39;address&#39;]][[&#39;country&#39;]]),
+    agency_class = xmlValue(xmltop[[&#39;sponsors&#39;]][[&#39;lead_sponsor&#39;]][[&#39;agency_class&#39;]])
+    )
+}
+
+# build dataset
+data_from_xml = map_df(all_files$file_name,xml_reader)
+data_from_xml = bind_cols(all_files,data_from_xml)
+data_from_xml_cleaned = data_from_xml %&gt;% 
+  drop_na() %&gt;%
+  mutate(file_group = str_c( str_sub(file_name,start = 1, end = 7), &quot;xxxx&quot;))
+
+# save files to local pathway
+write_csv(data_from_xml,&quot;./data_from_xml.csv&quot;)
+write_csv(data_from_xml_cleaned ,&quot;./data_from_xml_cleaned.csv&quot;)
+
+# get data only for US &amp; Phase 3 studies
+us_only =
+  data_from_xml %&gt;%
+  filter(location_country == &quot;United States&quot;) %&gt;%
+  mutate(location_state = recode(location_state,
+                                 &quot;Missouri&quot; = &quot;Missouri State&quot;)) %&gt;%
+  filter( phase == &quot;Phase 3&quot;)</code></pre>
+<p>In the following, we’re splitting the discussion into two parts:<br />
+* Main outcome: fragility index dataset * Secondary outcome: clinical trials dataset</p>
+</div>
 <div id="cleaning-data" class="section level3">
 <h3>Cleaning Data</h3>
-<p>Cleaning the data surprisingly wasn’t as bad as we thought. However, we do have to….</p>
-<p>Our process is explained in detail “link”</p>
+<div id="fragility-index-dataset" class="section level4">
+<h4>Fragility Index dataset</h4>
+<p>After scraping the hard numbers in the <code>scrape_data</code> column, we found that according to clinicaltrials.gov output issue, the html node doesn’t necessarily extract the information we want. Therefore, we have no choice but to filter out those contains NA values in the scraped table.</p>
+<pre class="r"><code># left as _test for now, change it back to ctgov_10k_scraped later
+ctgov_test = 
+ctgov_10k_scraped %&gt;% 
+mutate(
+  nainside = map_chr(scrape_data, anyNA)
+)
+
+ctgov_test %&gt;% 
+  count(nainside)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   nainside     n
+##   &lt;chr&gt;    &lt;int&gt;
+## 1 FALSE      274
+## 2 TRUE       346</code></pre>
+<p>As shown above, we have 274 intact datasets for further FI analysis.</p>
+</div>
+<div id="clinical-trials-dataset" class="section level4">
+<h4>Clinical trials dataset</h4>
+</div>
 </div>
 </div>
 <div id="exploratory-analysis" class="section level1">
