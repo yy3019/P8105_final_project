@@ -16,7 +16,7 @@ The fragility index is a measure of the "fragility" of a clinical trial. It is t
 The Fragility Index has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values. We are interested how the fragility index may differ based on different clinical trial characteristics. Multiple papers have shown that it requires just a few patients to alter outcomes of many large phase III trials. It is of concern to us that these studies require billions of dollars sunk but outcomes can be "easily" rendered obsolete based on so few participant outcomes. 
 <br></br>
 
-# Hypotheses
+# Initial Hypotheses
 
 Our main question of interest is whether fragility index is associated with a disease type. Specifically, we want to test the difference in fragility index for cancer related therapies to non-oncology immunologic monoclonal antibodies such as allergy, diabetes, and asthma. As a prior belief, we hypothesize that the median fragility Index of trials targeting cancers will be less than trials targeting auto-immune chronic diseases. 
 
@@ -32,4 +32,12 @@ We have a few secondary questions of interest if time allows:
   * In between a drug being approved for one indication and the next, doctors who are affiliated with research may prescribe therapies off label. There may be a host of evidence in the field from doctors using the drug off label, which gives data to suggest the drug may work in a different indication before it is approved. 
 * Is a drug intended to treat children less fragile than other drugs? 
 
-#
+# What did we do in this project?
+
+Due to realities explained in the [Obtaining Data](https://yy3019.github.io/P8105_final_project.github.io/report.html#obtaining_data) section, we did not answer any of the questions initially explored above. The data we collected was insufficient to answer these questions.
+
+Instead, this project: 
+1) Explored various methods of data scrapping for clinical trial data
+2) Calculated the fragility index for data we were able to collect
+3) Gave general insights to phase 3 clinical trials
+
