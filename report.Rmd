@@ -600,12 +600,16 @@ finalff_df = left_join(final_df, tempo, by = "nct_id")
 
 #### Clinical trials dataset
 
-## Data Summary
+## Data Summary and Results
 To summarize, we have 2 datasets that we used for further analysis and exploration:
 
 1) A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial.
+  * This dataset started with 10,000 phase 3 clinical trials completed before 2017.
+  * 1950 included a placebo arm, of which 620 had "Participant" as a unit of measure, of which 274 had complete data, of which 120 actually counted participants, of which 39 had a 2x2 table
+  * 11/39 had a non-0 fragility index
 
 2) A separate and distinct dataset created by selecting information by XML to explore trends in clinical trials.
+  * The results from this data can be explored with our [Shiny app graphs you can find here](https://zongchaoliu.shinyapps.io/clinicaltrials_map/)
 
 
 # Exploratory Analysis
@@ -643,7 +647,9 @@ Overall, we were not able to answer any of the questions we initally suggested i
 
 This project showed how difficult scraping data from a website could be if the data has a varied structure. It was much, much more difficult to scrape and tidy the data than we were originally anticipating, especially given the "tools" that were available to us prior to trying them.
 
-We learned a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov. Thankfully, clinicaltrials.gov is updating their API, which should hopefully improve upon the structure of this data. We learned the hard way the difference between publicly available data, and **usable** publicly available data. Tidying complex data is incredibly complex.
+We learned a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov. The main primary outcome table was inconsistent with its white space usage in the html table, which gave us an immense amount of issues.
+
+Thankfully, clinicaltrials.gov is updating their API, which should hopefully improve upon the structure of this data. We learned the hard way the difference between publicly available data, and **usable** publicly available data. Tidying complex data is incredibly complex.
 
 From our data and project, we came away with a few insights. First, there are a vast amount of differences and complexity between clinical trials. Using our data as a judge, a real-life phase 3 trial and its primary outcome is rarely simple and straight forward. Attempting to create any general structure currently seems nearly impossible. This is humbling and motivating.
 
