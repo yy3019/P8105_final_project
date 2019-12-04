@@ -1,0 +1,10 @@
+name: clinicaltrials_map
+title:
+username:
+account: zongchaoliu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1546657
+bundleId: 2638542
+url: https://zongchaoliu.shinyapps.io/clinicaltrials_map/
+when: 1575428067.086

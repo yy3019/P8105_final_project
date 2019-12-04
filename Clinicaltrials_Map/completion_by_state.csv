@@ -1,0 +1,1730 @@
+location_state,completion_year,total,participants
+Alabama,1991,1,2416
+Alabama,1993,2,156
+Alabama,1994,3,1986
+Alabama,1995,4,2490
+Alabama,1996,6,3747
+Alabama,1997,9,3762
+Alabama,1998,15,2209
+Alabama,1999,14,3751
+Alabama,2000,11,2343
+Alabama,2001,36,14085
+Alabama,2002,36,12736
+Alabama,2003,100,25318
+Alabama,2004,145,109396
+Alabama,2005,192,113729
+Alabama,2006,286,185727
+Alabama,2007,381,193824
+Alabama,2008,369,772575
+Alabama,2009,407,322646
+Alabama,2010,417,312668
+Alabama,2011,428,535072
+Alabama,2012,455,332291
+Alabama,2013,461,472903
+Alabama,2014,459,369291
+Alabama,2015,434,412582
+Alabama,2016,471,442444
+Alabama,2017,464,371063
+Alabama,2018,486,376192
+Alabama,2019,525,375389
+Alabama,2020,643,1186774
+Alabama,2021,411,546199
+Alabama,2022,251,236092
+Alabama,2023,168,159451
+Alabama,2024,107,156815
+Alabama,2025,50,55638
+Alabama,2026,29,47935
+Alabama,2027,21,38600
+Alabama,2028,16,41598
+Alabama,2029,3,6579
+Alabama,2030,13,454471
+Alabama,2031,7,11379
+Alabama,2032,3,2891
+Alabama,2034,5,33900
+Alabama,2035,1,359
+Alabama,2038,1,4970
+Alabama,2040,1,20000
+Alabama,2062,1,20000
+Alaska,1997,1,113
+Alaska,2001,1,248
+Alaska,2003,7,3890
+Alaska,2004,4,299
+Alaska,2005,5,1424
+Alaska,2006,2,462
+Alaska,2007,4,920
+Alaska,2008,9,2976
+Alaska,2009,4,704
+Alaska,2010,10,6002
+Alaska,2011,18,84711
+Alaska,2012,14,6297
+Alaska,2013,10,3023
+Alaska,2014,5,2202
+Alaska,2015,7,3118
+Alaska,2016,9,6550
+Alaska,2017,14,5298
+Alaska,2018,12,10747
+Alaska,2019,16,6368
+Alaska,2020,29,22207
+Alaska,2021,21,18005
+Alaska,2022,19,10389
+Alaska,2023,17,12012
+Alaska,2024,12,6861
+Alaska,2025,6,1317
+Alaska,2026,3,1041
+Alaska,2027,5,3172
+Alaska,2028,2,639
+Alaska,2035,1,880
+Arizona,1992,1,300
+Arizona,1994,2,0
+Arizona,1997,1,217
+Arizona,1998,2,316
+Arizona,1999,3,437
+Arizona,2000,1,5
+Arizona,2001,9,879
+Arizona,2002,21,2247
+Arizona,2003,57,12891
+Arizona,2004,61,15318
+Arizona,2005,72,19655
+Arizona,2006,150,44492
+Arizona,2007,188,57249
+Arizona,2008,260,96456
+Arizona,2009,267,87283
+Arizona,2010,283,72344
+Arizona,2011,273,87050
+Arizona,2012,295,86515
+Arizona,2013,323,96214
+Arizona,2014,349,100602
+Arizona,2015,360,212471
+Arizona,2016,423,167672
+Arizona,2017,375,768009
+Arizona,2018,444,121153
+Arizona,2019,502,177574
+Arizona,2020,600,387767
+Arizona,2021,413,210434
+Arizona,2022,219,114383
+Arizona,2023,125,62228
+Arizona,2024,83,73298
+Arizona,2025,56,5233138
+Arizona,2026,24,29620
+Arizona,2027,16,19020
+Arizona,2028,10,54903
+Arizona,2029,4,2631
+Arizona,2030,6,1007394
+Arizona,2031,1,1273
+Arizona,2032,1,1278
+Arizona,2033,3,3464
+Arizona,2034,2,395
+Arizona,2035,5,1709
+Arizona,2036,2,50040
+Arizona,2039,1,225
+Arizona,2050,1,87
+Arizona,2053,1,5000
+Arkansas,1994,1,115
+Arkansas,2000,5,2718
+Arkansas,2001,5,63658
+Arkansas,2002,8,883
+Arkansas,2003,12,1511
+Arkansas,2004,27,6778
+Arkansas,2005,46,11408
+Arkansas,2006,44,19290
+Arkansas,2007,69,16154
+Arkansas,2008,89,30146
+Arkansas,2009,91,26048
+Arkansas,2010,90,19917
+Arkansas,2011,72,24125
+Arkansas,2012,97,21310
+Arkansas,2013,92,37695
+Arkansas,2014,87,34305
+Arkansas,2015,95,33204
+Arkansas,2016,95,34819
+Arkansas,2017,102,36129
+Arkansas,2018,88,24747
+Arkansas,2019,141,29909
+Arkansas,2020,150,52789
+Arkansas,2021,72,23094
+Arkansas,2022,35,15066
+Arkansas,2023,25,31056
+Arkansas,2024,15,9612
+Arkansas,2025,10,3419
+Arkansas,2026,1,1173
+Arkansas,2027,2,2341
+Arkansas,2028,1,208
+Arkansas,2029,2,1026
+Arkansas,2031,1,514
+Arkansas,2032,1,4000
+Arkansas,2033,1,14000
+Arkansas,2034,1,1500
+Arkansas,2040,1,1100
+California,1989,3,566
+California,1990,12,2026
+California,1991,7,1177
+California,1992,17,3260
+California,1993,14,4048
+California,1994,12,3060
+California,1995,15,8791
+California,1996,24,7219
+California,1997,11,6642
+California,1998,25,3185
+California,1999,22,19159
+California,2000,48,8306
+California,2001,50,17538
+California,2002,71,14396
+California,2003,120,17333
+California,2004,180,65712
+California,2005,322,111194
+California,2006,406,101417
+California,2007,508,288399
+California,2008,709,160666
+California,2009,885,306222
+California,2010,843,239377
+California,2011,961,264893
+California,2012,1022,646383
+California,2013,1024,315635
+California,2014,1100,403039
+California,2015,1113,420031
+California,2016,1213,581758
+California,2017,1273,1383425
+California,2018,1349,1744438
+California,2019,1704,25988018
+California,2020,1907,2374844
+California,2021,1106,3042275
+California,2022,672,2659458
+California,2023,383,259964
+California,2024,225,170136
+California,2025,145,2240562
+California,2026,63,97029
+California,2027,40,115040
+California,2028,33,123309
+California,2029,16,23043
+California,2030,19,121034
+California,2031,11,113689
+California,2032,5,704
+California,2033,6,311
+California,2034,10,920
+California,2035,12,20740
+California,2036,6,1334
+California,2037,2,12500
+California,2038,2,15
+California,2039,1,50000
+California,2040,5,30459
+California,2050,5,208265
+California,2051,2,11050
+California,2069,1,9999
+California,2099,6,17299
+California,2100,3,20000300
+Colorado,1994,2,4779
+Colorado,1996,1,557
+Colorado,1997,4,90
+Colorado,1999,6,50
+Colorado,2000,3,121
+Colorado,2001,7,218
+Colorado,2002,2,0
+Colorado,2003,13,1861
+Colorado,2004,13,1726
+Colorado,2005,31,4902
+Colorado,2006,44,7173
+Colorado,2007,41,10397
+Colorado,2008,65,27070
+Colorado,2009,88,137384
+Colorado,2010,73,22623
+Colorado,2011,97,26333
+Colorado,2012,122,48925
+Colorado,2013,102,42870
+Colorado,2014,125,76576
+Colorado,2015,130,296714
+Colorado,2016,171,135562
+Colorado,2017,178,2126860
+Colorado,2018,155,33270
+Colorado,2019,277,92721
+Colorado,2020,268,212941
+Colorado,2021,184,70345
+Colorado,2022,104,85419
+Colorado,2023,42,20208
+Colorado,2024,33,13207
+Colorado,2025,21,69031
+Colorado,2026,12,4118
+Colorado,2027,7,4946
+Colorado,2028,2,868
+Colorado,2029,2,750
+Colorado,2030,2,1100
+Colorado,2031,1,23
+Colorado,2036,1,1500
+Colorado,2037,1,10000
+Colorado,2050,1,250
+Colorado,2064,1,1250
+Colorado,2099,1,999999
+Connecticut,1992,1,864
+Connecticut,1994,2,10
+Connecticut,1998,8,52
+Connecticut,1999,10,492
+Connecticut,2000,6,674
+Connecticut,2001,4,185
+Connecticut,2002,11,916
+Connecticut,2003,11,1863
+Connecticut,2004,18,2605
+Connecticut,2005,24,2440
+Connecticut,2006,40,8628
+Connecticut,2007,45,5566
+Connecticut,2008,103,13292
+Connecticut,2009,115,10294
+Connecticut,2010,96,15697
+Connecticut,2011,107,11253
+Connecticut,2012,123,14915
+Connecticut,2013,126,12969
+Connecticut,2014,129,28167
+Connecticut,2015,129,9748
+Connecticut,2016,158,18652
+Connecticut,2017,111,9724
+Connecticut,2018,156,16946
+Connecticut,2019,189,52005
+Connecticut,2020,252,97197
+Connecticut,2021,89,199732
+Connecticut,2022,71,25556
+Connecticut,2023,37,18103
+Connecticut,2024,26,73304
+Connecticut,2025,12,10660
+Connecticut,2026,4,323
+Connecticut,2027,2,358
+Connecticut,2028,4,1875
+Connecticut,2030,1,110
+Connecticut,2031,1,535
+Connecticut,2032,1,50
+Delaware,2003,1,22
+Delaware,2004,3,83
+Delaware,2005,1,43
+Delaware,2006,5,418
+Delaware,2007,12,1654
+Delaware,2008,17,823
+Delaware,2009,11,1301209
+Delaware,2010,8,6000952
+Delaware,2011,12,2784
+Delaware,2012,14,7227
+Delaware,2013,12,3239
+Delaware,2014,14,22587
+Delaware,2015,17,13090
+Delaware,2016,19,17406
+Delaware,2017,20,16322
+Delaware,2018,13,963
+Delaware,2019,21,101241
+Delaware,2020,26,277983
+Delaware,2021,13,37230
+Delaware,2022,11,8354
+Delaware,2023,4,478
+Delaware,2024,5,2206
+Delaware,2025,5,135101
+Delaware,2026,1,3750
+Delaware,2028,1,504
+District of Columbia,1990,1,12
+District of Columbia,1994,1,8
+District of Columbia,1996,1,0
+District of Columbia,1998,1,20
+District of Columbia,1999,1,19
+District of Columbia,2000,3,484
+District of Columbia,2001,4,149
+District of Columbia,2003,4,2
+District of Columbia,2004,13,2289
+District of Columbia,2005,17,2185
+District of Columbia,2006,21,8162
+District of Columbia,2007,48,10408
+District of Columbia,2008,38,6351
+District of Columbia,2009,41,3989
+District of Columbia,2010,60,6165
+District of Columbia,2011,73,20427
+District of Columbia,2012,39,10045
+District of Columbia,2013,59,18189
+District of Columbia,2014,53,316673
+District of Columbia,2015,62,10161
+District of Columbia,2016,56,20338
+District of Columbia,2017,71,25046
+District of Columbia,2018,72,11893
+District of Columbia,2019,85,38758
+District of Columbia,2020,119,45144
+District of Columbia,2021,67,17669
+District of Columbia,2022,32,30585
+District of Columbia,2023,23,8321
+District of Columbia,2024,12,2521
+District of Columbia,2025,9,23182
+District of Columbia,2026,5,8289
+District of Columbia,2027,3,1130
+District of Columbia,2030,6,87919
+District of Columbia,2034,2,343
+District of Columbia,2040,2,1600
+District of Columbia,2042,1,1300
+District of Columbia,2050,1,5000
+Florida,1990,4,169
+Florida,1993,2,98
+Florida,1994,1,81
+Florida,1996,1,36
+Florida,1997,1,100
+Florida,1999,2,134
+Florida,2000,3,0
+Florida,2001,14,794
+Florida,2002,12,3208
+Florida,2003,27,24424
+Florida,2004,38,3992
+Florida,2005,58,8201
+Florida,2006,88,10172
+Florida,2007,126,116453
+Florida,2008,178,20978
+Florida,2009,220,62911
+Florida,2010,251,61458
+Florida,2011,264,41879
+Florida,2012,312,210543
+Florida,2013,306,44679
+Florida,2014,347,199727
+Florida,2015,330,32008
+Florida,2016,365,42153
+Florida,2017,374,56146
+Florida,2018,430,197425
+Florida,2019,551,80862
+Florida,2020,653,323278
+Florida,2021,304,269346
+Florida,2022,200,104608
+Florida,2023,93,26833
+Florida,2024,53,20719
+Florida,2025,39,113186
+Florida,2026,16,2249
+Florida,2027,13,15384
+Florida,2028,5,2113
+Florida,2029,5,14394
+Florida,2030,8,28080
+Florida,2032,3,278
+Florida,2033,1,233
+Florida,2034,1,1700
+Florida,2035,3,146
+Florida,2036,1,361
+Florida,2037,1,151
+Florida,2040,2,5060
+Florida,2050,1,70
+Florida,2070,1,1000
+Georgia,2000,2,152
+Georgia,2001,1,150
+Georgia,2002,2,130
+Georgia,2003,9,1636
+Georgia,2004,15,1571
+Georgia,2005,32,17118
+Georgia,2006,56,56335
+Georgia,2007,79,10536
+Georgia,2008,66,22270
+Georgia,2009,94,23074
+Georgia,2010,86,17517
+Georgia,2011,93,29344
+Georgia,2012,118,64310
+Georgia,2013,127,39715
+Georgia,2014,131,19672
+Georgia,2015,130,20382
+Georgia,2016,112,15155
+Georgia,2017,135,27436
+Georgia,2018,127,14710
+Georgia,2019,175,326610
+Georgia,2020,190,55640
+Georgia,2021,136,61287
+Georgia,2022,65,11696
+Georgia,2023,37,9583
+Georgia,2024,29,7784
+Georgia,2025,10,23350
+Georgia,2026,4,967
+Georgia,2027,5,4715
+Georgia,2028,4,10946
+Georgia,2029,2,268
+Georgia,2030,2,2551
+Georgia,2031,1,36
+Georgia,2033,1,36
+Georgia,2034,1,10
+Georgia,2037,1,200
+Hawaii,2000,2,104
+Hawaii,2002,1,0
+Hawaii,2005,3,1542
+Hawaii,2006,3,24
+Hawaii,2007,5,198
+Hawaii,2008,6,6571
+Hawaii,2009,9,14544
+Hawaii,2010,12,690
+Hawaii,2011,15,1664
+Hawaii,2012,18,3964
+Hawaii,2013,14,1603
+Hawaii,2014,11,1447
+Hawaii,2015,6,386
+Hawaii,2016,17,14721
+Hawaii,2017,11,7527
+Hawaii,2018,13,1137
+Hawaii,2019,7,518
+Hawaii,2020,7,2032
+Hawaii,2021,3,988
+Hawaii,2022,7,2420
+Hawaii,2023,2,172
+Hawaii,2024,1,400
+Hawaii,2026,2,435
+Idaho,2006,2,2500
+Idaho,2007,2,333
+Idaho,2008,2,457
+Idaho,2009,2,109
+Idaho,2010,4,197
+Idaho,2011,4,640
+Idaho,2012,3,302
+Idaho,2013,1,42
+Idaho,2014,2,431
+Idaho,2015,2,110
+Idaho,2016,5,70
+Idaho,2017,4,406
+Idaho,2018,5,107
+Idaho,2019,8,1236
+Idaho,2020,8,736
+Idaho,2021,3,22050
+Idaho,2022,3,762
+Idaho,2023,2,175
+Idaho,2025,1,60
+Illinois,1990,1,26
+Illinois,1991,1,112
+Illinois,1992,1,25
+Illinois,1995,3,32
+Illinois,1996,6,110
+Illinois,1997,3,53
+Illinois,1998,7,731
+Illinois,1999,4,34
+Illinois,2000,8,454
+Illinois,2001,11,309
+Illinois,2002,31,583
+Illinois,2003,30,10995
+Illinois,2004,33,2006
+Illinois,2005,45,11339
+Illinois,2006,69,521987
+Illinois,2007,85,36044
+Illinois,2008,115,21021
+Illinois,2009,137,51172
+Illinois,2010,159,31580
+Illinois,2011,168,15302
+Illinois,2012,221,89055
+Illinois,2013,186,28223
+Illinois,2014,204,256273
+Illinois,2015,188,35612
+Illinois,2016,215,68018
+Illinois,2017,247,69256
+Illinois,2018,252,195105
+Illinois,2019,323,78098
+Illinois,2020,407,283608
+Illinois,2021,216,548456
+Illinois,2022,146,57184
+Illinois,2023,55,30483
+Illinois,2024,47,124707
+Illinois,2025,39,715365
+Illinois,2026,14,4809
+Illinois,2027,6,36081
+Illinois,2028,5,424
+Illinois,2029,2,497
+Illinois,2030,5,960
+Illinois,2031,1,60
+Illinois,2032,1,412
+Illinois,2033,1,47
+Illinois,2034,1,500
+Illinois,2035,1,12
+Illinois,2042,1,300
+Illinois,2044,1,10000
+Indiana,1993,1,44
+Indiana,1998,1,112
+Indiana,2000,2,67
+Indiana,2001,8,2100
+Indiana,2003,4,470
+Indiana,2004,13,2767
+Indiana,2005,25,15724
+Indiana,2006,25,5104
+Indiana,2007,48,16925
+Indiana,2008,60,79731
+Indiana,2009,54,5985
+Indiana,2010,66,13899
+Indiana,2011,68,12395
+Indiana,2012,105,108547
+Indiana,2013,64,5857
+Indiana,2014,81,9633
+Indiana,2015,79,8247
+Indiana,2016,92,71267
+Indiana,2017,75,23655
+Indiana,2018,88,15464
+Indiana,2019,116,36893
+Indiana,2020,112,203330
+Indiana,2021,72,74129
+Indiana,2022,42,9718
+Indiana,2023,24,11925
+Indiana,2024,15,5992
+Indiana,2025,10,2564
+Indiana,2026,1,2000
+Indiana,2028,5,4224
+Indiana,2029,2,435
+Indiana,2050,2,1150
+Iowa,2001,1,0
+Iowa,2003,1,444
+Iowa,2004,3,680
+Iowa,2005,6,1001
+Iowa,2006,6,1219
+Iowa,2007,16,2223
+Iowa,2008,29,26873
+Iowa,2009,26,2704
+Iowa,2010,21,11793
+Iowa,2011,33,5999
+Iowa,2012,27,3255
+Iowa,2013,33,6667
+Iowa,2014,39,2389
+Iowa,2015,28,8840
+Iowa,2016,32,3120
+Iowa,2017,40,3809
+Iowa,2018,55,53566
+Iowa,2019,46,7170
+Iowa,2020,61,19899
+Iowa,2021,48,8804
+Iowa,2022,28,8633
+Iowa,2023,22,5595
+Iowa,2024,10,10927
+Iowa,2025,5,752
+Iowa,2026,3,686
+Iowa,2028,1,240
+Iowa,2029,2,49
+Iowa,2030,2,35
+Iowa,2032,1,18
+Kansas,1998,1,480
+Kansas,2001,1,50
+Kansas,2002,2,1828
+Kansas,2003,2,432
+Kansas,2004,2,78
+Kansas,2005,15,2001
+Kansas,2006,11,566
+Kansas,2007,25,3574
+Kansas,2008,31,1869
+Kansas,2009,36,5447
+Kansas,2010,60,4169
+Kansas,2011,73,10725
+Kansas,2012,76,12919
+Kansas,2013,51,3665
+Kansas,2014,85,5358
+Kansas,2015,75,8502
+Kansas,2016,65,32948
+Kansas,2017,54,3168
+Kansas,2018,58,5955
+Kansas,2019,75,8966
+Kansas,2020,76,11162
+Kansas,2021,33,4661
+Kansas,2022,13,4750
+Kansas,2023,9,2526
+Kansas,2024,6,120744
+Kansas,2025,7,910
+Kansas,2026,2,3030
+Kansas,2027,1,0
+Kansas,2029,1,110
+Kansas,2035,2,1003
+Kentucky,2001,1,586
+Kentucky,2002,2,300
+Kentucky,2003,3,402
+Kentucky,2004,2,0
+Kentucky,2005,8,38161
+Kentucky,2006,15,1198
+Kentucky,2007,14,2840
+Kentucky,2008,31,2939
+Kentucky,2009,31,4414
+Kentucky,2010,45,20934
+Kentucky,2011,29,1842
+Kentucky,2012,46,5161
+Kentucky,2013,35,2760
+Kentucky,2014,44,94884
+Kentucky,2015,37,2801
+Kentucky,2016,61,48361
+Kentucky,2017,27,4359
+Kentucky,2018,73,3411
+Kentucky,2019,76,31880
+Kentucky,2020,87,110449
+Kentucky,2021,48,6304
+Kentucky,2022,33,11949
+Kentucky,2023,20,12235
+Kentucky,2024,14,5922
+Kentucky,2025,13,8752
+Kentucky,2026,3,177
+Kentucky,2027,4,375
+Kentucky,2028,2,137
+Kentucky,2029,3,343
+Kentucky,2030,5,568
+Kentucky,2031,1,20
+Kentucky,2034,1,50
+Louisiana,1990,1,45
+Louisiana,1991,2,282
+Louisiana,2000,2,36
+Louisiana,2001,1,0
+Louisiana,2002,3,205
+Louisiana,2003,2,20
+Louisiana,2004,4,1763
+Louisiana,2005,11,1330
+Louisiana,2006,14,2190
+Louisiana,2007,13,1764
+Louisiana,2008,16,3526
+Louisiana,2009,26,4633
+Louisiana,2010,20,1616
+Louisiana,2011,25,1824
+Louisiana,2012,19,2165
+Louisiana,2013,36,31544
+Louisiana,2014,34,9925
+Louisiana,2015,34,3089
+Louisiana,2016,36,2345
+Louisiana,2017,44,2681
+Louisiana,2018,39,64375
+Louisiana,2019,46,9192
+Louisiana,2020,52,27998
+Louisiana,2021,30,17051
+Louisiana,2022,11,7822
+Louisiana,2023,9,16399
+Louisiana,2024,5,825
+Louisiana,2025,4,31166
+Louisiana,2027,1,450
+Louisiana,2028,1,19500
+Maine,2005,4,2242
+Maine,2006,2,464
+Maine,2007,7,605
+Maine,2008,4,179179
+Maine,2009,7,617
+Maine,2010,3,653
+Maine,2012,7,1064
+Maine,2013,4,875
+Maine,2014,4,546
+Maine,2015,3,280
+Maine,2016,2,423
+Maine,2017,6,472
+Maine,2018,8,455
+Maine,2019,8,4485
+Maine,2020,6,2501
+Maine,2021,9,887
+Maine,2022,2,1048
+Maine,2023,1,18000
+Maine,2025,1,80
+Maryland,1988,2,24
+Maryland,1989,1,6
+Maryland,1990,2,26
+Maryland,1991,1,10
+Maryland,1994,1,6
+Maryland,1995,4,432
+Maryland,1996,1,12
+Maryland,1997,1,0
+Maryland,1998,5,302
+Maryland,1999,3,90
+Maryland,2000,158,20790
+Maryland,2001,141,125501
+Maryland,2002,164,58957
+Maryland,2003,124,10016389
+Maryland,2004,150,23196
+Maryland,2005,209,65089
+Maryland,2006,198,257027
+Maryland,2007,259,79132
+Maryland,2008,250,97462
+Maryland,2009,250,100020830
+Maryland,2010,307,94219
+Maryland,2011,316,56070
+Maryland,2012,282,185350
+Maryland,2013,311,85876
+Maryland,2014,318,44721
+Maryland,2015,339,384343
+Maryland,2016,325,55048
+Maryland,2017,376,65474
+Maryland,2018,378,122421
+Maryland,2019,394,95164
+Maryland,2020,521,214559
+Maryland,2021,284,3477427
+Maryland,2022,190,620842
+Maryland,2023,114,42405
+Maryland,2024,78,121987
+Maryland,2025,84,35119
+Maryland,2026,36,2876619
+Maryland,2027,25,35869
+Maryland,2028,23,32303
+Maryland,2029,27,22340
+Maryland,2030,22,100033105
+Maryland,2031,3,96
+Maryland,2032,5,4339
+Maryland,2033,1,306
+Maryland,2034,3,1135
+Maryland,2035,2,5110
+Maryland,2036,3,2120
+Maryland,2037,4,30729
+Maryland,2038,3,3700
+Maryland,2039,1,500
+Maryland,2040,4,6010
+Maryland,2041,1,1300
+Maryland,2044,1,7500
+Maryland,2048,1,2400
+Maryland,2050,9,16765
+Maryland,2063,1,1500
+Maryland,2085,2,1620
+Maryland,2099,1,300
+Maryland,2100,2,11100
+Massachusetts,1990,1,39
+Massachusetts,1993,2,97
+Massachusetts,1994,2,432
+Massachusetts,1995,2,86
+Massachusetts,1996,4,458
+Massachusetts,1997,2,45
+Massachusetts,1999,2,1670
+Massachusetts,2000,8,753
+Massachusetts,2001,12,22236
+Massachusetts,2002,18,1122
+Massachusetts,2003,34,4213
+Massachusetts,2004,51,21929
+Massachusetts,2005,90,44102
+Massachusetts,2006,118,135686
+Massachusetts,2007,168,41035
+Massachusetts,2008,204,4747305
+Massachusetts,2009,249,91502
+Massachusetts,2010,251,43949
+Massachusetts,2011,327,79960
+Massachusetts,2012,332,48964
+Massachusetts,2013,333,257393
+Massachusetts,2014,367,1022587
+Massachusetts,2015,361,359433
+Massachusetts,2016,425,1877292
+Massachusetts,2017,392,810709
+Massachusetts,2018,369,315344
+Massachusetts,2019,546,1021347
+Massachusetts,2020,647,1318063
+Massachusetts,2021,355,879220
+Massachusetts,2022,212,440450
+Massachusetts,2023,152,159799
+Massachusetts,2024,128,40146
+Massachusetts,2025,53,20527
+Massachusetts,2026,13,17339
+Massachusetts,2027,10,7736
+Massachusetts,2028,6,4255
+Massachusetts,2029,5,1723
+Massachusetts,2030,13,1015497
+Massachusetts,2031,2,30024
+Massachusetts,2032,3,354
+Massachusetts,2033,3,60152
+Massachusetts,2034,2,422
+Massachusetts,2035,1,2050
+Massachusetts,2036,2,96000
+Massachusetts,2037,1,10000
+Massachusetts,2040,1,35
+Massachusetts,2050,3,14045
+Massachusetts,2099,1,500
+Massachusetts,2100,6,4091
+Michigan,1999,1,272
+Michigan,2000,4,670
+Michigan,2001,4,40
+Michigan,2002,7,400
+Michigan,2003,11,900
+Michigan,2004,19,2116
+Michigan,2005,31,4733
+Michigan,2006,47,6935
+Michigan,2007,62,8800
+Michigan,2008,72,8968
+Michigan,2009,81,13924
+Michigan,2010,111,44617
+Michigan,2011,103,16330
+Michigan,2012,135,28846
+Michigan,2013,130,15938
+Michigan,2014,130,68498
+Michigan,2015,173,25178
+Michigan,2016,152,33407
+Michigan,2017,159,19337
+Michigan,2018,144,992190
+Michigan,2019,188,393785
+Michigan,2020,230,29719
+Michigan,2021,129,34423
+Michigan,2022,77,10633
+Michigan,2023,44,107468
+Michigan,2024,26,4637
+Michigan,2025,20,11653
+Michigan,2026,4,1772
+Michigan,2027,4,7875
+Michigan,2028,1,300
+Michigan,2029,1,35
+Michigan,2030,4,12540
+Michigan,2032,1,120
+Michigan,2049,1,5000
+Michigan,2054,1,9999
+Minnesota,1989,1,60
+Minnesota,1991,1,12
+Minnesota,1994,1,25
+Minnesota,1995,1,105
+Minnesota,1997,2,0
+Minnesota,1998,2,144
+Minnesota,1999,4,2893
+Minnesota,2000,7,85
+Minnesota,2001,19,6615
+Minnesota,2002,12,5639
+Minnesota,2003,16,13980
+Minnesota,2004,22,41508
+Minnesota,2005,49,29400
+Minnesota,2006,59,7657
+Minnesota,2007,102,9685
+Minnesota,2008,121,16032
+Minnesota,2009,118,26697
+Minnesota,2010,154,22161
+Minnesota,2011,149,40877
+Minnesota,2012,151,33469
+Minnesota,2013,173,46867
+Minnesota,2014,146,20830
+Minnesota,2015,168,19605
+Minnesota,2016,171,62354
+Minnesota,2017,173,1302600
+Minnesota,2018,194,43415
+Minnesota,2019,283,52849
+Minnesota,2020,343,238207
+Minnesota,2021,196,40485
+Minnesota,2022,113,138604
+Minnesota,2023,54,41630
+Minnesota,2024,27,7384
+Minnesota,2025,38,100019718
+Minnesota,2026,12,2526
+Minnesota,2027,3,830
+Minnesota,2028,4,1264
+Minnesota,2029,6,152510
+Minnesota,2030,7,8476
+Minnesota,2031,1,6000
+Minnesota,2032,1,300
+Minnesota,2050,2,15000
+Minnesota,2065,1,1000
+Minnesota,2091,1,200000
+Mississippi,2004,2,10604
+Mississippi,2005,1,100
+Mississippi,2006,2,22
+Mississippi,2007,7,1265
+Mississippi,2008,6,2488
+Mississippi,2009,9,3783
+Mississippi,2010,7,496
+Mississippi,2011,14,2137
+Mississippi,2012,9,525
+Mississippi,2013,9,1487
+Mississippi,2014,13,906
+Mississippi,2015,9,2268
+Mississippi,2016,13,1893
+Mississippi,2017,12,982
+Mississippi,2018,5,725
+Mississippi,2019,15,2786
+Mississippi,2020,13,2403
+Mississippi,2021,7,781
+Mississippi,2022,3,1340
+Mississippi,2024,1,5306
+Mississippi,2026,1,20
+Missouri State,1992,1,30
+Missouri State,1993,3,115
+Missouri State,1994,1,25
+Missouri State,1995,3,130
+Missouri State,1996,2,130
+Missouri State,1997,2,130
+Missouri State,1998,2,48
+Missouri State,2000,2,52
+Missouri State,2001,6,289
+Missouri State,2002,17,588
+Missouri State,2003,25,3395
+Missouri State,2004,31,2429
+Missouri State,2005,30,3777
+Missouri State,2006,43,3953
+Missouri State,2007,45,5234
+Missouri State,2008,76,6653
+Missouri State,2009,90,9471
+Missouri State,2010,78,11148
+Missouri State,2011,95,23976
+Missouri State,2012,92,39197
+Missouri State,2013,74,7602
+Missouri State,2014,105,11296
+Missouri State,2015,117,25504
+Missouri State,2016,152,41293
+Missouri State,2017,150,36456
+Missouri State,2018,134,9661
+Missouri State,2019,157,28745
+Missouri State,2020,212,44655
+Missouri State,2021,98,21612
+Missouri State,2022,47,107129
+Missouri State,2023,40,1006830
+Missouri State,2024,27,45451
+Missouri State,2025,19,4680
+Missouri State,2026,8,1649
+Missouri State,2027,3,426
+Missouri State,2028,3,238
+Missouri State,2029,5,3801
+Missouri State,2030,5,13640
+Missouri State,2032,2,31
+Missouri State,2035,1,100
+Missouri State,2036,1,3000
+Missouri State,2050,1,50000
+Montana,2007,2,121
+Montana,2008,3,115
+Montana,2009,1,99
+Montana,2010,2,1828
+Montana,2011,1,228
+Montana,2012,2,126
+Montana,2013,2,47
+Montana,2014,9,1086
+Montana,2015,8,2441
+Montana,2016,1,0
+Montana,2017,9,1366
+Montana,2018,7,767
+Montana,2019,8,1986
+Montana,2020,8,1315
+Montana,2021,3,1612
+Montana,2022,1,1008
+Montana,2023,3,250
+Montana,2024,1,100
+Nebraska,2000,2,153
+Nebraska,2003,2,32
+Nebraska,2004,9,1391
+Nebraska,2005,8,541
+Nebraska,2006,8,5541
+Nebraska,2007,16,910
+Nebraska,2008,29,1820
+Nebraska,2009,43,2694
+Nebraska,2010,40,1767
+Nebraska,2011,45,10821
+Nebraska,2012,45,3766
+Nebraska,2013,45,5604
+Nebraska,2014,35,1891
+Nebraska,2015,37,5214
+Nebraska,2016,36,3241
+Nebraska,2017,35,1402
+Nebraska,2018,49,1978
+Nebraska,2019,45,3071
+Nebraska,2020,34,3320
+Nebraska,2021,22,2354
+Nebraska,2022,13,6355
+Nebraska,2023,8,2600
+Nebraska,2024,4,143
+Nebraska,2025,1,1560
+Nebraska,2026,1,20
+Nebraska,2027,1,100
+Nevada,2004,1,32
+Nevada,2005,3,1955
+Nevada,2006,4,116
+Nevada,2007,1,183
+Nevada,2008,2,197
+Nevada,2009,7,321
+Nevada,2010,7,469
+Nevada,2011,13,1257
+Nevada,2012,9,6138
+Nevada,2013,12,1946
+Nevada,2014,17,1412
+Nevada,2015,10,1379
+Nevada,2016,10,988
+Nevada,2017,24,17011
+Nevada,2018,18,2650
+Nevada,2019,20,3502
+Nevada,2020,11,957
+Nevada,2021,9,715
+Nevada,2022,3,455
+Nevada,2023,1,1000
+Nevada,2024,1,130
+Nevada,2026,1,500
+Nevada,2027,1,358
+New Hampshire,2000,1,29
+New Hampshire,2001,3,51
+New Hampshire,2002,2,0
+New Hampshire,2003,3,49
+New Hampshire,2004,3,117
+New Hampshire,2005,4,429
+New Hampshire,2006,9,613
+New Hampshire,2007,11,824
+New Hampshire,2008,5,287
+New Hampshire,2009,13,641
+New Hampshire,2010,8,267
+New Hampshire,2011,12,3793
+New Hampshire,2012,14,1656
+New Hampshire,2013,23,2060
+New Hampshire,2014,14,871
+New Hampshire,2015,15,702
+New Hampshire,2016,20,1517
+New Hampshire,2017,18,8327
+New Hampshire,2018,24,4673
+New Hampshire,2019,32,4449
+New Hampshire,2020,34,5380
+New Hampshire,2021,16,2171
+New Hampshire,2022,7,3737
+New Hampshire,2023,3,922
+New Hampshire,2024,3,365
+New Hampshire,2025,3,138
+New Hampshire,2028,1,5
+New Hampshire,2050,1,100
+New Jersey,1991,1,0
+New Jersey,2000,1,0
+New Jersey,2001,4,1524
+New Jersey,2002,10,869
+New Jersey,2003,23,7858
+New Jersey,2004,24,8491
+New Jersey,2005,52,37481
+New Jersey,2006,97,71108
+New Jersey,2007,111,35628
+New Jersey,2008,108,39909
+New Jersey,2009,115,110516
+New Jersey,2010,98,24979
+New Jersey,2011,91,31502
+New Jersey,2012,77,30530
+New Jersey,2013,79,18459
+New Jersey,2014,85,16888
+New Jersey,2015,126,31437
+New Jersey,2016,129,205755
+New Jersey,2017,112,54868
+New Jersey,2018,100,1601465
+New Jersey,2019,140,1961669
+New Jersey,2020,261,68720
+New Jersey,2021,84,19030
+New Jersey,2022,46,11706
+New Jersey,2023,18,4198
+New Jersey,2024,9,1047
+New Jersey,2025,7,30221
+New Jersey,2026,1,24
+New Jersey,2027,1,10
+New Jersey,2028,1,100
+New Jersey,2029,1,1500
+New Jersey,2030,1,300
+New Jersey,2032,1,5000
+New Jersey,2047,1,10000
+New Mexico,2000,1,35
+New Mexico,2002,1,35
+New Mexico,2004,2,90
+New Mexico,2005,11,1187
+New Mexico,2006,15,388
+New Mexico,2007,20,2442
+New Mexico,2008,16,2517
+New Mexico,2009,13,847
+New Mexico,2010,10,2142
+New Mexico,2011,19,1286
+New Mexico,2012,21,1994
+New Mexico,2013,24,934
+New Mexico,2014,16,1289
+New Mexico,2015,26,21128
+New Mexico,2016,14,1867
+New Mexico,2017,17,2772
+New Mexico,2018,27,3426
+New Mexico,2019,25,1304018
+New Mexico,2020,27,16122
+New Mexico,2021,12,3093
+New Mexico,2022,7,4485
+New Mexico,2023,3,630
+New Mexico,2024,2,175
+New Mexico,2025,1,150
+New Mexico,2026,1,25
+New Mexico,2029,1,250
+New Mexico,2032,1,750
+New Mexico,2037,1,500
+New York,1988,1,0
+New York,1989,1,24
+New York,1990,3,150
+New York,1991,4,100
+New York,1992,5,326
+New York,1993,6,824
+New York,1994,3,328
+New York,1995,4,239
+New York,1996,2,64
+New York,1997,3,1029
+New York,1998,4,67
+New York,1999,8,3100
+New York,2000,25,1666
+New York,2001,51,5454
+New York,2002,47,3383
+New York,2003,69,5782
+New York,2004,93,6505
+New York,2005,118,15681
+New York,2006,119,27515
+New York,2007,194,59848
+New York,2008,299,46089
+New York,2009,312,46537
+New York,2010,336,565525
+New York,2011,374,100785
+New York,2012,393,114195
+New York,2013,441,53826
+New York,2014,414,112418
+New York,2015,424,104625
+New York,2016,467,439275
+New York,2017,474,116431
+New York,2018,514,161037
+New York,2019,745,278868
+New York,2020,1056,271655
+New York,2021,421,183253
+New York,2022,225,85658
+New York,2023,125,353719
+New York,2024,58,23755
+New York,2025,40,34596
+New York,2026,15,2557
+New York,2027,11,7131
+New York,2028,3,765
+New York,2029,5,1001
+New York,2030,7,7160
+New York,2031,2,20000
+New York,2032,2,75
+New York,2034,1,20
+New York,2037,2,820
+New York,2042,1,322
+New York,2050,1,10000
+New York,2099,1,1000
+North Carolina,1990,1,0
+North Carolina,1993,1,0
+North Carolina,1995,1,30
+North Carolina,1999,2,0
+North Carolina,2000,9,1434
+North Carolina,2001,18,5257
+North Carolina,2002,25,6916
+North Carolina,2003,19,1192
+North Carolina,2004,23,8788
+North Carolina,2005,35,6673
+North Carolina,2006,56,14289
+North Carolina,2007,86,31322
+North Carolina,2008,123,52308
+North Carolina,2009,146,17054
+North Carolina,2010,150,347229
+North Carolina,2011,154,24006
+North Carolina,2012,220,129378
+North Carolina,2013,202,21122
+North Carolina,2014,247,41187
+North Carolina,2015,225,113798
+North Carolina,2016,265,224181
+North Carolina,2017,295,1408260
+North Carolina,2018,283,100593
+North Carolina,2019,327,109391
+North Carolina,2020,393,131887
+North Carolina,2021,221,72984
+North Carolina,2022,121,426340
+North Carolina,2023,67,14010
+North Carolina,2024,30,8005
+North Carolina,2025,31,76987
+North Carolina,2026,11,19639
+North Carolina,2027,14,2002396
+North Carolina,2028,4,224
+North Carolina,2029,4,3400
+North Carolina,2030,3,3210
+North Carolina,2031,2,1040
+North Carolina,2032,1,33
+North Carolina,2033,1,12
+North Carolina,2034,2,38
+North Carolina,2035,2,10500
+North Carolina,2036,5,634
+North Carolina,2037,2,0
+North Carolina,2040,1,15000
+North Carolina,2099,1,1600
+North Dakota,1999,2,48
+North Dakota,2001,8,224
+North Dakota,2002,17,808
+North Dakota,2003,27,1105
+North Dakota,2004,15,651
+North Dakota,2005,27,1383
+North Dakota,2006,22,972
+North Dakota,2007,16,883
+North Dakota,2008,21,653
+North Dakota,2009,9,387
+North Dakota,2010,10,5661
+North Dakota,2011,14,739
+North Dakota,2012,8,332
+North Dakota,2013,3,160
+North Dakota,2014,3,114
+North Dakota,2015,8,877
+North Dakota,2016,9,430
+North Dakota,2017,6,182
+North Dakota,2018,9,317
+North Dakota,2019,14,888
+North Dakota,2020,9,643
+North Dakota,2021,2,184
+North Dakota,2022,1,1550
+North Dakota,2023,1,20
+North Dakota,2024,1,16
+Ohio,1993,1,90
+Ohio,1996,1,0
+Ohio,1997,1,0
+Ohio,1998,2,40
+Ohio,1999,3,20
+Ohio,2000,3,411
+Ohio,2001,12,1259
+Ohio,2002,12,10634
+Ohio,2003,12,233
+Ohio,2004,18,1536
+Ohio,2005,38,19774
+Ohio,2006,52,5133
+Ohio,2007,83,10156
+Ohio,2008,106,9830
+Ohio,2009,115,12948
+Ohio,2010,169,21512
+Ohio,2011,162,16532
+Ohio,2012,206,37532
+Ohio,2013,183,24744
+Ohio,2014,226,22100
+Ohio,2015,239,247683
+Ohio,2016,243,46853
+Ohio,2017,237,45320
+Ohio,2018,265,48744
+Ohio,2019,364,172644
+Ohio,2020,398,145692
+Ohio,2021,212,66501
+Ohio,2022,101,21966
+Ohio,2023,53,13466
+Ohio,2024,24,2896
+Ohio,2025,15,17082
+Ohio,2026,6,2248
+Ohio,2027,8,3039
+Ohio,2028,5,2898
+Ohio,2030,1,100
+Ohio,2031,3,10475
+Ohio,2032,2,77050
+Ohio,2033,2,65
+Ohio,2035,3,6010
+Ohio,2037,1,100
+Ohio,2039,1,100
+Ohio,2040,1,50
+Ohio,2047,1,1500
+Ohio,2050,1,5000
+Oklahoma,2001,1,75
+Oklahoma,2002,2,82
+Oklahoma,2003,1,60
+Oklahoma,2004,4,202
+Oklahoma,2005,2,500
+Oklahoma,2006,8,2021
+Oklahoma,2007,21,5570
+Oklahoma,2008,13,1478
+Oklahoma,2009,17,6175
+Oklahoma,2010,30,2560
+Oklahoma,2011,25,2697
+Oklahoma,2012,23,1128
+Oklahoma,2013,21,4305
+Oklahoma,2014,15,1135
+Oklahoma,2015,18,1617
+Oklahoma,2016,23,4169
+Oklahoma,2017,19,2312
+Oklahoma,2018,24,1895
+Oklahoma,2019,40,8089
+Oklahoma,2020,36,6639
+Oklahoma,2021,17,6407
+Oklahoma,2022,17,3008
+Oklahoma,2023,11,3291
+Oklahoma,2024,4,645
+Oklahoma,2025,3,83
+Oklahoma,2027,1,310
+Oklahoma,2030,1,450
+Oregon,1993,1,47
+Oregon,2000,1,1
+Oregon,2002,3,14400
+Oregon,2003,8,1108
+Oregon,2004,16,7727
+Oregon,2005,14,7941
+Oregon,2006,21,3567
+Oregon,2007,17,5048
+Oregon,2008,33,6224
+Oregon,2009,41,2812
+Oregon,2010,59,8855
+Oregon,2011,66,68976
+Oregon,2012,58,9314
+Oregon,2013,66,91429
+Oregon,2014,59,14520
+Oregon,2015,64,75491
+Oregon,2016,70,37691
+Oregon,2017,57,10313
+Oregon,2018,70,1949092
+Oregon,2019,85,12977
+Oregon,2020,105,54982
+Oregon,2021,47,74753
+Oregon,2022,49,1416060
+Oregon,2023,23,27532
+Oregon,2024,8,1127
+Oregon,2025,9,1233
+Oregon,2026,1,28
+Oregon,2030,2,10300
+Oregon,2033,1,18
+Oregon,2034,1,46
+Pennsylvania,1979,1,37
+Pennsylvania,1990,3,30
+Pennsylvania,1991,2,113
+Pennsylvania,1992,3,40
+Pennsylvania,1993,3,206
+Pennsylvania,1994,3,74
+Pennsylvania,1995,1,50
+Pennsylvania,1996,1,0
+Pennsylvania,1997,4,20
+Pennsylvania,1998,3,97
+Pennsylvania,1999,2,75
+Pennsylvania,2000,4,36
+Pennsylvania,2001,9,135
+Pennsylvania,2002,31,5763
+Pennsylvania,2003,30,4542
+Pennsylvania,2004,33,12067
+Pennsylvania,2005,69,8503
+Pennsylvania,2006,102,19240
+Pennsylvania,2007,141,20950
+Pennsylvania,2008,167,24765
+Pennsylvania,2009,214,32741
+Pennsylvania,2010,182,89999
+Pennsylvania,2011,246,72389
+Pennsylvania,2012,212,114310
+Pennsylvania,2013,253,128218
+Pennsylvania,2014,263,123496
+Pennsylvania,2015,278,179802
+Pennsylvania,2016,311,478311
+Pennsylvania,2017,315,113776
+Pennsylvania,2018,333,46927
+Pennsylvania,2019,403,117286
+Pennsylvania,2020,510,676538
+Pennsylvania,2021,302,188776
+Pennsylvania,2022,159,342968
+Pennsylvania,2023,95,23241
+Pennsylvania,2024,60,14204
+Pennsylvania,2025,37,32360
+Pennsylvania,2026,22,23806
+Pennsylvania,2027,5,418
+Pennsylvania,2028,10,6767
+Pennsylvania,2029,4,6230
+Pennsylvania,2030,8,14628
+Pennsylvania,2031,1,40
+Pennsylvania,2032,1,689
+Pennsylvania,2033,3,48
+Pennsylvania,2034,1,7
+Pennsylvania,2035,3,16518
+Pennsylvania,2040,2,67
+Pennsylvania,2047,1,7500
+Pennsylvania,2050,5,23000
+Pennsylvania,2064,1,3000
+Rhode Island,1996,1,0
+Rhode Island,1999,1,0
+Rhode Island,2000,2,160
+Rhode Island,2001,1,0
+Rhode Island,2002,1,252
+Rhode Island,2003,3,598
+Rhode Island,2004,4,1133
+Rhode Island,2005,9,1518
+Rhode Island,2006,12,10766
+Rhode Island,2007,16,1249
+Rhode Island,2008,26,10548
+Rhode Island,2009,24,4608
+Rhode Island,2010,22,2474
+Rhode Island,2011,32,8515
+Rhode Island,2012,35,15305
+Rhode Island,2013,30,10669
+Rhode Island,2014,38,12600
+Rhode Island,2015,41,61570
+Rhode Island,2016,29,6705
+Rhode Island,2017,37,3353
+Rhode Island,2018,58,13232
+Rhode Island,2019,55,8000
+Rhode Island,2020,53,14554
+Rhode Island,2021,33,53968
+Rhode Island,2022,15,2694
+Rhode Island,2023,10,4297
+Rhode Island,2024,7,2406
+Rhode Island,2025,2,55
+South Carolina,1989,1,240
+South Carolina,1997,1,0
+South Carolina,2000,3,49
+South Carolina,2002,4,572
+South Carolina,2003,1,9
+South Carolina,2004,1,140
+South Carolina,2005,7,1464
+South Carolina,2006,9,4249
+South Carolina,2007,27,17439
+South Carolina,2008,21,1227
+South Carolina,2009,32,4886
+South Carolina,2010,33,4258
+South Carolina,2011,24,4371
+South Carolina,2012,30,16652
+South Carolina,2013,42,10148
+South Carolina,2014,44,6437
+South Carolina,2015,41,5024
+South Carolina,2016,63,8150
+South Carolina,2017,50,6757
+South Carolina,2018,55,7097
+South Carolina,2019,72,14885
+South Carolina,2020,84,17522
+South Carolina,2021,37,5105
+South Carolina,2022,20,5595
+South Carolina,2023,20,5166
+South Carolina,2024,9,1608
+South Carolina,2025,1,66
+South Carolina,2029,1,100
+South Carolina,2030,2,180
+South Carolina,2046,1,6000
+South Carolina,2050,2,60000
+South Dakota,2003,1,224
+South Dakota,2006,1,130
+South Dakota,2007,1,10
+South Dakota,2008,2,128
+South Dakota,2009,1,0
+South Dakota,2010,2,25
+South Dakota,2011,8,214
+South Dakota,2012,2,235
+South Dakota,2013,7,314
+South Dakota,2014,5,3365
+South Dakota,2015,3,186
+South Dakota,2016,2,174
+South Dakota,2017,5,615
+South Dakota,2018,5,857
+South Dakota,2019,5,303
+South Dakota,2020,6,810
+South Dakota,2021,3,204
+South Dakota,2022,3,436
+South Dakota,2023,1,1000
+South Dakota,2024,1,100
+South Dakota,2029,1,100
+South Dakota,2100,1,20000
+Tennessee,1992,1,35
+Tennessee,1998,1,43
+Tennessee,2000,1,93
+Tennessee,2001,4,243
+Tennessee,2002,3,193
+Tennessee,2003,5,646
+Tennessee,2004,12,1814
+Tennessee,2005,16,1248
+Tennessee,2006,28,8295
+Tennessee,2007,50,12510
+Tennessee,2008,61,8891
+Tennessee,2009,96,10843
+Tennessee,2010,80,8427
+Tennessee,2011,107,8188
+Tennessee,2012,95,9638
+Tennessee,2013,77,33559
+Tennessee,2014,87,45801
+Tennessee,2015,103,11922
+Tennessee,2016,103,16251
+Tennessee,2017,109,341744
+Tennessee,2018,120,79745
+Tennessee,2019,115,13206
+Tennessee,2020,165,40779
+Tennessee,2021,80,26258
+Tennessee,2022,67,18247
+Tennessee,2023,30,24040
+Tennessee,2024,30,17765
+Tennessee,2025,20,47393
+Tennessee,2026,8,3585
+Tennessee,2027,6,955
+Tennessee,2028,9,4447
+Tennessee,2029,1,90
+Tennessee,2030,2,6000
+Tennessee,2034,2,8818
+Tennessee,2035,1,5000
+Tennessee,2036,1,100
+Tennessee,2037,2,4000
+Tennessee,2038,1,178
+Tennessee,2041,1,500
+Tennessee,2045,1,1000
+Tennessee,2047,1,300
+Tennessee,2050,1,8000
+Texas,1997,4,283
+Texas,1998,7,55
+Texas,1999,6,39
+Texas,2000,12,3172
+Texas,2001,19,2764
+Texas,2002,33,1195
+Texas,2003,55,2554
+Texas,2004,73,6842
+Texas,2005,120,28949
+Texas,2006,135,13834
+Texas,2007,191,21062
+Texas,2008,256,26969
+Texas,2009,280,34604
+Texas,2010,288,61155
+Texas,2011,311,848472
+Texas,2012,322,64970
+Texas,2013,287,34438
+Texas,2014,302,31999
+Texas,2015,323,39456
+Texas,2016,383,43483
+Texas,2017,387,38453
+Texas,2018,388,89720
+Texas,2019,599,107801
+Texas,2020,770,247624
+Texas,2021,469,114467
+Texas,2022,268,78492
+Texas,2023,122,35086
+Texas,2024,59,33176
+Texas,2025,55,68569
+Texas,2026,28,181311
+Texas,2027,18,133622
+Texas,2028,9,13261
+Texas,2029,5,2279
+Texas,2030,13,15655
+Texas,2031,5,3394
+Texas,2032,2,1536
+Texas,2033,7,12184
+Texas,2034,4,242
+Texas,2035,5,8536
+Texas,2036,4,127
+Texas,2037,4,5086
+Texas,2038,1,21
+Texas,2040,3,4020229
+Texas,2048,1,10000
+Texas,2049,1,5212
+Texas,2099,1,250000
+Utah,1994,1,116
+Utah,2002,1,16
+Utah,2003,1,541
+Utah,2004,2,97
+Utah,2005,6,654
+Utah,2006,12,1343
+Utah,2007,10,993
+Utah,2008,28,3549
+Utah,2009,28,1794
+Utah,2010,42,176198
+Utah,2011,46,7521
+Utah,2012,44,4684
+Utah,2013,46,2792
+Utah,2014,45,5308
+Utah,2015,43,3456
+Utah,2016,58,18936
+Utah,2017,73,6345
+Utah,2018,57,7897
+Utah,2019,89,563227
+Utah,2020,75,757112
+Utah,2021,52,8413
+Utah,2022,24,532662
+Utah,2023,20,26232
+Utah,2024,7,30282
+Utah,2025,10,13180
+Utah,2026,1,183
+Utah,2027,2,1590
+Utah,2028,1,500
+Utah,2030,1,2000
+Utah,2050,2,50600
+Vermont,2001,3,0
+Vermont,2002,1,20
+Vermont,2003,2,76
+Vermont,2004,1,45
+Vermont,2005,1,0
+Vermont,2007,3,7834
+Vermont,2008,8,1359
+Vermont,2009,6,146
+Vermont,2010,11,668
+Vermont,2011,10,3184
+Vermont,2012,9,874
+Vermont,2013,14,736
+Vermont,2014,11,2147
+Vermont,2015,6,751
+Vermont,2016,14,1358
+Vermont,2017,7,581
+Vermont,2018,8,605
+Vermont,2019,13,1023
+Vermont,2020,14,1012
+Vermont,2021,6,3296
+Vermont,2022,3,1355
+Vermont,2023,3,660
+Vermont,2040,1,60000
+Virginia,1998,1,150
+Virginia,2000,1,0
+Virginia,2001,1,15
+Virginia,2003,4,467
+Virginia,2004,8,2467
+Virginia,2005,9,879
+Virginia,2006,17,4181
+Virginia,2007,26,8991
+Virginia,2008,47,6869
+Virginia,2009,46,3407
+Virginia,2010,47,5433
+Virginia,2011,47,10033
+Virginia,2012,70,12037
+Virginia,2013,70,29914
+Virginia,2014,59,8073
+Virginia,2015,74,18843548
+Virginia,2016,74,5849
+Virginia,2017,86,7078
+Virginia,2018,114,52364
+Virginia,2019,130,8124019
+Virginia,2020,117,17949
+Virginia,2021,72,11969
+Virginia,2022,34,5295
+Virginia,2023,18,9483
+Virginia,2024,11,1706
+Virginia,2025,7,827
+Virginia,2027,2,533
+Virginia,2028,1,55
+Virginia,2030,1,198
+Virginia,2038,1,1200
+Washington,1990,1,30
+Washington,1992,1,13
+Washington,1996,3,1024
+Washington,1997,1,24
+Washington,1999,3,8458
+Washington,2000,5,302
+Washington,2001,14,1137
+Washington,2002,20,41419
+Washington,2003,17,2557
+Washington,2004,21,5879
+Washington,2005,39,10752
+Washington,2006,47,11378
+Washington,2007,65,14401
+Washington,2008,60,18419
+Washington,2009,69,2366273
+Washington,2010,75,18562
+Washington,2011,99,50357
+Washington,2012,85,14182
+Washington,2013,85,17604
+Washington,2014,64,23505
+Washington,2015,94,13590
+Washington,2016,94,101426
+Washington,2017,81,48213
+Washington,2018,112,51107
+Washington,2019,104,132772
+Washington,2020,142,42566
+Washington,2021,78,19294
+Washington,2022,60,9589
+Washington,2023,24,20035
+Washington,2024,14,1901
+Washington,2025,9,4363
+Washington,2026,5,207
+Washington,2027,3,152
+Washington,2028,4,5431
+Washington,2030,3,52
+Washington,2032,3,183
+Washington,2033,4,133
+Washington,2034,1,18
+Washington,2035,1,4
+Washington,2036,3,179
+Washington,2037,3,106
+Washington,2040,2,3000
+West Virginia,1972,1,12
+West Virginia,2002,10,368
+West Virginia,2003,18,3977
+West Virginia,2004,21,829
+West Virginia,2005,19,1440
+West Virginia,2006,5,273
+West Virginia,2007,3,667
+West Virginia,2008,6,1131
+West Virginia,2009,9,923
+West Virginia,2010,10,742
+West Virginia,2011,6,776
+West Virginia,2012,13,756
+West Virginia,2013,9,1241
+West Virginia,2014,7,496
+West Virginia,2015,9,686
+West Virginia,2016,4,145
+West Virginia,2017,10,2188
+West Virginia,2018,8,409
+West Virginia,2019,16,2437
+West Virginia,2020,12,1836
+West Virginia,2021,7,209
+West Virginia,2022,5,346
+West Virginia,2023,3,85
+West Virginia,2024,1,10
+West Virginia,2035,1,6750
+Wisconsin,1998,1,0
+Wisconsin,1999,1,46
+Wisconsin,2000,3,39
+Wisconsin,2001,1,60
+Wisconsin,2002,1,608
+Wisconsin,2003,4,572
+Wisconsin,2004,13,1928
+Wisconsin,2005,10,1711
+Wisconsin,2006,22,2368
+Wisconsin,2007,43,6083
+Wisconsin,2008,49,2951
+Wisconsin,2009,59,6223
+Wisconsin,2010,57,9351
+Wisconsin,2011,67,4235
+Wisconsin,2012,63,39455
+Wisconsin,2013,97,11679
+Wisconsin,2014,62,5854
+Wisconsin,2015,81,8805
+Wisconsin,2016,79,9116
+Wisconsin,2017,76,284237
+Wisconsin,2018,86,52552
+Wisconsin,2019,85,9590
+Wisconsin,2020,104,18750
+Wisconsin,2021,77,21126
+Wisconsin,2022,62,10527
+Wisconsin,2023,36,15410
+Wisconsin,2024,13,1266
+Wisconsin,2025,10,14228
+Wisconsin,2026,4,140
+Wisconsin,2027,1,800
+Wisconsin,2028,2,334
+Wisconsin,2030,1,500
+Wisconsin,2033,1,25
+Wisconsin,2040,1,24
+Wisconsin,2050,1,4000
+Wisconsin,2060,1,30
+Wyoming,2012,1,120
+Wyoming,2014,1,44
+Wyoming,2017,1,353
+Wyoming,2019,2,148
+Wyoming,2020,6,584
