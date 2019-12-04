@@ -65,9 +65,7 @@ Lastly, the [Del Paggio study](https://www.thelancet.com/journals/lanonc/article
 
 As our initial goal, we want to find the relationship between fragility index and disease type in phase III RCT. To be more specific, we want to see if there's significant difference in FI between trials targeting cancers and those targeting non-oncology immunologic disorders. Also, we would like to discover any other facotrs that may impact the FI of RCT studies. However, during the data collection process, we found out that all the criterias we'd applied would result in insufficient sample size to conduct further analysis. Accordingly, we've enlarged our filtering criteria to US based phase III clinical trials.
 
-## What actually happened
-
-### The reality of our fragility index data
+# What we ACTUALLY Do for FI
 
 What we ended up actually doing differed from our initial hypothesis described in the above paragraph. After looking at the data we were able to gather, the questions we initially posed were not answerable. While we were able to scrape clinical trial information usable to calculate the fragility index, we did not have enough trials to make visualizations or really anything substantial in our initial query which was filtered by drug type and disease type. 
 
@@ -78,11 +76,11 @@ Questions we could answer from this dataset include:
 1) What is the median fragility index of our data obtained through our MacGyvered scraping method?
 2) What sort of trends, if any, do we see from basic information describing the trials?
 
-# Obtaining Data
+### Obtaining Data for FI
 
 Our goal is to obtain data from clinical trials which is capable of calculating a fragility index in addition to any other information we may be able to easily gather. We attempted multiple methods to find such data.
 
-### Attempt to Scrape from Google Scholar
+#### Attempt to Scrape from Google Scholar
 
 Given the ease of access to Google Scholar (GS), we first attempted to scrape our sources from the site. We initially did this manually by searching some random entry in order to see a pattern where we can insert our "page number". We found that we need to split Google's search address into two partitions so that we can insert the search numbers. 
 
@@ -130,13 +128,13 @@ The code we made was successful in scraping the titles from GS. However, an appa
 
 Given the apparent high ceiling to scrape via GS, we decided to stop using GS and tried PubMed scraping.
 
-### Scraping from PubMed
+#### Scraping from PubMed
 
 Attempting to scrape PubMed results for our relevant issues quickly comes to a halt because we noticed that as we try to search results, their html address does **NOT** change or provide a page number. We quickly scraped this from our viable methods to obtain our data. 
 
-### Scraping from clinicaltrials.gov
+#### Scraping from clinicaltrials.gov
 
-#### rclinicaltrials library
+##### rclinicaltrials library
 
 [rclinicaltrials](https://github.com/sachsmc/rclinicaltrials) is a library meant to serve as an R interface to clinicaltrials.gov! It allows you to perform basic and advanced searches, query the database, and then download study information in a "useful" format. The author even included a useful vignette which served as a useful example during initial testing.
 
@@ -174,7 +172,7 @@ baseline3 <- test3$study_results$baseline_data
 ![](https://media.giphy.com/media/z9AUvhAEiXOqA/source.gif)
 
 
-#### Scraping Clinical Trial ID
+##### Scraping Clinical Trial ID
 
 Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), was successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link".
 
@@ -218,7 +216,7 @@ Example trial from clinicaltrials.gov seen below:
 ![](image/clinical_trials_scraping_ex.png)
 <br></br>
 
-#### Testing Data Scraping and Transformation to Dataframe
+##### Testing Data Scraping and Transformation to Dataframe
 
 The goal of this portion is to iteratively grab primary outcome data from clinicaltrials.gov, determine if the type of data allows us to calculate a fragility index, then tidy the data into a tibble to allow us to actually calculate it.
 
@@ -295,7 +293,7 @@ content_test
 
 Though it took a while, our code managed to pull the relevant info that we need to manipulate in order to evaluate our fragility indexes. Our next step then, is to be able to `map` this and make a listcol within our original dataframe. 
 
-#### Building the function with the proper conditions and mapping 
+##### Building the function with the proper conditions and mapping 
 
 Similar to how we approach making the single-url code, we had various trial and error to come up with the function. We start with a simple form of object that stores our url. We extract the "unit of measure" and evaluate whether or not it contains "participants" or "patients"; scrape if `TRUE`, return `NA` if `FALSE`. 
 
@@ -369,7 +367,7 @@ mapped_ctgov_scrape_test <- ctgov_scrape_test %>%
 
 ```
 
-#### Mapping our real dataset
+##### Mapping our real dataset
 
 Now that we have a working function that produces our expected extraction, we can use our real data source, `ctgov_10k_API`. This time, we just apply our previous functions and wait for about 30-40 minutes to "compile". 
 
@@ -399,7 +397,7 @@ ctgov_10k_scraped <- ctgov_10k_df %>%
 
 After all this, our resulting viable dataset is `r nrow(ctgov_10k_scraped)` datasets that each contains the primary outcomes of interest. There are `r nrow(ctgov_10k_scraped %>% distinct(conditions))` unique conditions found using `distinct()` function. 
 
-### Cleaning Fragility Index Dataset
+##### Cleaning the Scraped Dataset
 
 After scraping the hard numbers in the `scrape_data` column, we found that according to clinicaltrials.gov output issue, the html node doesn't necessarily extract the information we want. Therefore, we have no choice but to filter out those contains NA values in the scraped table. 
 
@@ -416,16 +414,12 @@ ctgov_10k_scraped %>%
 
 As shown above, we have `r length(which(pull(ctgov_10k_scraped, nainside) == FALSE))` intact datasets for FI analysis. We further filter this by selecting only the datasets that has number of participants as unit of measure.
 
-### Preliminary exploration from our scraped dataset
-
 ```{r count_of_unique}
 
-cond_count <- ctgov_10k_scraped %>% 
-  count(conditions)
 ```
 
-
 Now we filter and finally create a dataset.
+
 ```{r filtering}
 # select those doesn't contain NAs
 clean_ctgov_df <- ctgov_10k_scraped %>% 
@@ -458,6 +452,7 @@ new_df <- clean_ctgov_df %>%
     ncol = map_dbl(scrape_data, ncol)
   ) %>% 
   filter(ncol == 2 & nrow == 2)
+
 ```
 
 For now, we already found the trials with number of patient counts as unit of measures, and we further filtered out those that have complicated results more than 2 arms. The resulting dataset has 39 rows.
@@ -468,6 +463,7 @@ After we tried numerous method to detach the tibbles in the list column, non of 
 # some miracle happened!!!
 manual = read_csv("./data/FI2by2_manual.csv")
 
+# rejoin the results back to the orignial data
 final_df <- 
   left_join(new_df, manual, by = "nct_id") %>% 
   select(everything(), -nrow, -ncol, -nainside, -scrape_data)
@@ -477,7 +473,6 @@ final_df <-
 We thought we were fine already, but not yet. The built in function `fragility.index`, which you can read about [in the R documentation here](https://www.rdocumentation.org/packages/fragilityindex/versions/0.1.0), seemed to have consumed tons of workspace in R studio, which would not allow us to simply map the function to the dataset. Instead, we needed to calculate the FI one by one. 
 
 ```{r for loop for FI}
-
 # for loop constructing
 nct = c()
 FI = c()
@@ -503,7 +498,11 @@ finalff_df = left_join(final_df, tempo, by = "nct_id")
 
 ```
 
-The resulting dataset now includes basic infomration about the trial in addition to its fragility index!
+The resulting dataset now includes basic infomration about the trial in addition to its fragility index.
+
+##### EDA for Fragility Index
+
+Given the limited information we obtained so far, we are allowed to create general descriptive table and bar plot of FI corresponding to the disease conditions.
 
 ```{r aresenal table for EDA}
 
@@ -535,8 +534,7 @@ finalff_df %>%
 
 ```
 
-
-### Quest for ~~more~~ all data
+# Quest for ~~more~~ All Data from clinicaltrials.gov
 
 The dataset we collected above was light in the sense that our scraping method did not gather other descriptive information. We needed more data to allow us to graph information required for this project. Here, we pivoted, again, to look at phase III clinical trials more generally. Our group members are interested in clinical trials, which despite their importance to US healthcare seem very shrouded in mystery. The fragility index was a very pointed question in this area of our healthcare system we do not know much about. There is a lot of general information about trials unknown to our group which might be interesting to look at.
 
@@ -686,4 +684,10 @@ The fragility index is not the most quantitatively complex or descriptive metric
 Surprisingly, there were much less issues downloading every clinical trial and graphing different characteristics. At this more "bird's eye" level describing a study, the data is much more consistent and tidy, allowing for easier manipulation and usage.
 
 Seeing the distribution of trials across the US shows what one may guess: there are generally more trials in metropolitan areas which have large cities and relevant academic institutions. As the NIH is located in Maryland, many NIH sponsored trials are associated with a location in Maryland. California is the state with by far the most number of trials overall. Surprisingly, Alabama has the 2nd most number of studies performed according to our data. None of the group members would have guessed Alabama being in the top 2 states, let alone being an above average state.
+
+
+
+
+
+
 
