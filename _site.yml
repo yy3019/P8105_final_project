@@ -2,13 +2,14 @@ name: "Global Settings"
 output_dir: "."
 navbar:
   title: "<div><img src=\"image/title-icon.png\" height=\"22px\"><span style=\"padding-left:10px\">Fragility Index Project</div>"
-  right:
+  left:
   - text: "About"
     menu:
     - text: "The Project"
       href: proj_background.html
     - text: "Members"
       href: members.html
+  right:
   - text: "Project Report"
     icon: fa-file-text-o fa-lg
     href: report.html
