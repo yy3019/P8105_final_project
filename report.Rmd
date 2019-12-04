@@ -56,6 +56,10 @@ Our motivation behind this project is to explore the fragility index (FI) beyond
 
 # Related work
 
+The FI involves iteratively calculating fisher's exact test. After each calculation of your 2x2 table, you would artificially "add an event" to the smaller of the two groups and recalculate the fisher's test. The fragility index is the number of iterations necessary for the test to move past your predetermined alpha value, typically 0.05.
+
+Smaller fragility indexes are not good, and suggest that the trial is more fragile.
+
 Our study is inspired mainly by three recent aticles. First of all, the [Walsh et al.](https://www.jclinepi.com/article/S0895-4356(13)00466-6/abstract) has general introduction on Fragility Index and methodology behind. The author also provided an example of utilizing FI to evaluate the roubustness of a set of 399 eligible clinical trials.      
 [Tignanelli et al.](https://jamanetwork.com/journals/jamasurgery/fullarticle/2712857?fbclid=IwAR0bb9aN2gwCOFd-HLF-DFOmT60wBtziuFZ_CKdxIu-y40eXYb9GKa8LhcU) acknowleged FI as crucial part to be reported in further trama/ surgical RCT studies.       
 Lastly, the [Del Paggio et al.](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30338-9/fulltext) revealed a trembling fact that many of the FDA-approved phase III clinical studies had a low FI; some of them were even 1% or less of their respective sample size. These materials serve as the inspiration of our topic.
@@ -375,8 +379,6 @@ Now that we have a working function that produces our expected extraction, we ca
 
 **Note:** During one of our tries, we realize that there's an extra element in the "outcome measures" that we failed to take into account; `character(0)`. This is different from `NA`. We had to debug this for a while to make our function work by adding another condition: `if(length(input) == 0)`, which returns `NA` if `TRUE`.
 
-**TURN THE CODE OFF UNLESS READY TO BUILD WITH SIGNIFICANT UPDATES**
-
 ```{r ctgov_real_scrape}
 
 ctgov_10k_df <- read_csv("./data/ctgov_10k_API.csv") %>%              # read csv
@@ -504,7 +506,7 @@ The resulting dataset now includes basic infomration about the trial in addition
 
 ##### EDA for Fragility Index
 
-Given the limited information we obtained so far, we are allowed to create general descriptive table and bar plot of FI corresponding to the disease conditions.
+Given the limited information we obtained so far, we could only create general descriptive table and bar plot of FI corresponding to the disease conditions.
 
 ```{r aresenal table for EDA}
 
@@ -540,7 +542,7 @@ finalff_df %>%
 
 The dataset we collected above was light in the sense that our scraping method did not gather other descriptive information. We needed more data to allow us to graph information required for this project. Here, we pivoted, again, to look at phase III clinical trials more generally. Our group members are interested in clinical trials, which despite their importance to US healthcare seem very shrouded in mystery. The fragility index was a very pointed question in this area of our healthcare system we do not know much about. There is a lot of general information about trials unknown to our group which might be interesting to look at.
 
-So, to supplement our data scraping of clinical trial data, we decided instead to download **every clinical trial from clinicaltrials.gov**. This included a 800 MB csv including descriptive information about each trial. This dataset was quite large, and crashed multiple members' computers multiple times.
+So, to supplement our data scraping of clinical trial data, we decided instead to download **every clinical trial from clinicaltrials.gov** through XML indicator. This included a 800 MB csv including descriptive information about each trial. This dataset was quite large, and crashed multiple members' computers multiple times.
 
 There were many questions which we could answer with this data, although it is not about the fragility index at all. Instead, this data gave us a glimpse into the field.  
 Questions we looked at include:
@@ -637,7 +639,7 @@ us_only =
 
 This dataset includes tidied descriptive information about every US-based Phase 3 study.
 
-## Data Summary and Results
+# Data Summary and Results
 To summarize, we have 2 datasets that we used for further analysis and exploration:
 
 1) A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial.
@@ -648,20 +650,21 @@ To summarize, we have 2 datasets that we used for further analysis and explorati
 2) A separate and distinct dataset created by selecting information by XML to explore trends in clinical trials.
   * The results from this data can be explored with our [Shiny app graphs you can find here](https://zongchaoliu.shinyapps.io/clinicaltrials_map/)
 
+The main product of our project consists of two parts:
 
-# EDA on Clinical Trial Data
+1) A functional FI calculator
+
+2) Interactive plots of clinical trials characteristics
+
+## FI Calculator for Meta-Analysis
+
+
+
+
+## Interactive Plot of Clinical Trials Characteristics 
 
 *Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.*
 
-# Other Analysis
-
-*Additional analysis: If you undertake formal statistical analyses, describe these in detail.*
-
-Here it would be best to describe specifically how the fragility index is calculated. We made a lot of assumptions to only include trials that had a primary outcome reported in a 2x2 table of the number of participants of each group with a placebo. We did this to simplify the calculation of the FI.
-
-The FI involves iteratively calculating fisher's exact test. After each calculation of your 2x2 table, you would artificially "add an event" to the smaller of the two groups and recalculate the fisher's test. The fragility index is the number of iterations necessary for the test to move past your predetermined alpha value, typically 0.05.
-
-Smaller fragility indexes are not good, and suggest that the trial is more fragile.
 
 # Discussion
 
