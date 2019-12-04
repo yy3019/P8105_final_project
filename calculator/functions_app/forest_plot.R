@@ -101,9 +101,9 @@ forest_plot <- function(meta1, fragile=FALSE, modifs = NULL){
         rect(xleft = exp(meta1$TE - (meta1$w.fixed/msq)*0.4), 
              ybottom = n:1 - (meta1$w.fixed/msq)*0.48,
              xright = exp(meta1$TE + (meta1$w.fixed/msq)*0.4), 
-             ytop = n:1 + (meta1$w.fixed/msq)*0.45, col = "blue")
+             ytop = n:1 + (meta1$w.fixed/msq)*0.45, col = "light green")
         polygon(x =exp(c(meta1$TE.fixed,meta1$lower.fixed,meta1$TE.fixed,meta1$upper.fixed)), 
-                y = c(-0.2,0,0.2,0), col="black") 
+                y = c(-0.2,0,0.2,0), col="blue") 
         text(paste(meta1$method," Fixed, 95% CI",sep=","),
              x= 1, y = n+1, adj = 0.5, font=2,cex=cex)        
     }
@@ -114,9 +114,9 @@ forest_plot <- function(meta1, fragile=FALSE, modifs = NULL){
         rect(xleft = exp(meta1$TE - (meta1$w.random/msq)*0.4), 
              ybottom = n:1 - (meta1$w.random/msq)*0.48,
              xright = exp(meta1$TE + (meta1$w.random/msq)*0.4), 
-             ytop = n:1 + (meta1$w.random/msq)*0.45, col = "blue")
+             ytop = n:1 + (meta1$w.random/msq)*0.45, col = "light green")
         polygon(x =exp(c(meta1$TE.random,meta1$lower.random,meta1$TE.random,meta1$upper.random)), 
-                y = c(-0.2,0,0.2,0), col="black")
+                y = c(-0.2,0,0.2,0), col="blue")
         text(paste(meta1$method," Random, 95% CI",sep=","),
              x= 1, y = n+1, adj = 0.5, font=2,cex=cex)
     }
