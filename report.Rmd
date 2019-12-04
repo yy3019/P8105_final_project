@@ -196,9 +196,9 @@ Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), were fortuna
 We first obtained (downloaded) a `.csv` file from clinicaltrials.gov that contained our advanced search options:
 
 * phase III trials 
-* completed
+* completed trial
 
-After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we're only interested in the trial ID. We further filter the trials to those that has a "Placebo" arm. 
+After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we're only interested in the trial ID. We further filtered trials to include those that has a "Placebo" arm. 
 
 ```{r ctgov_data_read}
 
@@ -230,9 +230,11 @@ These tags will be used to identify certain cells in the messy table within clin
 
 #### Testing Data Scraping and Transformation to Dataframe
 
-We then test our code to be able to run and create a dataframe from a single source. It took quite a few trial and errors to be able to obtain the right form. 
+The goal of this portion is to iteratively grab primary outcome data from clinicaltrials.gov, determine if the type of data allows us to calculate a fragility index, then tidy the data to allow us to actually calculate it.
 
-Firstly, we attempt to find an identifier relevant to our project that may help us automate the determination of which trial will be included. 
+We started by testing our code to create a dataframe from a single source. It took quite a few trial and errors to be able to obtain the right form. 
+
+Firstly, we attempt to find an identifier relevant to our project that may help us automate the determination of which trial has data eligible for calculating FI. 
 
 ```{r ctgov_test_id, eval = FALSE}
 
@@ -244,7 +246,9 @@ test_url_ctgov <- read_html("https://ClinicalTrials.gov/show/results/NCT00195702
 
 ```
 
-This returns our important "unit of measure". We are particularly looking for variables that contain "participants". Having found a way to detect this, we continued to build our function under the assumption that we have "participants" as our unit of measure. 
+This returns the "unit of measure" of the primary outcome of any given clinical trial. We are particularly looking for outcomes that contain "participants". We do this because we are looking for trials that have a primary endpoint that involves a standard 2x2 table, which will allow us to calculate a fisher exact test, which is necessary to calculate the fragility index. Through trial and error, we found "unit of measure" to be the best proxy to filter the data. 
+
+Having found a way to detect this, we continued to build our function under the assumption that we have "participants" as our unit of measure. 
 
 We obtained the relevant column names:
 
@@ -274,7 +278,7 @@ row_names_test
 
 ```
 
-And finally, our most important component, which is the number of participants in each group. 
+And finally, our most important component, which is the number of participants in each group. The code chunks above and below combined detect the number of rows and columns in any clinicaltrials.gov website, grab available data in a vector, then recreate the table in a tidy fashion within R!
 
 ```{r content_pull}
 
@@ -379,7 +383,7 @@ mapped_ctgov_scrape_test <- ctgov_scrape_test %>%
 
 Now that we have a working function that produces our expected extraction, we can use our real data source, `ctgov_10k_API`. This time, we just apply our previous functions and wait for about 30-40 minutes to "compile". 
 
-**Note:** During one of our tries, we realize that there's an extra element in the "outcome measures" that we failed to take into account; `character(0)`. We had to debug this for a while to make our function work by adding another condition: `if(length(input) == 0)`, which returns `NA` if `TRUE`.
+**Note:** During one of our tries, we realize that there's an extra element in the "outcome measures" that we failed to take into account; `character(0)`. This is different from `NA`. We had to debug this for a while to make our function work by adding another condition: `if(length(input) == 0)`, which returns `NA` if `TRUE`.
 
 **TURN THE CODE OFF UNLESS READY TO BUILD WITH SIGNIFICANT UPDATES**
 
@@ -407,7 +411,7 @@ After all this, our resulting viable dataset is `r nrow(ctgov_10k_scraped)` data
 
 ### Gathering other interested information by XML
 
-As time went by, our interest expanded to explore the general trend and other variables related to clinical trials. Therefore, we first downloaded the XML information for **ALL** clinical trials listed in clinical.gov, then gather specific information for phase III, US based studies. The data extracting and processing code are shown below.
+As time went by, our interest expanded to explore the general trends related to clinical trials. Therefore, we first downloaded the XML information for **ALL clinical trials listed in clinical.gov**, then filtered for phase III, US based studies. The data extracting and processing code are shown below.
 
 ```{r scraping from XML, eval = F}
 
@@ -493,9 +497,6 @@ us_only =
 ```
 
 
-In the following, we're splitting the discussion into two parts:     
-* Main outcome: fragility index dataset 
-* Secondary outcome:  clinical trials dataset
 
 ### Cleaning Data
 
@@ -554,7 +555,7 @@ For now, we already fond the trials with number of patient counts as unit of mea
 
 After we tried innumerous method to detach the tibbles in the list column, non of these had worked. Therefore, we have no choice but to manually type out all the digits and save it as a new csv file. 
 
-```{r manual mirical}
+```{r manual miracle}
 # some miracle happened!!!
 manual = read_csv("./data/FI2by2_manual.csv")
 
@@ -564,7 +565,7 @@ final_df <-
 
 ```
 
-We thought we were fine already, but not yet. The built in function `fragility.index` seemed to have consumed tons of workspace in R studio, so we're not allowed to simply map the function to the dataset. Instead, we need to do it one by one. 
+We thought we were fine already, but not yet. The built in function `fragility.index`, which you can read about [here](https://www.rdocumentation.org/packages/fragilityindex/versions/0.1.0), seemed to have consumed tons of workspace in R studio, which would not allow us to simply map the function to the dataset. Instead, we needed to calculate the FI one by one. 
 
 ```{r for loop for FI}
 
@@ -629,4 +630,9 @@ Discussion: What were your findings? Are they what you expect? What insights int
 Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions. However, we did learn a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov, likely due to the vast differences between trials making any general structure close to impossible.
 
 Thankfully, there are many insights we were able to gather from the data we were able to collect!
+
+In the following, we're splitting the discussion into two parts:     
+* Main outcome: fragility index dataset 
+* Secondary outcome:  clinical trials dataset
+
 

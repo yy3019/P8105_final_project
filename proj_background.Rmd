@@ -39,5 +39,5 @@ Due to realities explained in the [Obtaining Data](https://yy3019.github.io/P810
 Instead, this project: 
 1) Explored various methods of data scrapping for clinical trial data
 2) Calculated the fragility index for data we were able to collect
-3) Gave general insights to phase 3 clinical trials
+3) Created a graphical display to show geographical and temporal trends in phase 3 clinical trials
 
