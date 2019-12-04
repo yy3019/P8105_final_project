@@ -13,7 +13,7 @@ The fragility index is a measure of the "fragility" of a clinical trial. It is t
 
 # Project's Motivation
 
-The Fragility Index has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values. We are interested how the fragility index may differ based on different clinical trial characteristics. Multiple papers have shown that it requires just a few patients to alter outcomes of many large phase III trials. It is of concern to us that these studies require billions of dollars sunk but outcomes can be "easily" rendered obsolete based on so few participant outcomes. 
+The [related work](https://yy3019.github.io/P8105_final_project.github.io/report.html#related_work) section has links to different publications that sparked this project. Briefly, the Fragility Index has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values. We are interested how the fragility index may differ based on different clinical trial characteristics. Multiple papers have shown that it requires just a few patients to alter outcomes of many large phase III trials. It is of concern to us that these studies require billions of dollars sunk but outcomes can be "easily" rendered obsolete based on so few participant outcomes. 
 <br></br>
 
 # Initial Hypotheses
