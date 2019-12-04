@@ -5,8 +5,8 @@ account: yy3019
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1546006
-bundleId: 2637574
+bundleId: 2641363
 url: https://yy3019.shinyapps.io/FI_calculator/
-when: 1575409021.79689
+when: 1575488514.7341
 asMultiple: FALSE
 asStatic: FALSE
