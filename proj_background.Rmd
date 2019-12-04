@@ -3,7 +3,6 @@ title: "<div><img src=\"image/ripped_doc.png\" style=\"max-width:64px; max-heigh
 output: html_document
 ---
 
-<!-- # {.tabset .tabset-fade} -->
 <br></br>
 
 # What is it?

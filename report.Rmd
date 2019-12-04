@@ -164,7 +164,9 @@ Unforuntately, it ended up not being useful for our purposes. This R package's l
 The data from the `clinicaltrials_download` function was in a listcol with plenty of descriptive information. Unfortunately, the outcomes section did not include the actual n included in each participant arm, and the structure of the data was inconsistent between trials. It ended up being more of a hassle to try to use this package than other methods learned in class. 
 
 clinicaltrials.gov trial and error example code:
+
 ```{r test_rclinicaltrials, eval=FALSE}
+
 #install_github("sachsmc/rclinicaltrials")
 library(devtools)
 library(rclinicaltrials)
@@ -616,7 +618,6 @@ To summarize, we have 2 datasets that we used for further analysis and explorati
 
 
 # Exploratory Analysis
-
 
 *Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.*
 
