@@ -99,6 +99,8 @@ There were many questions which we could answer with this data, although it is n
 
 # Obtaining Data
 
+Our goal is to obtain data from clinical trials which is capable of calculating a fragility index in addition to any other information we may be able to easily gather. We attempted multiple methods to find such data.
+
 ### Attempt to Scrape from Google Scholar
 
 Given the ease of access to Google Scholar (GS), we first attempted to scrape our sources from the site. We initially did this manually by searching some random entry in order to see a pattern where we can insert our "page number". We found that we need to split Google's search address into two partitions so that we can insert the search numbers. 
@@ -191,14 +193,16 @@ baseline3 <- test3$study_results$baseline_data
 
 #### Scraping Clinical Trial ID
 
-Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), were fortunately successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link"
+Our last bastion, [clinicaltrials.gov](https://clinicaltrials.gov), was successful (in some ways). We ended up employing a combination of API search to obtain specific trial ID and use those to scrape relevant contents from clinicaltrials.gov. You can see our codes and process in detail "link".
+
+After realizing the situation we were in (yikes) and the amount of data we were likely able to get using the initial hypothesis (close to none), we expanded our initial search options to any completed phase 3 clinical trials.
 
 We first obtained (downloaded) a `.csv` file from clinicaltrials.gov that contained our advanced search options:
 
 * phase III trials 
 * completed trial
 
-After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we're only interested in the trial ID. We further filtered trials to include those that has a "Placebo" arm. 
+After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we're only interested in the trial ID. We further filtered trials to include those that has a "Placebo" arm.
 
 ```{r ctgov_data_read}
 
@@ -565,7 +569,7 @@ final_df <-
 
 ```
 
-We thought we were fine already, but not yet. The built in function `fragility.index`, which you can read about [here](https://www.rdocumentation.org/packages/fragilityindex/versions/0.1.0), seemed to have consumed tons of workspace in R studio, which would not allow us to simply map the function to the dataset. Instead, we needed to calculate the FI one by one. 
+We thought we were fine already, but not yet. The built in function `fragility.index`, which you can read about [in the R documentation here](https://www.rdocumentation.org/packages/fragilityindex/versions/0.1.0), seemed to have consumed tons of workspace in R studio, which would not allow us to simply map the function to the dataset. Instead, we needed to calculate the FI one by one. 
 
 ```{r for loop for FI}
 
@@ -607,7 +611,7 @@ To summarize, we have 2 datasets that we used for further analysis and explorati
 # Exploratory Analysis
 
 
-Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.
+*Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.*
 
 ### Preliminary exploration from our scraped dataset
 
@@ -621,7 +625,7 @@ cond_count <- ctgov_10k_scraped %>%
 
 # Other Analysis
 
-Additional analysis: If you undertake formal statistical analyses, describe these in detail.
+*Additional analysis: If you undertake formal statistical analyses, describe these in detail.*
 
 Here it would be best to describe specifically how the fragility index is calculated. We made a lot of assumptions to only include trials that had a primary outcome reported in a 2x2 table of the number of participants of each group with a placebo. We did this to simplify the calculation of the FI.
 
@@ -631,7 +635,7 @@ Smaller fragility indexes are not good, and suggest that the trial is more fragi
 
 # Discussion
 
-Discussion: What were your findings? Are they what you expect? What insights into the data can you make?
+*Discussion: What were your findings? Are they what you expect? What insights into the data can you make?*
 
 Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions.  Thankfully, there are many insights we were able to gather from the data we were able to collect!
 
