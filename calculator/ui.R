@@ -24,7 +24,7 @@ shinyUI(
                                            tags$li(tags$b("TOTAL_2: "),"the total number of patients included in Arm 2")))),
                         # WHERE FOOTER GOES
                         hr(),
-                        print("© Copyright 2019 The Fragility Index Project Team, All Rights Reserved | Calculator credits to author for `fragility_sign_ma.R` and `fragility_non_sign_ma.R`")),
+                        print("© Copyright 2019 The Fragility Index Project Team, All Rights Reserved | Calculator credits to"),  tags$a("Author", herf = "https://github.com/iatal/fragility_ma/tree/master/app/functions_fragility"), ("for `fragility_sign_ma.R` and `fragility_non_sign_ma.R`")),
                
                
         tabPanel("Evaluate the Fragility", value = "fragility",
@@ -33,7 +33,7 @@ shinyUI(
                             
                  sidebarPanel(
                      tags$p(tags$strong("1- Upload meta-analysis data as CSV File")),
-                     tags$em("(See About for help)"),
+                     tags$em("(See" ,tags$a("About", herf = "https://yy3019.shinyapps.io/FI_calculator/"), "for more detail about data)"),
                      fileInput("file1", label = NULL,
                                accept = c("text/csv","text/comma-separated-values,text/plain",".csv")),
                      tags$p(tags$strong("2- Select the parameters of the meta-analysis")),
@@ -75,7 +75,7 @@ shinyUI(
                  
                  # WHERE FOOTER GOES
                  hr(),
-                 print("© Copyright 2019 The Fragility Index Project Team, All Rights Reserved | Calculator credits to author for `fragility_sign_ma.R` and `fragility_non_sign_ma.R`"))
+                 print("© Copyright 2019 The Fragility Index Project Team, All Rights Reserved | Calculator credits to"),  tags$a("Author", herf = "https://github.com/iatal/fragility_ma/tree/master/app/functions_fragility"), ("for `fragility_sign_ma.R` and `fragility_non_sign_ma.R`"))
 
         ,a( img(src='game.jpg', width='150px'),         href="https://yy3019.github.io/P8105_final_project.github.io/",target="_blank")
         )
