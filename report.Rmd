@@ -621,18 +621,31 @@ cond_count <- ctgov_10k_scraped %>%
 
 # Other Analysis
 
-Additional analysis: If you undertake formal statistical analyses, describe these in detail
+Additional analysis: If you undertake formal statistical analyses, describe these in detail.
+
+Here it would be best to describe specifically how the fragility index is calculated. We made a lot of assumptions to only include trials that had a primary outcome reported in a 2x2 table of the number of participants of each group with a placebo. We did this to simplify the calculation of the FI.
+
+The FI involves iteratively calculating fisher's exact test. After each calculation of your 2x2 table, you would artificially "add an event" to the smaller of the two groups and recalculate the fisher's test. The fragility index is the number of iterations necessary for the test to move past your predetermined alpha value, typically 0.05.
+
+Smaller fragility indexes are not good, and suggest that the trial is more fragile.
 
 # Discussion
 
 Discussion: What were your findings? Are they what you expect? What insights into the data can you make?
 
-Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions. However, we did learn a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov, likely due to the vast differences between trials making any general structure close to impossible.
+Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions.  Thankfully, there are many insights we were able to gather from the data we were able to collect!
 
-Thankfully, there are many insights we were able to gather from the data we were able to collect!
+## Main Data: fragility index 
 
-In the following, we're splitting the discussion into two parts:     
-* Main outcome: fragility index dataset 
-* Secondary outcome:  clinical trials dataset
+This project showed how difficult scraping data from a website could be if the data has a varied structure. It was much, much more difficult to scrape and tidy the data than we were originally anticipating, especially given the "tools" that were available to us prior to trying them.
 
+We learned a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov. Thankfully, clinicaltrials.gov is updating their API, which should hopefully improve upon the structure of this data. We learned the hard way the difference between publicly available data, and **usable** publicly available data. Tidying complex data is incredibly complex.
+
+From our data and project, we came away with a few insights. First, there are a vast amount of differences and complexity between clinical trials. Using our data as a judge, a real-life phase 3 trial and its primary outcome is rarely simple and straight forward. Attempting to create any general structure currently seems nearly impossible. This is humbling and motivating.
+
+## Secondary Data:  clinical trials dataset
+
+Surprisingly, there were much less issues downloading every clinical trial and graphing different characteristics. At this more "bird's eye" level describing a study, the data is much more consistent and tidy, allowing for easier manipulation and usage.
+
+Seeing the distribution of trials across the US shows what one may guess: there are generally more trials in metropolitan areas which have large cities and academic institutions. California has by far the most. Surprisingly, Alabama has the 2nd most number of studies performed according to our data. None of the group members would have guessed Alabama being in the top 2 states, let alone being an above average state.
 
