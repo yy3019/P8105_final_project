@@ -417,6 +417,17 @@ ctgov_10k_scraped %>%
 
 As shown above, we have `r length(which(pull(ctgov_10k_scraped, nainside) == FALSE))` intact datasets for FI analysis. We further filter this by selecting only the datasets that has number of participants as unit of measure.
 
+### Preliminary exploration from our scraped dataset
+
+```{r count_of_unique}
+
+cond_count <- ctgov_10k_scraped %>% 
+  count(conditions)
+  
+```
+
+
+Now we filter and finally create a dataset.
 ```{r filtering}
 # select those doesn't contain NAs
 clean_ctgov_df <- ctgov_10k_scraped %>% 
@@ -451,9 +462,9 @@ new_df <- clean_ctgov_df %>%
   filter(ncol == 2 & nrow == 2)
 ```
 
-For now, we already fond the trials with number of patient counts as unit of measures, and we further filtered out those that have complicated results more than 2 arms. The resulting dataset has 39 rows.
+For now, we already found the trials with number of patient counts as unit of measures, and we further filtered out those that have complicated results more than 2 arms. The resulting dataset has 39 rows.
 
-After we tried innumerous method to detach the tibbles in the list column, non of these had worked. Therefore, we have no choice but to manually type out the 39 studies and save it as a new csv file. 
+After we tried numerous method to detach the tibbles in the list column, non of these had worked. Therefore, we have no choice but to manually type out the 39 studies and save it as a new csv file. 
 
 ```{r manual miracle}
 # some miracle happened!!!
@@ -598,9 +609,6 @@ us_only =
 
 This dataset includes tidied descriptive information about every US-based Phase 3 study.
 
-
-#### Clinical trials dataset
-
 ## Data Summary and Results
 To summarize, we have 2 datasets that we used for further analysis and exploration:
 
@@ -613,18 +621,11 @@ To summarize, we have 2 datasets that we used for further analysis and explorati
   * The results from this data can be explored with our [Shiny app graphs you can find here](https://zongchaoliu.shinyapps.io/clinicaltrials_map/)
 
 
-# Exploratory Analysis
+# EDA on Clinical Trial Data
 
 *Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.*
 
-### Preliminary exploration from our scraped dataset
 
-```{r count_of_unique}
-
-cond_count <- ctgov_10k_scraped %>% 
-  count(conditions)
-  
-```
 
 
 # Other Analysis
