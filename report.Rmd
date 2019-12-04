@@ -57,9 +57,11 @@ Our motivation behind this project is to explore the fragility index (FI) beyond
 
 # Related work
 
-Our study is inspired mainly by three researches. First of all, the [Walsh study](https://www.jclinepi.com/article/S0895-4356(13)00466-6/abstract) has general introduction on Fragility Index and methodology behind. The author also provided an example of utilizing FI to evaluate the roubustness of a set of 399 eligible clinical trials.      
-[Another study](https://jamanetwork.com/journals/jamasurgery/fullarticle/2712857?fbclid=IwAR0bb9aN2gwCOFd-HLF-DFOmT60wBtziuFZ_CKdxIu-y40eXYb9GKa8LhcU) done by Tignanelli also acknowleged FI as crucial part to be reported in further trama/ surgical RCT studies.       
-Lastly, the [Del Paggio study](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30338-9/fulltext) revealed a trembling fact that many of the FDA-approved phase III clinical studies had a low FI; some of them were even 1% or less of their respective sample size. These materials serve as the inspiration of our topic.
+Our study is inspired mainly by three recent aticles. First of all, the [Walsh et al.](https://www.jclinepi.com/article/S0895-4356(13)00466-6/abstract) has general introduction on Fragility Index and methodology behind. The author also provided an example of utilizing FI to evaluate the roubustness of a set of 399 eligible clinical trials.      
+[Tignanelli et al.](https://jamanetwork.com/journals/jamasurgery/fullarticle/2712857?fbclid=IwAR0bb9aN2gwCOFd-HLF-DFOmT60wBtziuFZ_CKdxIu-y40eXYb9GKa8LhcU) acknowleged FI as crucial part to be reported in further trama/ surgical RCT studies.       
+Lastly, the [Del Paggio et al.](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30338-9/fulltext) revealed a trembling fact that many of the FDA-approved phase III clinical studies had a low FI; some of them were even 1% or less of their respective sample size. These materials serve as the inspiration of our topic.
+
+There has not been a consensus on the usage of the fragility index. It has pros and cons. A response from [Machado et al](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30581-9/fulltext) directly responds to the Del Paggio paper linked above. A different lancet paper by [Desnoyers et al.](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30583-2/fulltext) argues that the FI does not work with all data types, and one should be especially cogniscent of manipulating time-to-event data to fit into the FI as temporality is not taken into account. A brief letter from [Porco et al.](https://www.aaojournal.org/article/S0161-6420(18)30597-9/abstract) was quite critical, stating that the FI "merely highlights one minor sensitivity analysis at the expense of other features of trial design and quality assessment".
 <br></br>
 
 # Initial Questions
