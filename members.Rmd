@@ -25,7 +25,7 @@ You can learn more about me here [Fisher](https://yy3019.github.io/Resume.html)
 
 # <a href=""><img class="cat_circle" src="image/adobe.jpg"></a><span style="padding-left:25px">Zongchao (Adobe) Liu
 
-Content
+I received a BS in Medical Science from Shandong University in 2019 and currently study biostatistics in Mailman School of Public Health, Columbia University. I am passionate about the field of biomedical engineering and health data science. I am also interested in applications of the wearable sensors in healthcare and computational epidemiology. You may learn more about me from [here](https://zl2860.github.io/)
 
 <br></br>
 
