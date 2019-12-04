@@ -230,11 +230,14 @@ Now our "database" containing relevant clinical trials are ready. Before we cont
 * `#EXPAND-outcome-data-1 tbody:nth-child(2) th` : this is description of table
 
 These tags will be used to identify certain cells in the messy table within clinicaltrials.gov. 
+
+Example trial from clinicaltrials.gov seen below:
+![](image/clinical_trials_scraping_ex.png)
 <br></br>
 
 #### Testing Data Scraping and Transformation to Dataframe
 
-The goal of this portion is to iteratively grab primary outcome data from clinicaltrials.gov, determine if the type of data allows us to calculate a fragility index, then tidy the data to allow us to actually calculate it.
+The goal of this portion is to iteratively grab primary outcome data from clinicaltrials.gov, determine if the type of data allows us to calculate a fragility index, then tidy the data into a tibble to allow us to actually calculate it.
 
 We started by testing our code to create a dataframe from a single source. It took quite a few trial and errors to be able to obtain the right form. 
 
