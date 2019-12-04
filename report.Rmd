@@ -15,10 +15,9 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
                       )
 
 # loaded packages; placed here to be able to load global settings
-Packages <- c("tidyverse", "dplyr", "rvest", "httr", "XML", "readxl")
+
+Packages <- c("tidyverse", "dplyr", "rvest", "httr", "XML", "readxl", "fragilityindex")
 invisible(lapply(Packages, library, character.only = TRUE))
-
-
 
 # global settings for color palettes
 options(
@@ -389,12 +388,11 @@ Now that we have a working function that produces our expected extraction, we ca
 ctgov_10k_df <- read_csv("./data/ctgov_10k_API.csv") %>%              # read csv
   janitor::clean_names() %>%
   mutate(
-    url = str_replace(url, "https://ClinicalTrials.gov/show/", "")    # keep trial ID only
+    url = str_replace(url, "https://ClinicalTrials.gov/show/", "")# keep trial ID only
   ) %>% 
   rename("nct_id" = url) %>% 
   select(rank, nct_id, title, conditions, interventions) %>%     
   filter(str_detect(interventions, "Placebo"))
-
 
 # testing our function using purrr::map function.
 ctgov_10k_scraped <- ctgov_10k_df %>% 
@@ -507,18 +505,93 @@ After scraping the hard numbers in the `scrape_data` column, we found that accor
 
 ```{r removing those containg NAs}
 # left as _test for now, change it back to ctgov_10k_scraped later
-ctgov_test = 
-ctgov_10k_scraped %>% 
-mutate(
-  nainside = map_chr(scrape_data, anyNA)
-)
+ctgov_10k_scraped = 
+  ctgov_10k_scraped %>% 
+  mutate(
+    nainside = map_chr(scrape_data, anyNA)) 
 
-ctgov_test %>% 
+ctgov_10k_scraped %>% 
   count(nainside)
+```
+
+As shown above, we have `r length(which(pull(ctgov_10k_scraped, nainside) == FALSE))` intact datasets for FI analysis. We further filter this by selecting only the datasets that has number of participants as unit of measure.
+
+```{r filtering}
+# select those doesn't contain NAs
+clean_ctgov_df <- ctgov_10k_scraped %>% 
+  filter(nainside == F)
+
+# scrape out the unit of measure terms
+unit_detector = function(data) {
+  
+  site = read_html(str_c("https://ClinicalTrials.gov/show/results/", data))
+  
+  measure = site %>% 
+    html_nodes("#EXPAND-outcome-data-1 .labelSubtle") %>% 
+    html_text() %>% 
+    str_replace("Unit of Measure:", "")
+  
+  return(measure)
+}
+
+# adding unit of measure to the dataset
+clean_ctgov_df <- clean_ctgov_df %>% 
+  mutate(
+    units = map_chr(nct_id, unit_detector)
+  )
+
+# remove those containing percentile in unit of measure
+new_df <- clean_ctgov_df %>% 
+  filter(!str_detect(units, "[pP]ercent|[pP]ercentage|[pP]roportion")) %>% 
+  mutate(
+    nrow = map_dbl(scrape_data, nrow),
+    ncol = map_dbl(scrape_data, ncol)
+  ) %>% 
+  filter(ncol == 2 & nrow == 2)
+```
+
+For now, we already fond the trials with number of patient counts as unit of measures, and we further filtered out those that have complicated results more than 2 arms. The resulting dataset has 39 rows.
+
+After we tried innumerous method to detach the tibbles in the list column, non of these had worked. Therefore, we have no choice but to manually type out all the digits and save it as a new csv file. 
+
+```{r manual mirical}
+# some miracle happened!!!
+manual = read_csv("./data/FI2by2_manual.csv")
+
+final_df <- 
+  left_join(new_df, manual, by = "nct_id") %>% 
+  select(everything(), -nrow, -ncol, -nainside, -scrape_data)
 
 ```
 
-As shown above, we have 274 intact datasets for further FI analysis.
+We thought we were fine already, but not yet. The built in function `fragility.index` seemed to have consumed tons of workspace in R studio, so we're not allowed to simply map the function to the dataset. Instead, we need to do it one by one. 
+
+```{r for loop for FI}
+
+# for loop constructing
+nct = c()
+FI = c()
+
+for (i in 1:nrow(final_df))
+{
+    nct[i] = final_df$nct_id[i]
+    FI[i] = fragility.index(final_df$effective_trt[i], 
+                            final_df$effective_placebo[i], 
+                            final_df$total_number_trt[i],  
+                            final_df$total_number_placebo[i])
+} 
+
+# create temporary dataframe to store the results of FI
+tempo =   
+  tibble(
+    nct_id = nct,
+    FI = as.numeric(FI)) 
+
+# left join the final results
+
+finalff_df = left_join(final_df, tempo, by = "nct_id") 
+
+```
 
 #### Clinical trials dataset
 

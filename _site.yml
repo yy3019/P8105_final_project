@@ -18,7 +18,6 @@ navbar:
   - text: "Trials"
     icon: fa-bar-chart fa-lg
     href: https://zongchaoliu.shinyapps.io/clinicaltrials_map/
-    
   - text: "Contact Us"
     icon: fa-telegram fa-lg
     menu:
