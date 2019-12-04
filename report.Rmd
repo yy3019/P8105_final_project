@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
 
 # loaded packages; placed here to be able to load global settings
 
-Packages <- c("tidyverse", "dplyr", "rvest", "httr", "XML", "readxl", "fragilityindex")
+Packages <- c("tidyverse", "dplyr", "rvest", "httr", "XML", "readxl", "fragilityindex", "kableExtra")
 invisible(lapply(Packages, library, character.only = TRUE))
 
 # global settings for color palettes
@@ -41,7 +41,6 @@ theme_set(theme_minimal() +
 Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go [here](proj_background.html) to learn more about our motivation. 
 
 **Note:** You can expand our code chunks by clicking on `code` on the right pill-button.
-<br></br>
 
 ### Primary Goals
 * Learn more about phase III clinical trials and the fragility index
@@ -423,7 +422,6 @@ As shown above, we have `r length(which(pull(ctgov_10k_scraped, nainside) == FAL
 
 cond_count <- ctgov_10k_scraped %>% 
   count(conditions)
-  
 ```
 
 
@@ -506,6 +504,36 @@ finalff_df = left_join(final_df, tempo, by = "nct_id")
 ```
 
 The resulting dataset now includes basic infomration about the trial in addition to its fragility index!
+
+```{r aresenal table for EDA}
+
+# quick review of available FI data
+finalff_df %>% 
+  select(title, conditions, interventions, FI) %>% 
+  filter(FI != 0) %>% 
+  arrange(desc(FI)) %>% 
+  knitr::kable("html", booktabs = TRUE, linesep = "", digits = 3, 
+         caption = "Summary Statistics of each Variable") %>% 
+  kableExtra::kable_styling(full_width = TRUE)
+
+# barplot according to corresponding disease/ treatment
+
+finalff_df %>% 
+  filter(FI != 0) %>% 
+  arrange(desc(FI)) %>% 
+  ggplot(aes(x = reorder(conditions, FI), y = FI)) +
+  geom_bar(stat = "identity", color = "steelblue2", fill = "steelblue2") +
+  coord_flip() +                                                 # flip x-y to better "stratify" categories
+  theme(legend.position = "none",                                # remove legends
+        axis.text.y = 
+          element_text(hjust = 1, vjust = 0.5,                   # adjusts the hor/ver alignment of y-variables
+                       size = 8,                    # resize text size and rotate at an angle
+                       margin = margin(0, 0, 0, 70)),          # reduce margin to close gap between label/graph
+        panel.grid.major.y = element_blank()                     # remove horizontal lines to improve readability
+        ) + 
+  labs(x = "Disease", y = "Fragility Index")
+
+```
 
 
 ### Quest for ~~more~~ all data
@@ -625,9 +653,6 @@ To summarize, we have 2 datasets that we used for further analysis and explorati
 
 *Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.*
 
-
-
-
 # Other Analysis
 
 *Additional analysis: If you undertake formal statistical analyses, describe these in detail.*
@@ -656,7 +681,7 @@ From our data and project, we came away with a few insights. First, there are a 
 
 The fragility index is not the most quantitatively complex or descriptive metric. However, it is not meant to be. Literature suggests that the fragility index is an easy to synthesize metric that could be included with a p-value to try to improve biostatitical literacy in clinical and research settings. The target audience for the FI, if it is accepted by the community, is not biostatisticians but clinicians. This brings up a broader conversation discussed in our M.S. program here at Columbia. As we enter our careers we will likely work with individuals who have expertise in other fields, and rely on our knowledge of biostatistics. It is part of our job to disseminate biostatistics information in a way that is most easily absorbed by our other team members.
 
-## Secondary Data:  clinical trials dataset
+## Secondary Data: clinical trials dataset
 
 Surprisingly, there were much less issues downloading every clinical trial and graphing different characteristics. At this more "bird's eye" level describing a study, the data is much more consistent and tidy, allowing for easier manipulation and usage.
 
