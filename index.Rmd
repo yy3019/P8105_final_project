@@ -34,11 +34,11 @@ A quick summary of our findings include:
 2.  Out of 10,000 trials prior to 2017, only 39 met our criteria for calculating the fragility index. 
 3.  California has by far the most number of clinical trials out of available data
 
-For detailed results, analysis and outout, please refer to [report](report.html).
+For detailed results, analysis and outout, please refer to our [report](report.html).
 
 # Fun Facts about the project
 
 1. This project utilized 5 customly created functions
-2. The XML for all available clinical trial data is 800mb large
+2. The XML for all publicly available clinical trial data is over 800mb large
 3. To date, there have been 158 clinical trials based in Hawaii, and only 10 in Wyoming
-4. Alamaba has the 2nd most industry backed clinical trials in the union
+4. Alamaba has the 2nd most industry backed clinical trials in the US
