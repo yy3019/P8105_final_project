@@ -418,12 +418,6 @@ ctgov_10k_scraped %>%
 
 As shown above, we have `r length(which(pull(ctgov_10k_scraped, nainside) == FALSE))` intact datasets for FI analysis. We further filter this by selecting only the datasets that has number of participants as unit of measure.
 
-```{r count_of_unique}
-
-```
-
-Now we filter and finally create a dataset.
-
 ```{r filtering}
 # select those doesn't contain NAs
 clean_ctgov_df <- ctgov_10k_scraped %>% 
@@ -552,7 +546,7 @@ Questions we looked at include:
 3) Who sponsors clinical trials?
 4) Other interesting tidbits
 
-We filtered our scraped XML for all phase III, US based studies. The data extracting and processing code are shown below. It does not run, as the file is WAY TOO BIG.
+We filtered our scraped XML for all US based studies. The data extracting and processing code are shown below. It does not run, as the file is WAY TOO BIG.
 
 ```{r scraping from XML, eval = F}
 
@@ -627,44 +621,53 @@ data_from_xml_cleaned = data_from_xml %>%
 write_csv(data_from_xml,"./data_from_xml.csv")
 write_csv(data_from_xml_cleaned ,"./data_from_xml_cleaned.csv")
 
-# get data only for US & Phase 3 studies
-us_only =
+# get data only for US studies
+test_us =
   data_from_xml %>%
   filter(location_country == "United States") %>%
   mutate(location_state = recode(location_state,
-                                 "Missouri" = "Missouri State")) %>%
-  filter( phase == "Phase 3")
+                                 "Missouri" = "Missouri State"))
 
 ```
 
-This dataset includes tidied descriptive information about every US-based Phase 3 study.
+This dataset includes tidied descriptive information about every US-based clincal trials.
 
 # Data Summary and Results
 To summarize, we have 2 datasets that we used for further analysis and exploration:
 
-1) A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial.
+1. A dataset created through html scraping clinicaltrials.gov which gave us trials eligible to calculate the fragility index with supporting information about the trial.
   * This dataset started with 10,000 phase 3 clinical trials completed before 2017.
   * 1950 included a placebo arm, of which 620 had "Participant" as a unit of measure, of which 274 had complete data, of which 120 actually counted participants, of which 39 had a 2x2 table
   * 11/39 had a non-0 fragility index
-
-2) A separate and distinct dataset created by selecting information by XML to explore trends in clinical trials.
+2. A separate and distinct dataset created by selecting information by XML to explore trends in clinical trials.
   * The results from this data can be explored with our [Shiny app graphs you can find here](https://zongchaoliu.shinyapps.io/clinicaltrials_map/)
 
-The main product of our project consists of two parts:
+The main product of our project consists of three parts:
 
-1) A functional FI calculator
-
-2) Interactive plots of clinical trials characteristics
-
-## FI Calculator for Meta-Analysis
-
-
-
+1. A custom made dataset generated from clinicaltrials.gov, including respective FI 
+2. A collection of all available clinical trial data from clinicaltrials.gov
+   * Containing general characteristics of clinical trials
+3. Interactive plots utilizing the data above 
+4. A functional FI calculator for meta-analysis
 
 ## Interactive Plot of Clinical Trials Characteristics 
 
-*Exploratory analysis: Visualizations, summaries, and exploratory statistical analyses. Justify the steps you took, and show any major changes to your ideas.*
 
+
+## Functional FI calculator for meta-analysis
+
+We initially wanted to create a custom FI calculator. Fortunately, this already existed in an R package, `fragilityindex`, and through a meta-analysis custom function which we found on github [here](https://github.com/iatal/fragility_ma/tree/master/app/functions_fragility). We incorporated this to our website and added interactivity so that users can input their own dataset and different parameters. 
+
+![](image/FI_calculator_icon.png)
+
+As shown above, the interactive parameters in the function includes:
+
+1. Upload meta-analysis data: takes csv files in specific format
+2. Parameters of the meta-analysis: options include Mantel-Haenszel, Inverse Variance, Peto
+3. Measure: the statistic to assess testing results and corresponding p-vlaue. Options include: Odds Ratio, Risk Difference, Risk Ratio
+4. Random effects: options include Fixed or Random effects
+
+All these parameters are contained in the function we found. Although we have not learned about all of them, they are interactive!          
 
 # Discussion
 
@@ -683,6 +686,8 @@ Thankfully, clinicaltrials.gov is updating their API, which should hopefully imp
 From our data and project, we came away with a few insights. First, there are a vast amount of differences and complexity between clinical trials. Using our data as a judge, a real-life phase 3 trial and its primary outcome is rarely simple and straight forward. Attempting to create any general structure currently seems nearly impossible. This is humbling and motivating.
 
 The fragility index is not the most quantitatively complex or descriptive metric. However, it is not meant to be. Literature suggests that the fragility index is an easy to synthesize metric that could be included with a p-value to try to improve biostatitical literacy in clinical and research settings. The target audience for the FI, if it is accepted by the community, is not biostatisticians but clinicians. This brings up a broader conversation discussed in our M.S. program here at Columbia. As we enter our careers we will likely work with individuals who have expertise in other fields, and rely on our knowledge of biostatistics. It is part of our job to disseminate biostatistics information in a way that is most easily absorbed by our other team members.
+
+Having said that, our limited data appears to show that a well-explored chronic disease has a statistically robust result, given the higher FI. For instance, the trial studying on Chronic Heart Failure has the highest FI among our findings. On the other hand, less well-known chronic disease or even acute diseases have lower FI. Also note that the diseases in our data are all non-cancers, which suggests the potential of FI to be used out of oncololgy. 
 
 ## Secondary Data: clinical trials dataset
 
