@@ -41,28 +41,25 @@ theme_set(theme_minimal() +
 Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go [here](proj_background.html) to learn more about our motivation. 
 
 **Note:** You can expand our code chunks by clicking on `code` on the right pill-button.
-
 <br></br>
 
 ### Primary Goals
-* Explore general trend of FI in recent phase III clinical trials   
-* Construct a web-based FI calculator which allows user to input their own dataset       
-* Discover potential impact factors on FI. e.g. disease type, treatment type, conducted location
+* Learn more about phase III clinical trials and the fragility index
+* Explore general trend of FI in recent phase III clinical trials  
+* Discover potential associations between FI and factors such as disease type, treatment type, conducted location
 
 ### Secondary Goals
 
 * Explore other variables
 * Use available data the best we can to synthesize information about clinical trials
-
+* Construct a web-based FI calculator which allows user to input their own dataset     
 <br></br>
 
 # Related work
 
-Our study is inspired mainly by three recent aticles. First of all, the [Walsh et al.](https://www.jclinepi.com/article/S0895-4356(13)00466-6/abstract) has general introduction on Fragility Index and methodology behind. The author also provided an example of utilizing FI to evaluate the roubustness of a set of 399 eligible clinical trials.      
-[Tignanelli et al.](https://jamanetwork.com/journals/jamasurgery/fullarticle/2712857?fbclid=IwAR0bb9aN2gwCOFd-HLF-DFOmT60wBtziuFZ_CKdxIu-y40eXYb9GKa8LhcU) acknowleged FI as crucial part to be reported in further trama/ surgical RCT studies.       
-Lastly, the [Del Paggio et al.](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30338-9/fulltext) revealed a trembling fact that many of the FDA-approved phase III clinical studies had a low FI; some of them were even 1% or less of their respective sample size. These materials serve as the inspiration of our topic.
-
-There has not been a consensus on the fragility index. It has pros and cons. A response from [Machado et al](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30581-9/fulltext) directly responds to the Del Paggio paper linked above. A different lancet paper by [Desnoyers et al.](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30583-2/fulltext) argues that the FI does not work with all data types, and one should be especially cogniscent of manipulating time-to-event data to fit into the FI as temporality is not taken into account. A brief letter from [Porco et al.](https://www.aaojournal.org/article/S0161-6420(18)30597-9/abstract) highlights that the FI "merely highlights one minor sensitivity analysis at the expense of other features of trial design and quality assessment". 
+Our study is inspired mainly by three researches. First of all, the [Walsh study](https://www.jclinepi.com/article/S0895-4356(13)00466-6/abstract) has general introduction on Fragility Index and methodology behind. The author also provided an example of utilizing FI to evaluate the roubustness of a set of 399 eligible clinical trials.      
+[Another study](https://jamanetwork.com/journals/jamasurgery/fullarticle/2712857?fbclid=IwAR0bb9aN2gwCOFd-HLF-DFOmT60wBtziuFZ_CKdxIu-y40eXYb9GKa8LhcU) done by Tignanelli also acknowleged FI as crucial part to be reported in further trama/ surgical RCT studies.       
+Lastly, the [Del Paggio study](https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(19)30338-9/fulltext) revealed a trembling fact that many of the FDA-approved phase III clinical studies had a low FI; some of them were even 1% or less of their respective sample size. These materials serve as the inspiration of our topic.
 <br></br>
 
 # Initial Questions
@@ -73,30 +70,14 @@ As our initial goal, we want to find the relationship between fragility index an
 
 ### The reality of our fragility index data
 
-What we ended up actually doing differed from our initial hypothesis described in the above paragraph. After looking at the data we were able to gather, the questions we initially posed were not answerable. While we were able to scrape clinical trial information usable to calculate the fragility index, we did not have enough trials to make visualizations or really anything in our initial query which was filtered by drug type and disease type. 
+What we ended up actually doing differed from our initial hypothesis described in the above paragraph. After looking at the data we were able to gather, the questions we initially posed were not answerable. While we were able to scrape clinical trial information usable to calculate the fragility index, we did not have enough trials to make visualizations or really anything substantial in our initial query which was filtered by drug type and disease type. 
 
-So we pivoted and instead **scraped data from 10,000 completed phase 3 clinical trials prior to 2017**. This took a lot of trial and error, and the various methods we attempted can be found in the [obtaining data](https://yy3019.github.io/P8105_final_project.github.io/report.html#obtaining_data) section. We ended up scrapping **39** trials that matched our specific criteria (The primary outcome described as a 2x2 table of patients with placebo as one of the groups) to calculate fragility index.
+So we pivoted and instead **scraped data from 10,000 completed phase 3 clinical trials prior to 2017**. This took a lot of trial and error, and the various methods we attempted can be found in the [obtaining data](https://yy3019.github.io/P8105_final_project.github.io/report.html#obtaining_data) section. We ended up scrapping **39** trials that matched our specific criteria (The primary outcome described as a 2x2 table of the number of patients with placebo as one of the groups) to calculate fragility index.
 
 Questions we could answer from this dataset include:
 
-1) What is the median fragility index of our data using our MacGyvered scraping method?
+1) What is the median fragility index of our data obtained through our MacGyvered scraping method?
 2) What sort of trends, if any, do we see from basic information describing the trials?
-
-### Quest for ~~more~~ all data
-
-The dataset we collected above was light in the sense that our scraping method did not gather other descriptive information. We needed more data to allow us to graph information required for this project. Here, we pivoted, again, to look at phase III clinical trials more generally. Our group members are interested in clincial trials, which despite their importance to US healthcare seem very shrouded in mystery. The fragility index was a very pointed question in this area of our healthcare system we do not know much about. There is a lot of general information about trials unknown to our group which might be interesting to look at.
-
-So, to supplement our data scraping of clinical trial data, we decided instead to download **every clinical trial from clinicaltrials.gov**. This included a 800mb csv including descriptive information about each trial. This dataset was quite large, and crashed multiple members computers multiple times.
-
-There were many questions which we could answer with this data, although it is not about the fragility index at all, and instead gave us a glimpse about what was generally going on in the field. We performed exploratory data analysis to look at what sort of questions we could answer including:
-
-1) Where are clinical trials being done in the United States?
-2) How many trials are done per year? Has it changed much year to year?
-3) Who sponsors clinical trials?
-4) Other interesting tidbits
-
-
-<br></br>
 
 # Obtaining Data
 
@@ -419,15 +400,124 @@ ctgov_10k_scraped <- ctgov_10k_df %>%
 
 After all this, our resulting viable dataset is `r nrow(ctgov_10k_scraped)` datasets that each contains the primary outcomes of interest. There are `r nrow(ctgov_10k_scraped %>% distinct(conditions))` unique conditions found using `distinct()` function. 
 
-### Gathering other interested information by XML
+### Cleaning Fragility Index Dataset
 
-As time went by, our interest expanded to explore the general trends related to clinical trials. Therefore, we first downloaded the XML information for **ALL clinical trials listed in clinical.gov**, then filtered for phase III, US based studies. The data extracting and processing code are shown below.
+After scraping the hard numbers in the `scrape_data` column, we found that according to clinicaltrials.gov output issue, the html node doesn't necessarily extract the information we want. Therefore, we have no choice but to filter out those contains NA values in the scraped table. 
+
+```{r removing those containg NAs}
+# left as _test for now, change it back to ctgov_10k_scraped later
+ctgov_10k_scraped = 
+  ctgov_10k_scraped %>% 
+  mutate(
+    nainside = map_chr(scrape_data, anyNA)) 
+
+ctgov_10k_scraped %>% 
+  count(nainside)
+```
+
+As shown above, we have `r length(which(pull(ctgov_10k_scraped, nainside) == FALSE))` intact datasets for FI analysis. We further filter this by selecting only the datasets that has number of participants as unit of measure.
+
+```{r filtering}
+# select those doesn't contain NAs
+clean_ctgov_df <- ctgov_10k_scraped %>% 
+  filter(nainside == F)
+
+# scrape out the unit of measure terms
+unit_detector = function(data) {
+  
+  site = read_html(str_c("https://ClinicalTrials.gov/show/results/", data))
+  
+  measure = site %>% 
+    html_nodes("#EXPAND-outcome-data-1 .labelSubtle") %>% 
+    html_text() %>% 
+    str_replace("Unit of Measure:", "")
+  
+  return(measure)
+}
+
+# adding unit of measure to the dataset
+clean_ctgov_df <- clean_ctgov_df %>% 
+  mutate(
+    units = map_chr(nct_id, unit_detector)
+  )
+
+# remove those containing percentile in unit of measure
+new_df <- clean_ctgov_df %>% 
+  filter(!str_detect(units, "[pP]ercent|[pP]ercentage|[pP]roportion")) %>% 
+  mutate(
+    nrow = map_dbl(scrape_data, nrow),
+    ncol = map_dbl(scrape_data, ncol)
+  ) %>% 
+  filter(ncol == 2 & nrow == 2)
+```
+
+For now, we already fond the trials with number of patient counts as unit of measures, and we further filtered out those that have complicated results more than 2 arms. The resulting dataset has 39 rows.
+
+After we tried innumerous method to detach the tibbles in the list column, non of these had worked. Therefore, we have no choice but to manually type out the 39 studies and save it as a new csv file. 
+
+```{r manual miracle}
+# some miracle happened!!!
+manual = read_csv("./data/FI2by2_manual.csv")
+
+final_df <- 
+  left_join(new_df, manual, by = "nct_id") %>% 
+  select(everything(), -nrow, -ncol, -nainside, -scrape_data)
+
+```
+
+We thought we were fine already, but not yet. The built in function `fragility.index`, which you can read about [in the R documentation here](https://www.rdocumentation.org/packages/fragilityindex/versions/0.1.0), seemed to have consumed tons of workspace in R studio, which would not allow us to simply map the function to the dataset. Instead, we needed to calculate the FI one by one. 
+
+```{r for loop for FI}
+
+# for loop constructing
+nct = c()
+FI = c()
+
+for (i in 1:nrow(final_df))
+{
+    nct[i] = final_df$nct_id[i]
+    FI[i] = fragility.index(final_df$effective_trt[i], 
+                            final_df$effective_placebo[i], 
+                            final_df$total_number_trt[i],  
+                            final_df$total_number_placebo[i])
+} 
+
+# create temporary dataframe to store the results of FI
+tempo =   
+  tibble(
+    nct_id = nct,
+    FI = as.numeric(FI)) 
+
+# left join the final results
+
+finalff_df = left_join(final_df, tempo, by = "nct_id") 
+
+```
+
+The resulting dataset now includes basic infomration about the trial in addition to its fragility index!
+
+
+### Quest for ~~more~~ all data
+
+The dataset we collected above was light in the sense that our scraping method did not gather other descriptive information. We needed more data to allow us to graph information required for this project. Here, we pivoted, again, to look at phase III clinical trials more generally. Our group members are interested in clinical trials, which despite their importance to US healthcare seem very shrouded in mystery. The fragility index was a very pointed question in this area of our healthcare system we do not know much about. There is a lot of general information about trials unknown to our group which might be interesting to look at.
+
+So, to supplement our data scraping of clinical trial data, we decided instead to download **every clinical trial from clinicaltrials.gov**. This included a 800 MB csv including descriptive information about each trial. This dataset was quite large, and crashed multiple members' computers multiple times.
+
+There were many questions which we could answer with this data, although it is not about the fragility index at all. Instead, this data gave us a glimpse into the field.  
+Questions we looked at include:
+
+1) Where are clinical trials being done in the United States?
+2) How many trials are done per year? Has it changed much year to year?
+3) Who sponsors clinical trials?
+4) Other interesting tidbits
+
+We filtered our scraped XML for all phase III, US based studies. The data extracting and processing code are shown below. It does not run, as the file is WAY TOO BIG.
 
 ```{r scraping from XML, eval = F}
 
-### step 1
-### get all names of the downloaded xml files
+######### step 1
 
+# get all names of the downloaded xml files
 get_file_names = function(){
   file_list = tibble(
     file_name = list.files("/Users/adobel/Desktop/Columbia/data\ science/homework/rclinicaltrials/AllPublicXML", recursive = T)
@@ -435,9 +525,9 @@ get_file_names = function(){
 } 
 # the xml files are too large to be submitted to github, so we kept the directory local
 
-### step 2
-### build a dataframe for future mapping
+############ step 2
 
+# build a dataframe for future mapping
 all_files = get_file_names() %>%
   separate(file_name,c("1","file_name")) %>%
   select('file_name') %>%
@@ -506,103 +596,8 @@ us_only =
 
 ```
 
+This dataset includes tidied descriptive information about every US-based Phase 3 study.
 
-
-### Cleaning Data
-
-#### Fragility Index dataset
-
-After scraping the hard numbers in the `scrape_data` column, we found that according to clinicaltrials.gov output issue, the html node doesn't necessarily extract the information we want. Therefore, we have no choice but to filter out those contains NA values in the scraped table. 
-
-```{r removing those containg NAs}
-# left as _test for now, change it back to ctgov_10k_scraped later
-ctgov_10k_scraped = 
-  ctgov_10k_scraped %>% 
-  mutate(
-    nainside = map_chr(scrape_data, anyNA)) 
-
-ctgov_10k_scraped %>% 
-  count(nainside)
-```
-
-As shown above, we have `r length(which(pull(ctgov_10k_scraped, nainside) == FALSE))` intact datasets for FI analysis. We further filter this by selecting only the datasets that has number of participants as unit of measure.
-
-```{r filtering}
-# select those doesn't contain NAs
-clean_ctgov_df <- ctgov_10k_scraped %>% 
-  filter(nainside == F)
-
-# scrape out the unit of measure terms
-unit_detector = function(data) {
-  
-  site = read_html(str_c("https://ClinicalTrials.gov/show/results/", data))
-  
-  measure = site %>% 
-    html_nodes("#EXPAND-outcome-data-1 .labelSubtle") %>% 
-    html_text() %>% 
-    str_replace("Unit of Measure:", "")
-  
-  return(measure)
-}
-
-# adding unit of measure to the dataset
-clean_ctgov_df <- clean_ctgov_df %>% 
-  mutate(
-    units = map_chr(nct_id, unit_detector)
-  )
-
-# remove those containing percentile in unit of measure
-new_df <- clean_ctgov_df %>% 
-  filter(!str_detect(units, "[pP]ercent|[pP]ercentage|[pP]roportion")) %>% 
-  mutate(
-    nrow = map_dbl(scrape_data, nrow),
-    ncol = map_dbl(scrape_data, ncol)
-  ) %>% 
-  filter(ncol == 2 & nrow == 2)
-```
-
-For now, we already fond the trials with number of patient counts as unit of measures, and we further filtered out those that have complicated results more than 2 arms. The resulting dataset has 39 rows.
-
-After we tried innumerous method to detach the tibbles in the list column, non of these had worked. Therefore, we have no choice but to manually type out all the digits and save it as a new csv file. 
-
-```{r manual miracle}
-# some miracle happened!!!
-manual = read_csv("./data/FI2by2_manual.csv")
-
-final_df <- 
-  left_join(new_df, manual, by = "nct_id") %>% 
-  select(everything(), -nrow, -ncol, -nainside, -scrape_data)
-
-```
-
-We thought we were fine already, but not yet. The built in function `fragility.index`, which you can read about [in the R documentation here](https://www.rdocumentation.org/packages/fragilityindex/versions/0.1.0), seemed to have consumed tons of workspace in R studio, which would not allow us to simply map the function to the dataset. Instead, we needed to calculate the FI one by one. 
-
-```{r for loop for FI}
-
-# for loop constructing
-nct = c()
-FI = c()
-
-for (i in 1:nrow(final_df))
-{
-    nct[i] = final_df$nct_id[i]
-    FI[i] = fragility.index(final_df$effective_trt[i], 
-                            final_df$effective_placebo[i], 
-                            final_df$total_number_trt[i],  
-                            final_df$total_number_placebo[i])
-} 
-
-# create temporary dataframe to store the results of FI
-tempo =   
-  tibble(
-    nct_id = nct,
-    FI = as.numeric(FI)) 
-
-# left join the final results
-
-finalff_df = left_join(final_df, tempo, by = "nct_id") 
-
-```
 
 #### Clinical trials dataset
 
