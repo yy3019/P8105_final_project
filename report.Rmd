@@ -302,6 +302,7 @@ content_test
 ```
 
 Though it took a while, our code managed to pull the relevant info that we need to manipulate in order to evaluate our fragility indexes. Our next step then, is to be able to `map` this and make a listcol within our original dataframe. 
+<br></br>
 
 ##### Building the function with the proper conditions and mapping 
 
@@ -378,6 +379,7 @@ mapped_ctgov_scrape_test <- ctgov_scrape_test %>%
 ```
 
 We then checked those trials that contain 2x2 table from our original file but we only found 6 (uh oh). After realizing the situation we were in (yikes) and the amount of data we were likely able to get using the initial hypothesis (close to none), we expanded our initial search options to any completed phase 3 clinical trials.
+<br></br>
 
 ##### Mapping our 10,000 dataset
 
@@ -406,6 +408,7 @@ ctgov_10k_scraped <- ctgov_10k_df %>%
 ```
 
 After all this, our resulting viable dataset is `r nrow(ctgov_10k_scraped)` datasets that each contains the primary outcomes of interest. There are roughly `r nrow(ctgov_10k_scraped %>% distinct(conditions))` unique conditions found using `distinct()` function.
+<br></br>
 
 ##### Cleaning the Scraped Dataset
 
@@ -522,6 +525,7 @@ After all that painstaking path, we finally have a dataframe that have just enou
 * `effective_trt`: those that developed a response in treatment group
 * `effective_placebo`: those that developed a response in control group
 * `FI`: fragility index calculated using `fragilityindex::fragility.index`
+<br></br>
 
 ##### EDA for Fragility Index
 
@@ -562,7 +566,7 @@ clean_final_df %>%
         axis.text.y = 
           element_text(hjust = 1, vjust = 0.5,                # adjusts the hor/ver alignment of y-variables
                        size = 8,                              # resize text size and rotate at an angle
-                       margin = margin(0, -30, 0, 0)),        # reduce margin to close gap between label/graph
+                       margin = margin(0, -10, 0, 0)),        # reduce margin to close gap between label/graph
         panel.grid.major.y = element_blank()                  # remove horizontal lines to improve readability
         ) + 
   labs(x = "Disease", y = "Fragility Index",
