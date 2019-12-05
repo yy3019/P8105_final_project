@@ -652,7 +652,20 @@ The main product of our project consists of three parts:
 
 ## Interactive Plot of Clinical Trials Characteristics 
 
+Given the collection of all available clinical trial data, we are allowed to integrate a bunch of interactive plots. 
 
+![](image/Int_plot_tab1.JPG)
+
+On the first tab *Spatial Distribution*, first of all, we can see the distribution of number of clinical trials across the conutry; if we click on the circles, it goes further into more specific geographical locations. For the checkbox on the left, we're allowed to filter acoording to types of study: interventional, observational, patient registry and also expanded access.       
+
+On the right side, by selecting different agency class, we can filter through the sponsors of study: US Federal, NIH, Industry or other. The histogram on the left interacts with the selection from the right and is ranked by number of trials in the US from the higest to the lowest. 
+
+
+For the time trend plot below, we can compare the number of completed/ongoing clinical trials sponsored by different agencies.
+
+![](image/Int_plot_tab2.JPG)
+
+On the second tab *Sponsor Information*, we've collected information of every single sponsor that invloved in clinical trials. We have their registered name, number of sponsored studies, total participants enrolled in their studies, average number of participants in their trials, and the minimum and maximum number of participants enrolled in their single study. 
 
 ## Functional FI calculator for meta-analysis
 
@@ -670,8 +683,6 @@ As shown above, the interactive parameters in the function includes:
 All these parameters are contained in the function we found. Although we have not learned about all of them, they are interactive!          
 
 # Discussion
-
-*Discussion: What were your findings? Are they what you expect? What insights into the data can you make?*
 
 Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions.  Thankfully, there are many insights we were able to gather from the data we were able to collect!
 
@@ -693,8 +704,9 @@ Having said that, our limited data appears to show that a well-explored chronic 
 
 Surprisingly, there were much less issues downloading every clinical trial and graphing different characteristics. At this more "bird's eye" level describing a study, the data is much more consistent and tidy, allowing for easier manipulation and usage.
 
-Seeing the distribution of trials across the US shows what one may guess: there are generally more trials in metropolitan areas which have large cities and relevant academic institutions. As the NIH is located in Maryland, many NIH sponsored trials are associated with a location in Maryland. California is the state with by far the most number of trials overall. Surprisingly, Alabama has the 2nd most number of studies performed according to our data. None of the group members would have guessed Alabama being in the top 2 states, let alone being an above average state.
+Seeing the distribution of trials across the US shows what one may guess: there are generally more trials in metropolitan areas which have large cities and relevant academic institutions. As the NIH is located in Maryland, many NIH sponsored trials are associated with a location in Maryland. California is the state with by far the most number of trials overall. Surprisingly, Alabama has the 2nd most number of studies performed according to our data. None of the group members would have guessed Alabama being in the top 2 states, let alone being an above average state. Another intersting fact is that observational studies with patient registries are highly clustered in major cities. On the other hand, when we look at the time trend, we can tell that industries has much more completed/ ongoing clinical trials compared to NIH after 2000.
 
+When we order all the sponsors by number of studies they've supported, we can see a healthy mix of govermental agencies (e.g. NCI), industries (e.g. Pfizer) and academical institutions(e.g. Stanford University). Memorial Sloan Kettering Cancer Center, which is one of our affiliated institutions, has the 20th most amount of studies recorded at 530. Also, Columbia University itself ranked 62nd with 249 studies recorded. 
 
 
 
