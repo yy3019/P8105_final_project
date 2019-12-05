@@ -15,7 +15,7 @@ output: html_document
 
 # Introduction
 
-Fragility index (FI) measures the "fragility" of a clinical trial by iteratively switching the outcomes of patients from the experimental arm to a control and evaluating whether or not the trial becomes non-signifcant. It therefore measures the number of people for this to be true. FI has been suggested to be an easy-to-understand metric of a clinical trial’s robustness, which may pair well with other frequently discussed metrics like p-values and we are interested in how FI may differ based on different clinical trial characteristics. More details regarding our motivation can be found [here](proj_background.html).
+Fragility index (FI) measures the "fragility" of a clinical trial by iteratively switching the outcomes of a single trial arm and evaluating whether or not the trial becomes non-signifcant. It therefore measures the number of patient outcomes required for a statistical test to change. FI has been suggested to be an easy-to-understand metric of a clinical trial’s robustness, which may pair well with other frequently discussed metrics like p-values and we are interested in how FI may differ based on different clinical trial characteristics. This project investigates the fragility index using real world data in addition to baseline information about clinical trials. More details regarding our motivation can be found [here](proj_background.html).
 
 # Dataset
 

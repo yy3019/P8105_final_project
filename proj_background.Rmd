@@ -7,12 +7,12 @@ output: html_document
 
 # What is it?
 
-The fragility index is a measure of the "fragility" of a clinical trial. It is the equivalent of the required number of people who, if we switch their outcome, would convert the primary endpoint of a significant trial into a non-significant trial. 
+The fragility index is a measure of the "fragility" of a clinical trial. Using a 2x2 table using a fisher's exact test as an example, it is  equivalent to the required number of people who, if we switch their outcome in the smaller group, would cross the critical value for the statistical test used to result in a non-significant result.
 <br></br>
 
 # Project's Motivation
 
-The [related work](https://yy3019.github.io/P8105_final_project.github.io/report.html#related_work) section has links to different publications that sparked this project. Briefly, the Fragility Index has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values. We are interested how the fragility index may differ based on different clinical trial characteristics. Multiple papers have shown that it requires just a few patients to alter outcomes of many large phase III trials. It is of concern to us that these studies require billions of dollars sunk but outcomes can be "easily" rendered obsolete based on so few participant outcomes. 
+The [related work](https://yy3019.github.io/P8105_final_project.github.io/report.html#related_work) section has links to different publications that sparked this project. Briefly, the Fragility Index has been suggested to be an easy-to-understand metric of a clinical trials’ robustness, which may pair well with other frequently discussed metrics like p-values. There have also been critics to its use or potential misuse. We are interested how the fragility index may differ based on different clinical trial characteristics. Multiple papers have shown that it requires just a few patients to alter outcomes of many large phase III trials. It is of concern to us that these studies require billions of dollars sunk but outcomes can be "easily" rendered obsolete based on so few participant outcomes. 
 <br></br>
 
 # Initial Hypotheses
@@ -36,7 +36,9 @@ We have a few secondary questions of interest if time allows:
 Due to realities explained in the [Obtaining Data](https://yy3019.github.io/P8105_final_project.github.io/report.html#obtaining_data) section, we did not answer any of the questions initially explored above. The data we collected was insufficient to answer these questions.
 
 Instead, this project: 
-1) Explored various methods of data scrapping for clinical trial data
-2) Calculated the fragility index for data we were able to collect
-3) Created a graphical display to show geographical and temporal trends in phase 3 clinical trials
+
+1. Explored various methods of data scrapping for clinical trial data
+2. Calculated the fragility index for data we were able to collect
+3. Created an interactive FI calculator
+4. Created a graphical display to show geographical and temporal trends in phase 3 clinical trials
 
