@@ -36,7 +36,9 @@ We have a few secondary questions of interest if time allows:
 Due to realities explained in the [Obtaining Data](https://yy3019.github.io/P8105_final_project.github.io/report.html#obtaining_data) section, we did not answer any of the questions initially explored above. The data we collected was insufficient to answer these questions.
 
 Instead, this project: 
-1) Explored various methods of data scrapping for clinical trial data
-2) Calculated the fragility index for data we were able to collect
-3) Created a graphical display to show geographical and temporal trends in phase 3 clinical trials
+
+1. Explored various methods of data scrapping for clinical trial data
+2. Calculated the fragility index for data we were able to collect
+3. Created an interactive FI calculator
+4. Created a graphical display to show geographical and temporal trends in phase 3 clinical trials
 
