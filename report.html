@@ -652,7 +652,7 @@ content_test</code></pre>
 ## *                     &lt;dbl&gt;                      &lt;dbl&gt;                &lt;dbl&gt;
 ## 1                       212                        207                  200
 ## 2                       129                        131                   59</code></pre>
-<p>Though it took a while, our code managed to pull the relevant info that we need to manipulate in order to evaluate our fragility indexes. Our next step then, is to be able to <code>map</code> this and make a listcol within our original dataframe.</p>
+<p>Though it took a while, our code managed to pull the relevant info that we need to manipulate in order to evaluate our fragility indexes. Our next step then, is to be able to <code>map</code> this and make a listcol within our original dataframe. <br></br></p>
 </div>
 <div id="building-the-function-with-the-proper-conditions-and-mapping" class="section level5">
 <h5>Building the function with the proper conditions and mapping</h5>
@@ -715,7 +715,7 @@ mapped_ctgov_scrape_test &lt;- ctgov_scrape_test %&gt;%
     scrape_data = map(nct_id, outcome_extractor)
   ) %&gt;% 
   filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.</code></pre>
-<p>We then checked those trials that contain 2x2 table from our original file but we only found 6 (uh oh). After realizing the situation we were in (yikes) and the amount of data we were likely able to get using the initial hypothesis (close to none), we expanded our initial search options to any completed phase 3 clinical trials.</p>
+<p>We then checked those trials that contain 2x2 table from our original file but we only found 6 (uh oh). After realizing the situation we were in (yikes) and the amount of data we were likely able to get using the initial hypothesis (close to none), we expanded our initial search options to any completed phase 3 clinical trials. <br></br></p>
 </div>
 <div id="mapping-our-10000-dataset" class="section level5">
 <h5>Mapping our 10,000 dataset</h5>
@@ -736,7 +736,7 @@ ctgov_10k_scraped &lt;- ctgov_10k_df %&gt;%
     scrape_data = map(nct_id, outcome_extractor)
   ) %&gt;% 
   filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.</code></pre>
-<p>After all this, our resulting viable dataset is 620 datasets that each contains the primary outcomes of interest. There are roughly 394 unique conditions found using <code>distinct()</code> function.</p>
+<p>After all this, our resulting viable dataset is 620 datasets that each contains the primary outcomes of interest. There are roughly 394 unique conditions found using <code>distinct()</code> function. <br></br></p>
 </div>
 <div id="cleaning-the-scraped-dataset" class="section level5">
 <h5>Cleaning the Scraped Dataset</h5>
@@ -833,7 +833,7 @@ clean_final_df &lt;- left_join(final_df, temp_df, by = &quot;nct_id&quot;) </cod
 <li><code>total_number_placebo</code>: sample size in the control group</li>
 <li><code>effective_trt</code>: those that developed a response in treatment group</li>
 <li><code>effective_placebo</code>: those that developed a response in control group</li>
-<li><code>FI</code>: fragility index calculated using <code>fragilityindex::fragility.index</code></li>
+<li><code>FI</code>: fragility index calculated using <code>fragilityindex::fragility.index</code> <br></br></li>
 </ul>
 </div>
 <div id="eda-for-fragility-index" class="section level5">
@@ -1039,7 +1039,7 @@ clean_final_df %&gt;%
         axis.text.y = 
           element_text(hjust = 1, vjust = 0.5,                # adjusts the hor/ver alignment of y-variables
                        size = 8,                              # resize text size and rotate at an angle
-                       margin = margin(0, -30, 0, 0)),        # reduce margin to close gap between label/graph
+                       margin = margin(0, -10, 0, 0)),        # reduce margin to close gap between label/graph
         panel.grid.major.y = element_blank()                  # remove horizontal lines to improve readability
         ) + 
   labs(x = &quot;Disease&quot;, y = &quot;Fragility Index&quot;,
