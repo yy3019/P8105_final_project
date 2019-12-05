@@ -192,6 +192,7 @@ We first obtained (downloaded) a `.csv` file from clinicaltrials.gov that contai
 * phase III trials 
 * completed trial
 * 2017 or earlier
+* "monoclonal antibodies" search term
 
 After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we're only interested in the trial ID. Each clinical trial on the website has a special **ClinicalTrials.gov Identifier** which is used to distinguish trials. We will use this identifier going forward to scrape data. We further filtered trials to include those that has a "Placebo" arm.
 

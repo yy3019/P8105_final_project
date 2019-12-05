@@ -441,7 +441,7 @@ div.tocify {
 
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has growing interest in the oncology community but we want to explore its utility beyond this scope. You can go <a href="proj_background.html">here</a> to learn more about our motivation.</p>
+<p>Our motivation behind this project is to explore the fragility index (FI) beyond what those involved in clinical trials have done. FI has been suggested as an easy-to-understand metric that bridges the intent of researchers and utilization by clinicians. It has the most interest in the oncology community but we want to explore its utility beyond this scope. You can go <a href="proj_background.html">here</a> to learn more about our motivation.</p>
 <p><strong>Note:</strong> You can expand our code chunks by clicking on <code>code</code> on the right pill-button.</p>
 <div id="primary-goals" class="section level3">
 <h3>Primary goals</h3>
@@ -463,9 +463,9 @@ div.tocify {
 </div>
 <div id="related-work" class="section level1">
 <h1>Related Work</h1>
-<p>The FI involves iteratively calculating Fisher’s exact test. After each calculation of a 2x2 table, we would artificially “add an event” to the smaller of the two groups and recalculate the Fisher’s exact test. The FI is the number of iterations necessary for the test to move past your predetermined alpha value, typically 0.05.</p>
+<p>The fragility index involves iteratively calculating Fisher’s exact test. After each calculation of a 2x2 table, we would artificially “add an event” to the smaller of the two groups and recalculate the Fisher’s exact test. The FI is the number of iterations necessary for the test to move past your predetermined critical value, typically 0.05.</p>
 <p>Smaller fragility indexes are not good, and suggest that the trial is more fragile.</p>
-<p>Our study is inspired mainly by three recent aticles:</p>
+<p>Our study is inspired mainly by three recent articles:</p>
 <ul>
 <li><a href="https://www.jclinepi.com/article/S0895-4356(13)00466-6/abstract">Walsh et al.</a> has general introduction on Fragility Index and methodology behind it. The author also provided an example of utilizing FI to evaluate the roubustness of a set of 399 eligible clinical trials.<br />
 </li>
@@ -569,9 +569,10 @@ baseline3 &lt;- test3$study_results$baseline_data
 <ul>
 <li>phase III trials</li>
 <li>completed trial</li>
-<li><em>add more here</em></li>
+<li>2017 or earlier</li>
+<li>“monoclonal antibodies” search term</li>
 </ul>
-<p>After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we’re only interested in the trial ID. We further filtered trials to include those that has a “Placebo” arm.</p>
+<p>After obtaining this file, we read it into R and clean-up the relevant part of this file. In particular, we have to clean the provided url as we’re only interested in the trial ID. Each clinical trial on the website has a special <strong>ClinicalTrials.gov Identifier</strong> which is used to distinguish trials. We will use this identifier going forward to scrape data. We further filtered trials to include those that has a “Placebo” arm.</p>
 <pre class="r"><code>ctgov_scrape_test &lt;- read_csv(&quot;./data/ctgov_test_API.csv&quot;) %&gt;%      # read csv
   janitor::clean_names() %&gt;% 
   mutate(
@@ -656,7 +657,7 @@ content_test</code></pre>
 </div>
 <div id="building-the-function-with-the-proper-conditions-and-mapping" class="section level5">
 <h5>Building the function with the proper conditions and mapping</h5>
-<p>Similar to how we approach making the single-url code, we had various trial and error to come up with the function. We start with a simple form of object that stores our url. We extract the “unit of measure” and evaluate whether or not it contains “participants” or “patients”; scrape if <code>TRUE</code>, return <code>NA</code> if <code>FALSE</code>.</p>
+<p>Similar to how we approach making the single-url code, we had various trial and error to come up with the function. We start with a simple object that stores our base url and ClinicalTrials.gov Identifier. We iteratively go to each website and extract the “unit of measure” of the primary outcome of the trial and evaluate whether or not it contains “participants” or “patients”; scrape if <code>TRUE</code>, return <code>NA</code> if <code>FALSE</code>.</p>
 <p>A slightly different step was to split the content-scraping and data-frame transformation into two separate steps in order to clarify the segmentation.</p>
 <pre class="r"><code># function to scrape from url
 outcome_extractor &lt;- function(data) {
@@ -715,11 +716,11 @@ mapped_ctgov_scrape_test &lt;- ctgov_scrape_test %&gt;%
     scrape_data = map(nct_id, outcome_extractor)
   ) %&gt;% 
   filter(!is.na(scrape_data))               # necessary step to clear out the NA rows.</code></pre>
-<p>We then checked those trials that contain 2x2 table from our original file but we only found 6 (uh oh). After realizing the situation we were in (yikes) and the amount of data we were likely able to get using the initial hypothesis (close to none), we expanded our initial search options to any completed phase 3 clinical trials. <br></br></p>
+<p>We then checked those trials that contain 2x2 table from our original file with stricter search criteria but we only found 6 (uh-oh). After realizing the situation we were in (yikes) and the amount of data we were likely able to get using the initial hypothesis (not enough), we expanded our initial search options to any completed phase 3 clinical trials. <br></br></p>
 </div>
 <div id="mapping-our-10000-dataset" class="section level5">
 <h5>Mapping our 10,000 dataset</h5>
-<p>Now that we expanded our scope, we use our working function on our new data source, <code>ctgov_10k_API</code>. This however, takes about 30-40 minutes to “compile”.</p>
+<p>Now that we expanded our scope, we use our working function on our new data source, <code>ctgov_10k_API</code>. This however, takes about 30-40 minutes to compile.</p>
 <p><strong>Note:</strong> During one of our tries, we realize that there’s an extra element in the “outcome measures” that we failed to take into account; <code>character(0)</code>. This is different from <code>NA</code>. We had to debug this for a while to make our function work by adding another condition: <code>if(length(input) == 0)</code>, which returns <code>NA</code> if <code>TRUE</code>.</p>
 <pre class="r"><code>ctgov_10k_df &lt;- read_csv(&quot;./data/ctgov_10k_API.csv&quot;) %&gt;%              # read csv
   janitor::clean_names() %&gt;%
@@ -822,7 +823,7 @@ temp_df &lt;- tibble(
 
 # left join the final results
 clean_final_df &lt;- left_join(final_df, temp_df, by = &quot;nct_id&quot;) </code></pre>
-<p>After all that painstaking path, we finally have a dataframe that have just enough data to do something preliminary with it. Our final dataset contains 39 trials with 10 relevant variables:</p>
+<p>After all of the above, we finally have a dataframe that has just enough data to get a preliminary look at the fragility index. Our final dataset contains 39 trials with 10 relevant variables:</p>
 <ul>
 <li><code>nct_id</code>: trial ID from clinicaltrials.gov</li>
 <li><code>title</code>: title for the trial submitted to clinicaltrials.gov</li>
@@ -1173,14 +1174,14 @@ test_us =
 <p>Given the collection of all available clinical trial data, we are allowed to integrate a bunch of interactive plots.</p>
 <p><img src="image/Int_plot_tab1.JPG" /></p>
 <p>On the first tab <em>Spatial Distribution</em>, first of all, we can see the distribution of number of clinical trials across the conutry; if we click on the circles, it goes further into more specific geographical locations. For the checkbox on the left, we’re allowed to filter acoording to types of study: interventional, observational, patient registry and also expanded access.</p>
-<p>On the right side, by selecting different agency class, we can filter through the sponsors of study: US Federal, NIH, Industry or other. The histogram on the left interacts with the selection from the right and is ranked by number of trials in the US from the higest to the lowest.</p>
+<p>On the right side, by selecting different agency class, we can filter through the sponsors of study: US Federal, NIH, Industry or other. The histogram on the left interacts with the selection from the right and is ranked by number of trials in the US from the highest to the lowest.</p>
 <p>For the time trend plot below, we can compare the number of completed/ongoing clinical trials sponsored by different agencies.</p>
 <p><img src="image/Int_plot_tab2.JPG" /></p>
 <p>On the second tab <em>Sponsor Information</em>, we’ve collected information of every single sponsor that invloved in clinical trials. We have their registered name, number of sponsored studies, total participants enrolled in their studies, average number of participants in their trials, and the minimum and maximum number of participants enrolled in their single study. <br></br></p>
 </div>
 <div id="functional-fi-calculator-for-meta-analysis" class="section level2">
 <h2>Functional FI calculator for meta-analysis</h2>
-<p>We initially wanted to create a custom FI calculator. Fortunately, this already existed in an R package, <code>fragilityindex</code>, and through a meta-analysis custom function which we found on github <a href="https://github.com/iatal/fragility_ma/tree/master/app/functions_fragility">here</a>. We incorporated this to our website and added interactivity so that users can input their own dataset and different parameters.</p>
+<p>We initially wanted to create a custom FI calculator. Fortunately, this already existed in an R package, <code>fragilityindex</code>. Additionally, we found on github a custom meta-analysis fragility index function which can be found <a href="https://github.com/iatal/fragility_ma/tree/master/app/functions_fragility">here</a>. We incorporated this to our website and added interactivity so that users can input their own dataset and different parameters.</p>
 <p><img src="image/FI_calculator_icon.png" /></p>
 <p>As shown above, the interactive parameters in the function includes:</p>
 <ol style="list-style-type: decimal">
@@ -1189,7 +1190,7 @@ test_us =
 <li>Measure: the statistic to assess testing results and corresponding p-vlaue. Options include: Odds Ratio, Risk Difference, Risk Ratio</li>
 <li>Random effects: options include Fixed or Random effects</li>
 </ol>
-<p>All these parameters are contained in the function we found. Although we have not learned about all of them, they are interactive!</p>
+<p>All these parameters are contained in the function we found. Although we have not learned about all of them yet, they are interactive!</p>
 </div>
 </div>
 <div id="discussion" class="section level1">
@@ -1197,17 +1198,17 @@ test_us =
 <p>Overall, we were not able to answer any of the questions we initally suggested in our initial proposal. We simply were not able to gather data capable of answering the questions. Thankfully, there are many insights we were able to gather from the data we were able to collect!</p>
 <div id="main-data-fragility-index" class="section level2">
 <h2>Main Data: Fragility Index</h2>
-<p>This project showed how difficult scraping data from a website could be if the data has a varied structure. It was much, much more difficult to scrape and tidy the data than we were originally anticipating, especially given the “tools” available to us prior to trying them.</p>
-<p>We learned a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were suprised by the relatively messy data structure of clinicaltrials.gov. The main primary outcome table was inconsistent with its white space usage in the html table, which gave us an immense amount of issues. Thankfully, clinicaltrials.gov is updating their API, which should hopefully improve upon the structure of this data. We learned the hard way the difference between publicly available data, and <strong>usable</strong> publicly available data. Tidying complex data is incredibly complex.</p>
+<p>This project showed how difficult scraping data from a website could be if the data has a varied structure. It was much, much more difficult to scrape and tidy the data than we were originally anticipating, especially given the tools available to us prior to trying them.</p>
+<p>We learned a lot about the data structure of clinicaltrials.gov and general information about phase 3 clinical trials. We were surprised by the relatively messy data structure of clinicaltrials.gov. The main primary outcome table was inconsistent with its white space usage in the html table, which gave us an immense amount of issues. Thankfully, clinicaltrials.gov is updating their API, which should hopefully improve upon the structure of this data. We learned the hard way the difference between publicly available data, and <strong>tidy and usable</strong> publicly available data. Tidying complex data is incredibly complex.</p>
 <p>From our data and project, we came away with a few insights. First, there are a vast amount of differences and complexity between clinical trials. Using our data as a judge, a real-life phase 3 trial and its primary outcome is rarely simple and straight forward. Attempting to create any general structure currently seems nearly impossible. This is humbling and motivating.</p>
 <p>The fragility index is not the most quantitatively complex or descriptive metric. However, it is not meant to be. Literature suggests that the fragility index is an easy to synthesize metric that could be included with a p-value to try to improve biostatitical literacy in clinical and research settings. The target audience for the FI, if it is accepted by the community, is not biostatisticians but clinicians. This brings up a broader conversation discussed in our M.S. program here at Columbia. As we enter our careers we will likely work with individuals who have expertise in other fields, and rely on our knowledge of biostatistics. It is part of our job to disseminate biostatistics information in a way that is most easily absorbed by our other team members.</p>
-<p>Having said that, our limited data appears to show that a well-explored chronic disease has a statistically robust result, given the higher FI. For instance, the trial on CHF has the highest FI among our findings. On the other hand, less-explored chronic disease or even acute diseases have lower FI. Also note that the diseases in our data are all non-cancers, which suggests the potential of FI to be used out of oncology.</p>
+<p>Having said that, our limited data appears to show that a well-explored chronic disease has a more stable result, given the higher FI. For instance, the trial on CHF has the highest FI among our findings. On the other hand, less-explored chronic disease or even acute diseases have lower FI. Also note that the diseases in our data are all non-cancers, which suggests the potential of FI to be used out of oncology.</p>
 </div>
 <div id="secondary-data-clinical-trials-dataset" class="section level2">
 <h2>Secondary Data: Clinical Trials Dataset</h2>
 <p>Surprisingly, there were much less issues downloading every clinical trial and graphing different characteristics. At this more “bird’s eye” level of describing a study, the data is much more consistent and tidy, allowing for easier manipulation and usage.</p>
 <p>Seeing the distribution of trials across the US shows what one may guess: there are generally more trials in metropolitan areas which have large cities and relevant academic institutions. As the NIH is located in Maryland, many NIH sponsored trials are associated with a location in Maryland. California is the state with by far the most number of trials overall. Surprisingly, Alabama has the 2nd most number of studies performed according to our data. None of the group members would have guessed Alabama being in the top 2 states, let alone being an above average state. Another intersting fact is that observational studies with patient registries are highly clustered in major cities. On the other hand, when we look at the time trend, we can tell that industries has much more completed/ ongoing clinical trials compared to NIH after 2000.</p>
-<p>When we order all the sponsors by number of studies they’ve supported, we can see a healthy mix of govermental agencies (e.g. NCI), industries (e.g. Pfizer) and academical institutions(e.g. Stanford University). Memorial Sloan Kettering Cancer Center, which is one of our affiliated institutions, has the 20th most amount of studies recorded at 530. Also, Columbia University itself ranked 62nd with 249 studies recorded.</p>
+<p>When we order all the sponsors by number of studies they’ve supported, we can see a healthy mix of govermental agencies (e.g. NCI), industries (e.g. Pfizer) and academical institutions (e.g. Stanford University). Memorial Sloan Kettering Cancer Center, which is one of our affiliated institutions, has the 20th most amount of studies recorded at 530. Also, Columbia University itself ranked 62nd with 249 studies recorded.</p>
 </div>
 </div>
 
